@@ -309,14 +309,14 @@ def moveDirection(direction):
 
     # Moves in a direction the function takes as an argument
     print(f"Moving {direction}...")
-    tn.write(bf"{direction}\n")
+    tn.write(b"" + direction + "\n")
     time.sleep(5)
 
 def jumpSystem(system):
 
     # Moves to a new system or cartel from the inter-stellar link
     print(f"Jumping to {system}...")
-    tn.write(bf"jump {system}\n")
+    tn.write(b"jump " + system "\n")
     time.sleep(5)
 
 # Trade functions
@@ -325,14 +325,14 @@ def buyCommodity(commodity):
 
     # Used to buy commodities at an exchange
     print(f"Buying {commodity}...")
-    tn.write(bf"buy {commodity}\n")
+    tn.write(b"buy " + commodity "\n")
     time.sleep(5)
 
 def sellCommodity(commodity):
 
     # Used to sell commodities at an exchange
     print(f"Selling {commodity}...")
-    tn.write(bf"sell {commodity}\n")
+    tn.write(b"sell " + commodity "\n")
     time.sleep(5)
 
 def deficitToBays(commodity):
