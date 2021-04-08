@@ -1,0 +1,19 @@
+{
+    "Ravenloft": {
+        "LP_to_Exchange": ["s","w"],
+        "Exchange_to_LP": ["w","n"],
+        "LP_to_Restaurant": ["s"],
+        "Restaurant_to_LP": ["n"],
+        "System": "Barovia",
+        "Task": "TRADE"
+    },
+
+    "Cessna": {
+        "LP_to_Exchange": ["s","w"],
+        "Exchange_to_LP": ["w","n"],
+        "LP_to_Restaurant": ["s"],
+        "Restaurant_to_LP": ["n"],
+        "System": "Flight",
+        "Task": "TRADE"
+    }
+}
