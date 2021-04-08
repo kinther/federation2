@@ -296,6 +296,63 @@ def checkSurpluses():
         if int(exchange_dict[commodity]["Current"]) > SURPLUS:
             surpluses.append(commodity)
 
+# Move functions
+
+def boardPlanet():
+
+    # Lands or lifts off from planet
+    print("Boarding planet...")
+    tn.write(b"board\n")
+    time.sleep(5)
+
+def moveDirection(direction):
+
+    # Moves in a direction the function takes as an argument
+    print(f"Moving {direction}...")
+    tn.write(bf"{direction}\n")
+    time.sleep(5)
+
+def jumpSystem(system):
+
+    # Moves to a new system or cartel from the inter-stellar link
+    print(f"Jumping to {system}...")
+    tn.write(bf"jump {system}\n")
+    time.sleep(5)
+
+# Trade functions
+
+def buyCommodity(commodity):
+
+    # Used to buy commodities at an exchange
+    print(f"Buying {commodity}...")
+    tn.write(bf"buy {commodity}\n")
+    time.sleep(5)
+
+def sellCommodity(commodity):
+
+    # Used to sell commodities at an exchange
+    print(f"Selling {commodity}...")
+    tn.write(bf"sell {commodity}\n")
+    time.sleep(5)
+
+def deficitToBays(commodity):
+
+    # Bring in global variables
+    global exchange_dict
+
+    # Temporary variables
+    bays = 0
+
+    # Used to determine how many bays of a deficit to buy
+    print(f"Identifying how many bays to buy of {commodity}...")
+    # Check current deficit value by parsing dictionary based on commodity key
+    for item in exchange_dict:
+        if commodity in item:
+            bays = int(exchange_dict[commodity]["Current"])
+            bays = int((bays / 75) * -1)
+
+    return bays
+
 # Multi functions
 
 def player():
@@ -333,7 +390,7 @@ def exchange():
     # Runs all planet exchange functions with slight delay
     updateExchange() # Required before any other update can run
     time.sleep(5)
-    parseExchange() # Convert plain text to JSON
+    parseExchange() # Convert plain text to dictionary
     time.sleep(5)
     checkDeficits()
     time.sleep(5)
@@ -401,6 +458,21 @@ def main():
     print(f"{surpluses}")
     print("+---------------------------------------------+")
 
+### End print functions
+
+### Start main loop
+
+    cycles = len(surpluses)
+
+    while True:
+
+        for _ in cycles: #
+            buyCommodity(surpluses[0])
+            time.sleep(5)
+        w
+
+### End main loop
+
     # Exit game
     tn.write(b"quit")
     time.sleep(5)
@@ -409,7 +481,6 @@ def main():
     tn.close()
     print(f"Closed connection to {host} on port {port} as {user}.")
 
-###
 
 if __name__ == "__main__":
     main()

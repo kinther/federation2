@@ -1,19 +1,31 @@
 {
     "Ravenloft": {
+        "Cartel": "Flight",
+        "System": "Barovia",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
         "LP_to_Exchange": ["s","w"],
         "Exchange_to_LP": ["w","n"],
         "LP_to_Restaurant": ["s"],
         "Restaurant_to_LP": ["n"],
-        "System": "Barovia",
-        "Task": "TRADE"
+        "Buy": ["Fruit", "Furs", "Livestock", "Nickel", "Soya", "Textiles",
+        "Woods"],
+        "Sell": ["Games", "Holos", "Katydidics", "Musiks", "Nanos", "Studios",
+        "Univators"]
     },
 
     "Cessna": {
+        "Cartel": "Flight",
+        "System": "Flight",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
         "LP_to_Exchange": ["s","w"],
         "Exchange_to_LP": ["w","n"],
         "LP_to_Restaurant": ["s"],
         "Restaurant_to_LP": ["n"],
-        "System": "Flight",
-        "Task": "TRADE"
+        "Buy": ["Games", "Holos", "Katydidics", "Musiks", "Nanos", "Studios",
+        "Univators"],
+        "Sell": ["Fruit", "Furs", "Livestock", "Nickel", "Soya", "Textiles",
+        "Woods"]
     }
 }
