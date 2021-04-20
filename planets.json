@@ -5,13 +5,11 @@
         "ISL_to_Planet": [],
         "Planet_to_ISL": [],
         "LP_to_Exchange": ["s","w"],
-        "Exchange_to_LP": ["w","n"],
+        "Exchange_to_LP": ["e","n"],
         "LP_to_Restaurant": ["s"],
         "Restaurant_to_LP": ["n"],
-        "Buy": ["Fruit", "Furs", "Livestock", "Nickel", "Soya", "Textiles",
-        "Woods"],
-        "Sell": ["Games", "Holos", "Katydidics", "Musiks", "Nanos", "Studios",
-        "Univators"]
+        "Buy": [],
+        "Sell": []
     },
 
     "Cessna": {
@@ -19,13 +17,91 @@
         "System": "Flight",
         "ISL_to_Planet": [],
         "Planet_to_ISL": [],
-        "LP_to_Exchange": ["s","w"],
-        "Exchange_to_LP": ["w","n"],
-        "LP_to_Restaurant": ["s"],
-        "Restaurant_to_LP": ["n"],
-        "Buy": ["Games", "Holos", "Katydidics", "Musiks", "Nanos", "Studios",
-        "Univators"],
-        "Sell": ["Fruit", "Furs", "Livestock", "Nickel", "Soya", "Textiles",
-        "Woods"]
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["sw"],
+        "Restaurant_to_LP": ["ne"],
+        "Buy": [],
+        "Sell": ["Holos", "Libraries", "Musiks", "Studios", "Univators"]
+    },
+
+    "Piper": {
+        "Cartel": "Flight",
+        "System": "Flight",
+        "ISL_to_Planet": ["e"],
+        "Planet_to_ISL": ["w"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["sw"],
+        "Restaurant_to_LP": ["ne"],
+        "Buy": [],
+        "Sell": ["Cereals", "Soya", "Woods"]
+    },
+
+    "Diamond": {
+        "Cartel": "Flight",
+        "System": "Flight",
+        "ISL_to_Planet": ["ne"],
+        "Planet_to_ISL": ["sw"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["sw"],
+        "Restaurant_to_LP": ["ne"],
+        "Buy": [],
+        "Sell": ["Artifacts", "BioChips", "BioComponents", "Clinics",
+        "Firewalls", "Hypnotapes", "Katydidics", "Laboratories", "LubOils",
+        "Proteins", "Sensamps", "Tracers", "TQuarks", "Vidicasters"]
+    },
+
+    "Paper": {
+        "Cartel": "Flight",
+        "System": "Flight",
+        "ISL_to_Planet": ["s"],
+        "Planet_to_ISL": ["n"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["sw"],
+        "Restaurant_to_LP": ["ne"],
+        "Buy": [],
+        "Sell": ["MicroScalpels", "Probes", "Sensors", "ToxicMunchers"]
+    },
+
+    "Cirrus": {
+        "Cartel": "Flight",
+        "System": "Flight",
+        "ISL_to_Planet": ["w"],
+        "Planet_to_ISL": ["e"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["sw"],
+        "Restaurant_to_LP": ["ne"],
+        "Buy": [],
+        "Sell": ["Textiles"]
+    },
+
+    "Blackbird": {
+        "Cartel": "Flight",
+        "System": "Flight",
+        "ISL_to_Planet": ["sw"],
+        "Planet_to_ISL": ["ne"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["sw"],
+        "Restaurant_to_LP": ["ne"],
+        "Buy": [],
+        "Sell": []
+    },
+
+    "Voyager": {
+        "Cartel": "Flight",
+        "System": "Flight",
+        "ISL_to_Planet": ["se"],
+        "Planet_to_ISL": ["nw"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["sw"],
+        "Restaurant_to_LP": ["ne"],
+        "Buy": [],
+        "Sell": []
     }
 }
