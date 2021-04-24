@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 # Federation 2 Community Edition automation scripts for planet owners
+# version 1.0 "Deficit Dance"
 # Written by Strahd of the Barovia system
 # Please don't tell anyone how I script *Lenny face*
 
@@ -30,7 +31,7 @@ logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
 logger = logging.getLogger()
 
 # Character constants
-HOME_PLANET = "" # constant variable used to check exchange info
+HOME_PLANET = "Ravenloft" # constant variable used to check exchange info
 DEFICIT = -75 # How much we consider a deficit
 SURPLUS = 15000 # How much we consider a surplus
 
@@ -89,7 +90,7 @@ def clearBuffer():
     # Attempts to clear the buffer
     tn.write(b"\n")
     i = tn.read_very_eager().decode("ascii")
-    time.sleep(5)
+    time.sleep(3)
 
 def escape_ansi(line):
     # https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi
@@ -98,12 +99,18 @@ def escape_ansi(line):
     return ansi_escape.sub('', line)
 
 def deleteFiles():
-    # deletes all generated files
 
-    os.remove("score.txt")
-    os.remove("ship.txt")
-    os.remove("planet.txt")
-    os.remove("exchange.txt")
+    while True:
+        # deletes all generated files
+        try:
+            os.remove("score.txt")
+            os.remove("ship.txt")
+            os.remove("planet.txt")
+            os.remove("exchange.txt")
+            break
+        except:
+            continue
+        break
 
 # Character functions
 
@@ -115,7 +122,7 @@ def updateScore():
     # Check character score information
     logger.info(f"Updating score info of {user}...")
     tn.write(b"score\n")
-    time.sleep(5)
+    time.sleep(3)
     score = tn.read_very_eager().decode("ascii")
     score = escape_ansi(score)
 
@@ -183,7 +190,7 @@ def buyFood():
     # Tries to buy food for the player
     logger.info(f"Buying food for {user}...")
     tn.write(b"buy food\n")
-    time.sleep(5)
+    time.sleep(3)
 
 # Ship functions
 
@@ -195,7 +202,7 @@ def updateShip():
     # Check ship status information
     logger.info(f"Updating ship info of {user}...")
     tn.write(b"st\n")
-    time.sleep(5)
+    time.sleep(3)
     ship = tn.read_very_eager().decode("ascii")
     ship = escape_ansi(ship)
 
@@ -246,7 +253,7 @@ def buyFuel():
     # Tries to buy fuel for the player's ship
     logger.info(f"Buying fuel for {user}'s ship...")
     tn.write(b"buy fuel\n")
-    time.sleep(5)
+    time.sleep(3)
 
 # Planet/Exchange functions
 
@@ -258,7 +265,7 @@ def updatePlanet():
     # Check planetary exchange information
     logger.info(f"Updating {current_planet} planet information...")
     tn.write(b"di planet\n")
-    time.sleep(5)
+    time.sleep(3)
     planet = tn.read_very_eager().decode("ascii")
     planet = escape_ansi(planet)
 
@@ -296,7 +303,7 @@ def updateExchange():
     # Check planetary exchange information
     logger.info(f"Updating {current_planet} exchange information...")
     tn.write(b"di exchange " + str.encode(HOME_PLANET) + b"\n")
-    time.sleep(5)
+    time.sleep(3)
     exchange = tn.read_very_eager().decode("ascii")
     exchange = escape_ansi(exchange)
 
@@ -353,21 +360,21 @@ def boardPlanet():
     # Lands or lifts off from planet
     logger.info("Boarding planet...")
     tn.write(b"board\n")
-    time.sleep(5)
+    time.sleep(3)
 
 def moveDirection(direction):
 
     # Moves in a direction the function takes as an argument
     logger.info(f"Moving {direction}...")
     tn.write(str.encode(direction) + b"\n")
-    time.sleep(5)
+    time.sleep(3)
 
 def jumpSystem(system):
 
     # Moves to a new system or cartel from the inter-stellar link
     logger.info(f"Jumping to {system}...")
     tn.write(b"jump " + str.encode(system) + b"\n")
-    time.sleep(5)
+    time.sleep(3)
 
 # Trade functions
 
@@ -380,7 +387,7 @@ def checkPrice(commodity, planet):
     logger.info(f"Checking if {planet} is buying {commodity}...")
     tn.write(b"c price " + str.encode(commodity) + b" " + str.encode(planet) +
     b"\n")
-    time.sleep(5)
+    time.sleep(3)
     price = tn.read_very_eager().decode("ascii")
     price = escape_ansi(price)
 
@@ -404,7 +411,7 @@ def buyCommodity(commodity):
     # Used to buy commodities at an exchange
     logger.info(f"Buying {commodity}...")
     tn.write(b"buy " + str.encode(commodity) + b"\n")
-    time.sleep(5)
+    time.sleep(3)
 
 def checkIfSelling(commodity, planet):
 
@@ -415,7 +422,7 @@ def checkIfSelling(commodity, planet):
     logger.info(f"Checking if {planet} is selling {commodity}...")
     tn.write(b"c price " + str.encode(commodity) + b" " + str.encode(planet) +
     b"\n")
-    time.sleep(5)
+    time.sleep(3)
     price = tn.read_very_eager().decode("ascii")
     price = escape_ansi(price)
 
@@ -439,7 +446,7 @@ def sellCommodity(commodity):
     # Used to sell commodities at an exchange
     logger.info(f"Selling {commodity}...")
     tn.write(b"sell " + str.encode(commodity) + b"\n")
-    time.sleep(5)
+    time.sleep(3)
 
 def deficitToBays(commodity):
 
@@ -465,57 +472,68 @@ def player():
 
     # Runs all player functions with slight delay
     updateScore() # Required before any other check can run
-    time.sleep(5)
+    time.sleep(3)
     checkBalance() # How much money do we have right now?
-    time.sleep(5)
+    time.sleep(3)
     checkStamina() # How much stamina do we have right now?
-    time.sleep(5)
+    time.sleep(3)
     checkLocation() # What planet and system are we on right now?
-    time.sleep(5)
+    time.sleep(3)
 
 def ship():
 
     # Runs all ship functions with slight delay
     updateShip() #  Required before any other check can run
-    time.sleep(5)
+    time.sleep(3)
     checkFuel() # How much fuel do we have right now?
-    time.sleep(5)
+    time.sleep(3)
     checkCargo() # How much cargo do we have right now?
-    time.sleep(5)
+    time.sleep(3)
 
 def planet():
 
     # Runs all planet functions with slight delay
     updatePlanet() # Required before any other update can run
-    time.sleep(5)
+    time.sleep(3)
     checkTreasury() # How much money does the treasury have right now?
-    time.sleep(5)
+    time.sleep(3)
 
 def exchange():
 
     # Runs all planet exchange functions with slight delay
     updateExchange() # Required before any other update can run
-    time.sleep(5)
+    time.sleep(3)
     parseExchange() # Convert plain text to dictionary
-    time.sleep(5)
+    time.sleep(3)
     checkDeficits()
-    time.sleep(5)
+    time.sleep(3)
     checkSurpluses()
-    time.sleep(5)
+    time.sleep(3)
 
 def gatherData():
 
-    # Runs all multi functions
-    player()
-    time.sleep(5)
-    ship()
-    time.sleep(5)
-    planet()
-    time.sleep(5)
-    exchange()
-    time.sleep(5)
-    deleteFiles()
-    time.sleep(5)
+    while True:
+        try:
+            # Runs all multi functions
+            player()
+            time.sleep(3)
+            ship()
+            time.sleep(3)
+            planet()
+            time.sleep(3)
+            exchange()
+            time.sleep(3)
+            deleteFiles()
+            time.sleep(3)
+            break
+        except IndexError:
+            logger.info("Some extra garbage lines found in files, trying again...")
+            continue
+        except ValueError:
+            logger.info("Some extra garbage lines found in files, trying again...")
+            continue
+        break
+
 
 # Main function
 
@@ -525,15 +543,16 @@ def main():
     # Perform initial setup and gather game data
     try:
         login()
-        time.sleep(5)
+        time.sleep(3)
         gatherData()
-        time.sleep(5)
+        time.sleep(3)
     except Exception as e:
         logger.error("Ran into error during initial setup and gathering data.")
         logger.error(e)
 
     # global variables
     global deficits
+    global surpluses
 
     # while loop variables
     iter = 0 # how many times have we gone through the loop?
@@ -552,20 +571,23 @@ def main():
             else:
                 logger.info("Deficits all filled.  Sleeping for 5 minutes...")
                 time.sleep(300)
-                exchange() # run exchange functions
+                clearBuffer() # clear buffer, who knows what happened in 5 mins
+                time.sleep(3)
+                gatherData() # run multi functions
+                time.sleep(3)
                 continue
 
         # Open planets.json file and load it with current deficits
         f = open("planets.json")
         data = json.load(f)
-        item = deficits[0]
-        tn.write(b"say Deficit needed is " + str.encode(item) + b".\n")
+        def_item = deficits[0]
+        tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
 
         # Buy fuel and food
         if current_fuel < fuel_min:
             buyFuel()
             logger.info("Current fuel is below minimum, buying fuel.")
-            time.sleep(5)
+            time.sleep(3)
         else:
             logger.info("Current fuel is above minimum.")
             pass
@@ -586,22 +608,22 @@ def main():
         while True:
             for planet in data:
                 if HOME_PLANET not in planet:
-                    if item in data[planet]["Sell"]:
+                    if def_item in data[planet]["Sell"]:
                         remote_planet_id = planet
                         break
                     else:
-                        logger.info(f"{planet} does not sell {item}, moving on...")
+                        logger.info(f"{planet} does not sell {def_item}, moving on...")
 
             if len(remote_planet_id) > 0:
-                logger.info(f"Will buy {item} from {remote_planet_id}...")
+                logger.info(f"Will buy {def_item} from {remote_planet_id}...")
                 break
             else:
                 continue
 
         # Determine how many bays to buy of deficit[cycle]
-        bays = deficitToBays(item)
+        bays = deficitToBays(def_item)
         logger.info(f"Will buy {bays} bays of deficit from remote planet...")
-        tn.write(b"say Will buy " + str.encode(str(bays)) + b" " + str.encode(item) + b".\n")
+        tn.write(b"say Will buy " + str.encode(str(bays)) + b" " + str.encode(def_item) + b".\n")
 
         # Board planet
         boardPlanet()
@@ -640,7 +662,7 @@ def main():
         # Buy deficits from remote exchange
         logger.info("Buying deficit from remote exchange...")
         for _ in range(bays):
-            buyCommodity(item)
+            buyCommodity(def_item)
             time.sleep(2)
         time.sleep(3)
 
@@ -687,7 +709,7 @@ def main():
         # Sell goods
         logger.info("Selling deficit item to remote exchange...")
         for _ in range(bays):
-            sellCommodity(item)
+            sellCommodity(def_item)
             time.sleep(2)
         time.sleep(3)
 
@@ -702,7 +724,7 @@ def main():
         gatherData() # gather new data
         time.sleep(2)
         logger.info("Removing entry from deficits list...")
-        tn.write(b"say Filled " + str.encode(item) + b".  Moving on to next.\n")
+        tn.write(b"say Filled " + str.encode(def_item) + b".  Moving on to next.\n")
         deficits.pop(0)
         time.sleep(3)
 
