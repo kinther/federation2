@@ -1,61 +1,64 @@
 #!/usr/bin/python3
 
 # Federation 2 Community Edition automation scripts for planet owners
-# version 1.0 "Deficit Dance"
+# version 1.1 "Anomalous Alloys"
 # Written by Strahd of the Barovia system
 # Please don't tell anyone how I script *Lenny face*
 
 # Imports
-import telnetlib # used to do all things telnet
-import time # used to provide sleep function and logging file name
-import re # used to escape ansi characters
-import json # used to read planets.json file
-import logging # used to write logs to file
-import os # used to delete files
+import telnetlib  # used to do all things telnet
+import time  # used to provide sleep function and logging file name
+import re  # used to escape ansi characters
+import json  # used to read planets.json file
+import logging  # used to write logs to file
+import os  # used to delete files
+import argparse  # used to pass user/password credentials
 
-# Login variables
-host = "play.federation2.com" # don't change this
-port = 30003 # don't change this
-timeout = 15 # maybe change this
-user = "" # change this
-password = "" # change this
+# argparse constants
+parser = argparse.ArgumentParser()
+parser.add_argument("--user", type=str, action="store", required=True)
+parser.add_argument("--password", type=str, action="store", required=True)
+args = parser.parse_args()
 
 # Telnetlib variables
+host = "play.federation2.com"  # don't change this
+port = 30003  # don't change this
+timeout = 90  # maybe change this
+
+# telnetlib constants
 tn = telnetlib.Telnet(host, port, timeout=timeout)
 
 # Logging constants
 LOG_FILENAME = time.strftime("%c" + "-fed2.txt")
-
-# Logging variables
-logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO)
+logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
 logger = logging.getLogger()
 
 # Character constants
-HOME_PLANET = "Ravenloft" # constant variable used to check exchange info
-DEFICIT = -75 # How much we consider a deficit
-SURPLUS = 15000 # How much we consider a surplus
+HOME_PLANET = "Ravenloft"  # constant variable used to check exchange info
+DEFICIT = -75  # How much we consider a deficit
+SURPLUS = 15000  # How much we consider a surplus
 
 # Character variables
-balance = 0 # character's current balance, from output of score
-current_stamina = 0 # character's current stamina, from output of score
-stamina_min = 20 # lowest stamina level we want our character to fall to
-stamina_max = 0 # character's maximum stamina level, from output of score
-current_system = "" # character is on this planet, from output of score
-current_planet = "" # character is in this system, from output of score
+balance = 0  # character's current balance, from output of score
+current_stamina = 0  # character's current stamina, from output of score
+stamina_min = 20  # lowest stamina level we want our character to fall to
+stamina_max = 0  # character's maximum stamina level, from output of score
+current_system = ""  # character is on this planet, from output of score
+current_planet = ""  # character is in this system, from output of score
 
 # Ship variables
-current_fuel = 0 # ship's current fuel level, from output of st
-fuel_min = 100 # lowest fuel level we want our ship to fall to
-fuel_max = 0 # ship's maximum stamina level, from output of st
-current_cargo = 0 # total cargo currently being hauled
-cargo_min = 0 # not sure if needed
-cargo_max = 0 # maximum tonnage ship can haul
+current_fuel = 0  # ship's current fuel level, from output of st
+fuel_min = 100  # lowest fuel level we want our ship to fall to
+fuel_max = 0  # ship's maximum stamina level, from output of st
+current_cargo = 0  # total cargo currently being hauled
+cargo_min = 0  # not sure if needed
+cargo_max = 0  # maximum tonnage ship can haul
 
 # Planet variables
-treasury = 0 # planet's current balance, from output of di planet
-exchange_dict = {} # used to hold the exchange information
-deficits = [] # used to hold the current deficits list
-surpluses = [] # used to hold the current surpluses list
+treasury = 0  # planet's current balance, from output of di planet
+exchange_dict = {}  # used to hold the exchange information
+deficits = []  # used to hold the current deficits list
+surpluses = []  # used to hold the current surpluses list
 
 # Global functions
 
@@ -63,28 +66,18 @@ def login():
 
     # Wait for Login prompt, then write username and hit enter
     tn.read_until(b"Login:")
-    tn.write(user.encode("ascii") + b"\n")
+    tn.write((args.user).encode("ascii") + b"\n")
     time.sleep(2)
 
     # Wait for Password prompt, then write password and hit enter
     tn.read_until(b"Password:")
-    tn.write(password.encode("ascii") + b"\n")
+    tn.write((args.password).encode("ascii") + b"\n")
     time.sleep(2)
 
     # Wait for string indicating we have logged in successfully
     tn.read_until(b"Linking to Federation DataSpace.")
-    logger.info(f"Logged in successfully to {host} on port {port} as {user}.")
+    logger.info(f"Logged in successfully to {host} on port {port} as {args.user}.")
     time.sleep(5)
-
-def quit():
-
-    # Exits game gracefully
-    tn.write(b"quit")
-    time.sleep(5)
-    tn.write(b"\n")
-    logger.info("Issued quit command.")
-    tn.close()
-    logger.info(f"Closed connection to {host} on port {port} as {user}.")
 
 def clearBuffer():
     # Attempts to clear the buffer
@@ -120,7 +113,7 @@ def updateScore():
     clearBuffer()
 
     # Check character score information
-    logger.info(f"Updating score info of {user}...")
+    logger.info(f"Updating score info of {args.user}...")
     tn.write(b"score\n")
     time.sleep(3)
     score = tn.read_very_eager().decode("ascii")
@@ -137,16 +130,16 @@ def checkBalance():
     global balance
 
     # Check character balance information
-    logger.info(f"Checking bank balance of {user}...")
+    logger.info(f"Checking bank balance of {args.user}...")
     with open("score.txt", "r") as f:
         for line in f:
             if "Bank" in line:
-                i = line.split(" ") # remove whitespace
-                i = i[4] # select fourth entry in list
-                i = i[:-3] # remove last 3 characters from string
-                i = i.split(",") # parse output to remove comma separation
-                i = "".join(i) # rejoin list entries into single string
-                i = int(i) # turn string into integer
+                i = line.split(" ")  # remove whitespace
+                i = i[4]  # select fourth entry in list
+                i = i[:-3]  # remove last 3 characters from string
+                i = i.split(",")  # parse output to remove comma separation
+                i = "".join(i)  # rejoin list entries into single string
+                i = int(i)  # turn string into integer
                 balance = i
 
 def checkStamina():
@@ -156,7 +149,7 @@ def checkStamina():
     global stamina_max
 
     # Check character stamina information
-    logger.info(f"Checking stamina of {user}...")
+    logger.info(f"Checking stamina of {args.user}...")
     with open("score.txt", "r") as f:
         for line in f:
             if "Stamina" in line:
@@ -174,7 +167,7 @@ def checkLocation():
     global current_system
 
     # Check character location information
-    logger.info(f"Checking location of {user}...")
+    logger.info(f"Checking location of {args.user}...")
     with open("score.txt", "r") as f:
         for line in f:
             if "system" in line:
@@ -188,7 +181,7 @@ def buyFood():
     clearBuffer()
 
     # Tries to buy food for the player
-    logger.info(f"Buying food for {user}...")
+    logger.info(f"Buying food for {args.user}...")
     tn.write(b"buy food\n")
     time.sleep(3)
 
@@ -200,7 +193,7 @@ def updateShip():
     clearBuffer()
 
     # Check ship status information
-    logger.info(f"Updating ship info of {user}...")
+    logger.info(f"Updating ship info of {args.user}...")
     tn.write(b"st\n")
     time.sleep(3)
     ship = tn.read_very_eager().decode("ascii")
@@ -218,7 +211,7 @@ def checkFuel():
     global fuel_max
 
     # Check character location information
-    logger.info(f"Checking fuel of {user}'s ship...")
+    logger.info(f"Checking fuel of {args.user}'s ship...")
     with open("ship.txt", "r") as f:
         for line in f:
             if "Fuel" in line:
@@ -235,10 +228,10 @@ def checkCargo():
     global cargo_max
 
     # Check character location information
-    logger.info(f"Checking cargo of {user}'s ship...")
+    logger.info(f"Checking cargo space of {args.user}'s ship...")
     with open("ship.txt", "r") as f:
         for line in f:
-            if "Cargo" in line:
+            if "Cargo space" in line:
                 i = line.split(" ")
                 i = i[7]
                 i = i.split("/")
@@ -251,7 +244,7 @@ def buyFuel():
     clearBuffer()
 
     # Tries to buy fuel for the player's ship
-    logger.info(f"Buying fuel for {user}'s ship...")
+    logger.info(f"Buying fuel for {args.user}'s ship...")
     tn.write(b"buy fuel\n")
     time.sleep(3)
 
@@ -263,8 +256,8 @@ def updatePlanet():
     clearBuffer()
 
     # Check planetary exchange information
-    logger.info(f"Updating {current_planet} planet information...")
-    tn.write(b"di planet\n")
+    logger.info(f"Updating {HOME_PLANET} planet information...")
+    tn.write(b"di planet " + str.encode(HOME_PLANET) + b"\n")
     time.sleep(3)
     planet = tn.read_very_eager().decode("ascii")
     planet = escape_ansi(planet)
@@ -280,7 +273,7 @@ def checkTreasury():
     global treasury
 
     # Check character location information
-    logger.info(f"Checking treasury of {current_planet}...")
+    logger.info(f"Checking treasury of {HOME_PLANET}...")
     with open("planet.txt", "r") as f:
         for line in f:
             if "Treasury" in line:
@@ -301,7 +294,7 @@ def updateExchange():
     clearBuffer()
 
     # Check planetary exchange information
-    logger.info(f"Updating {current_planet} exchange information...")
+    logger.info(f"Updating {HOME_PLANET} exchange information...")
     tn.write(b"di exchange " + str.encode(HOME_PLANET) + b"\n")
     time.sleep(3)
     exchange = tn.read_very_eager().decode("ascii")
@@ -324,7 +317,7 @@ def parseExchange():
         for line in f:
             i = line.split(" ")
             commodity = i[2]
-            commodity = commodity[:-1] # strip colon after commodity name
+            commodity = commodity[:-1]  # strip colon after commodity name
             current = i[12]
             current = current.split("/")
             current = current[0]
@@ -385,8 +378,7 @@ def checkPrice(commodity, planet):
 
     # Checks if a remote exchange is buying a commodity or not
     logger.info(f"Checking if {planet} is buying {commodity}...")
-    tn.write(b"c price " + str.encode(commodity) + b" " + str.encode(planet) +
-    b"\n")
+    tn.write(b"c price " + str.encode(commodity) + b" " + str.encode(planet) + b"\n")
     time.sleep(3)
     price = tn.read_very_eager().decode("ascii")
     price = escape_ansi(price)
@@ -420,8 +412,7 @@ def checkIfSelling(commodity, planet):
 
     # Checks if a remote exchange is buying a commodity or not
     logger.info(f"Checking if {planet} is selling {commodity}...")
-    tn.write(b"c price " + str.encode(commodity) + b" " + str.encode(planet) +
-    b"\n")
+    tn.write(b"c price " + str.encode(commodity) + b" " + str.encode(planet) + b"\n")
     time.sleep(3)
     price = tn.read_very_eager().decode("ascii")
     price = escape_ansi(price)
@@ -471,39 +462,39 @@ def deficitToBays(commodity):
 def player():
 
     # Runs all player functions with slight delay
-    updateScore() # Required before any other check can run
+    updateScore()  # Required before any other check can run
     time.sleep(3)
-    checkBalance() # How much money do we have right now?
+    checkBalance()  # How much money do we have right now?
     time.sleep(3)
-    checkStamina() # How much stamina do we have right now?
+    checkStamina()  # How much stamina do we have right now?
     time.sleep(3)
-    checkLocation() # What planet and system are we on right now?
+    checkLocation()  # What planet and system are we on right now?
     time.sleep(3)
 
 def ship():
 
     # Runs all ship functions with slight delay
-    updateShip() #  Required before any other check can run
+    updateShip()  # Required before any other check can run
     time.sleep(3)
-    checkFuel() # How much fuel do we have right now?
+    checkFuel()  # How much fuel do we have right now?
     time.sleep(3)
-    checkCargo() # How much cargo do we have right now?
+    checkCargo()  # How much cargo do we have right now?
     time.sleep(3)
 
 def planet():
 
     # Runs all planet functions with slight delay
-    updatePlanet() # Required before any other update can run
+    updatePlanet()  # Required before any other update can run
     time.sleep(3)
-    checkTreasury() # How much money does the treasury have right now?
+    checkTreasury()  # How much money does the treasury have right now?
     time.sleep(3)
 
 def exchange():
 
     # Runs all planet exchange functions with slight delay
-    updateExchange() # Required before any other update can run
+    updateExchange()  # Required before any other update can run
     time.sleep(3)
-    parseExchange() # Convert plain text to dictionary
+    parseExchange()  # Convert plain text to dictionary
     time.sleep(3)
     checkDeficits()
     time.sleep(3)
@@ -527,10 +518,10 @@ def gatherData():
             time.sleep(3)
             break
         except IndexError:
-            logger.info("Some extra garbage lines found in files, trying again...")
+            logger.info("IndexError occurred, trying again...")
             continue
         except ValueError:
-            logger.info("Some extra garbage lines found in files, trying again...")
+            logger.info("ValueError occurred, trying again...")
             continue
         break
 
@@ -553,33 +544,50 @@ def main():
     # global variables
     global deficits
     global surpluses
+    global balance
+    global treasury
 
     # while loop variables
-    iter = 0 # how many times have we gone through the loop?
-    bays = 0 # starting amount of bays to buy
-    remote_planet_id = "" # picked from planets.json and pinned
+    iter = 0  # how many times have we gone through the loop?
+    bays = 0  # starting amount of bays to buy
+    remote_planet_id = ""  # picked from planets.json and pinned
+    prev_balance = 0  # how much money pc had last iteration
+    diff_balance = 0  # difference +/- gained from last iteration
+    prev_treasury = 0  # how much planet treasury had last iteration
+    diff_treasury = 0  # difference +/- gained from last iteration
+
+    # Open planets.json file
+    f = open("planets.json")
+    data = json.load(f)
 
     while True:
 
-        # Iteration check
-        logger.info(f"+++++This is iteration number {iter}+++++")
+        # Iteration checks
+        logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        logger.info(f" This is iteration number {iter}.")
+        logger.info(f" {args.user}'s bank balance is {balance}.")
+        logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
+        logger.info(f" {HOME_PLANET}'s treasury value is {treasury}.")
+        logger.info(f" That's a difference of {diff_treasury} compared to last iteration.")
+        logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
         # Pause for 30 minutes if deficits list is empty
         while True:
-            if len(deficits) > 0:
+            if len(deficits) > 0:  # is deficits list empty yet?
                 break
             else:
-                logger.info("Deficits all filled.  Sleeping for 5 minutes...")
-                time.sleep(300)
-                clearBuffer() # clear buffer, who knows what happened in 5 mins
+                logger.info("Deficits all filled.  Sleeping for 30 minutes...")
+                tn.write(b"say All deficits filled.  Sleeping for 30 minutes.\n")
+                for i in range(30):  # Keepalive function so BrokenPipe does not occur
+                    tn.write(b"\n")
+                    time.sleep(60)
+                clearBuffer()  # clear buffer, who knows what happened in 30 mins
                 time.sleep(3)
-                gatherData() # run multi functions
+                exchange()  # run exchange functions
                 time.sleep(3)
                 continue
 
-        # Open planets.json file and load it with current deficits
-        f = open("planets.json")
-        data = json.load(f)
+        # Deficits loop specific vars
         def_item = deficits[0]
         tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
 
@@ -606,13 +614,13 @@ def main():
 
         # Determine which planet to buy deficits[cycle] from
         while True:
-            for planet in data:
-                if HOME_PLANET not in planet:
-                    if def_item in data[planet]["Sell"]:
-                        remote_planet_id = planet
+            for entry in data:
+                if HOME_PLANET not in entry:
+                    if def_item in data[entry]["Sell"]:
+                        remote_planet_id = entry
                         break
                     else:
-                        logger.info(f"{planet} does not sell {def_item}, moving on...")
+                        logger.info(f"{entry} does not sell {def_item}, moving on...")
 
             if len(remote_planet_id) > 0:
                 logger.info(f"Will buy {def_item} from {remote_planet_id}...")
@@ -721,15 +729,27 @@ def main():
 
         # Iteration data updates to keep things fresh
         iter += 1
-        gatherData() # gather new data
+
+        prev_balance = balance  # how much we had before cycle began
+        player()  # gather new player data
         time.sleep(2)
+        diff_balance = (balance-prev_balance)  # how much we made this iteration
+
+        ship()  # gather new ship data
+        time.sleep(2)
+        prev_treasury = treasury  # how much we had before cycle began
+
+        planet()  # gather new planet data
+        time.sleep(2)
+        diff_treasury = (treasury-prev_treasury)  # how much we made this iteration
+
+        os.remove("score.txt")  # remove files
+        os.remove("ship.txt")  # remove files
+        os.remove("planet.txt")  # remove files
         logger.info("Removing entry from deficits list...")
-        tn.write(b"say Filled " + str.encode(def_item) + b".  Moving on to next.\n")
+        tn.write(b"say Filled " + str.encode(def_item) + b".\n")
         deficits.pop(0)
         time.sleep(3)
-
-    # Exits game
-    quit()
 
 if __name__ == "__main__":
     main()
