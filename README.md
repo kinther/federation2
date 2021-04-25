@@ -13,8 +13,7 @@ python3 federation2.py --user (username) --password (password)
 
 version log:
 
-1.0 "Deficit Dance" - Will continuously run through your exchange's deficits
-and buy them from planets you set in planets.json.  Bugs should be expected.
+1.0 "Deficit Dance" - Initial release.  Runs through deficit loop cycle.
 
 1.1 "Anomalous Alloys" - bug fixes in deficit loop logic, minor enhancements
 to print further data to logfile, conversion of user/password passing to
