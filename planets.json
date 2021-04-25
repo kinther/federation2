@@ -22,20 +22,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": [],
-        "Sell": ["Holos", "Libraries", "Musiks", "Studios", "Univators"]
-    },
-
-    "Piper": {
-        "Cartel": "Flight",
-        "System": "Flight",
-        "ISL_to_Planet": ["e"],
-        "Planet_to_ISL": ["w"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": ["sw"],
-        "Restaurant_to_LP": ["ne"],
-        "Buy": [],
-        "Sell": ["Cereals", "Soya", "Woods"]
+        "Sell": ["Holos", "Libraries", "Musiks", "Studios"]
     },
 
     "Diamond": {
@@ -48,60 +35,35 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": [],
-        "Sell": ["Artifacts", "BioChips", "BioComponents", "Clinics",
-        "Firewalls", "Hypnotapes", "Katydidics", "Laboratories", "LubOils",
-        "Proteins", "Sensamps", "Tracers", "TQuarks", "Vidicasters"]
+        "Sell": ["Artifacts", "Hypnotapes", "Katydidics", "LubOils",
+        "TQuarks", "Vidicasters"]
     },
 
-    "Paper": {
+    "Zen": {
         "Cartel": "Flight",
-        "System": "Flight",
-        "ISL_to_Planet": ["s"],
-        "Planet_to_ISL": ["n"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": ["sw"],
-        "Restaurant_to_LP": ["ne"],
-        "Buy": [],
-        "Sell": ["MicroScalpels", "Probes", "Sensors", "ToxicMunchers"]
-    },
-
-    "Cirrus": {
-        "Cartel": "Flight",
-        "System": "Flight",
-        "ISL_to_Planet": ["w"],
-        "Planet_to_ISL": ["e"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": ["sw"],
-        "Restaurant_to_LP": ["ne"],
-        "Buy": [],
-        "Sell": ["Textiles"]
-    },
-
-    "Blackbird": {
-        "Cartel": "Flight",
-        "System": "Flight",
-        "ISL_to_Planet": ["sw"],
-        "Planet_to_ISL": ["ne"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": ["sw"],
-        "Restaurant_to_LP": ["ne"],
-        "Buy": [],
-        "Sell": []
-    },
-
-    "Voyager": {
-        "Cartel": "Flight",
-        "System": "Flight",
+        "System": "Enso",
         "ISL_to_Planet": ["se"],
         "Planet_to_ISL": ["nw"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": ["sw"],
-        "Restaurant_to_LP": ["ne"],
+        "LP_to_Exchange": ["s"],
+        "Exchange_to_LP": ["n"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": []
+        "Sell": ["BioChips", "BioComponents", "Clinics", "Firewalls",
+        "Laboratories", "MicroScalpels", "Probes", "Proteins", "Sensamps",
+        "Sensors", "ToxicMunchers", "Tracers", "Univators"]
+    },
+
+    "Phoenix": {
+        "Cartel": "Flight",
+        "System": "Enso",
+        "ISL_to_Planet": ["s"],
+        "Planet_to_ISL": ["n"],
+        "LP_to_Exchange": ["n"],
+        "Exchange_to_LP": ["s"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Cereals", "Soya", "Textiles", "Woods"]
     }
 }
