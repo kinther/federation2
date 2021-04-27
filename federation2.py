@@ -20,6 +20,7 @@ import sys  # used to exit script if criteria is met
 parser = argparse.ArgumentParser()
 parser.add_argument("--user", type=str, action="store", required=True)
 parser.add_argument("--password", type=str, action="store", required=True)
+parser.add_argument("--planet", type=str, action="store", required=True)
 args = parser.parse_args()
 
 # Telnetlib variables
@@ -40,7 +41,7 @@ logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
 logger = logging.getLogger()
 
 # Character constants
-HOME_PLANET = "Ravenloft"  # constant variable used to check exchange info
+HOME_PLANET = args.planet  # passed from player arguments
 DEFICIT = -75  # How much we consider a deficit
 SURPLUS = 15000  # How much we consider a surplus
 
