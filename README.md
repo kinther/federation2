@@ -1,14 +1,13 @@
 Strahd's Federation 2 planet owner (rank Founder and above) deficit hauling
 script.  Send mail in game to Strahd if you have any questions.
 
-1. Input your home planet to federation2.py (line 36).
-2. Modify planets.json file with your home planet information, replacing
+1. Modify planets.json file with your home planet information, replacing
 Ravenloft variables.  For example if you owned the planet Rhea, you would
 replace "Ravenloft" with "Rhea" for the name field.  Another important entry
 is "ISL_to_Planet", which for Rhea would be a single entry of ["sw"], and
 the reverse "Planet_to_ISL" which would be ["nw"].  Do the same for the
 remaining entries under your planet.
-3. Find out which planets you want to buy from by checking their exchange
+2. Find out which planets you want to buy from by checking their exchange
 prices for commodities that are your deficits.  If you don't know your full
 deficits list, check out https://www.f2ea.com which should help you identify
 anything that is in the negative.  Once you have found a planet you want to buy
@@ -17,13 +16,13 @@ in planets.json in the "Sell" category.  For example if I wanted to buy
 Alloys and BioChips from Castillo, I would create an entry for it and in the
 Sell line enter ["Alloys", "BioChips"].  (Make sure you account for all your
 deficits here - this is important)
-4. Place your planet owner on your home planet landing pad before running and
+3. Place your planet owner on your home planet landing pad before running and
 ensure you have a ship capable of carrying at least 525 tons.  (clear your
 cargo space ahead of time wherever possible)
 
 Run the script with:
 
-python3 federation2.py --user (username) --password (password)
+python3 federation2.py --user (username) --password (password) --planet (planet you own)
 
 version log:
 
