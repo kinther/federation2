@@ -550,10 +550,41 @@ def main():
 
     # Check if current_planet = HOME_PLANET.  If not, exit script.
     if HOME_PLANET not in current_planet:
-        print("Character must be on their home planet on the landing pad.")
-        print(f"Detected character on {current_planet} rather than {HOME_PLANET}.")
-        print("Exiting.")
+        logger.info("ERROR: Character must be on their home planet on the landing pad.")
+        logger.info(f"Detected character on {current_planet} rather than {HOME_PLANET}.")
+        logger.info("Exiting.")
         sys.exit(0)
+    else:
+        pass
+
+    # Check if cargo_max is less than 525 (can't haul a full 7 bays)
+    if cargo_max < 525:
+        i = str(cargo_max)
+        logger.info("ERROR: Ship is not capable of hauling 525 tons of cargo right now.")
+        logger.info(f"Detected {i} is the max tons we can haul.")
+        logger.info("You may need to upgrade your ship in order to haul 525 tons.")
+        logger.info("Exiting.")
+        sys.exit(0)
+    else:
+        pass
+
+    # Check if current_cargo is less than 525 (can't haul a full 7 bays)
+    if current_cargo < 525:
+        i = str(current_cargo)
+        logger.info("ERROR: Ship is not capable of hauling 525 tons of cargo right now.")
+        logger.info(f"Detected {i} is the max tons we can haul.")
+        logger.info("Please sell some things from the hold and re-start script.")
+        logger.info("Exiting.")
+        sys.exit(0)
+    else:
+        pass
+
+
+    # Check if current_cargo does not equal max cargo
+    if current_cargo != cargo_max:
+        i = str(cargo_max - current_cargo)
+        logger.info("WARNING: Ship is hauling some cargo already in its hold.")
+        logger.info(f"Detected {i} tons in use.")
     else:
         pass
 
