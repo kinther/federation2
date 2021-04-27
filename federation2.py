@@ -8,12 +8,13 @@
 # Imports
 import telnetlib  # used to do all things telnet
 import time  # used to provide sleep function
-from datetime import datetime  # used to provide logging filename
+import datetime  # used to provide logging filename
 import re  # used to escape ansi characters
 import json  # used to read planets.json file
 import logging  # used to write logs to file
 import os  # used to delete files
 import argparse  # used to pass user/password credentials
+import sys  # used to exit script if criteria is met
 
 # argparse constants
 parser = argparse.ArgumentParser()
@@ -30,7 +31,7 @@ timeout = 90  # maybe change this
 tn = telnetlib.Telnet(host, port, timeout=timeout)
 
 # Logging constants
-now = datetime.now()
+now = datetime.datetime.now()
 day = now.strftime("%a")
 hour = now.strftime("%H")
 minute = now.strftime("%M")
@@ -545,6 +546,14 @@ def main():
     except Exception as e:
         logger.error("Ran into error during initial setup and gathering data.")
         logger.error(e)
+
+    # Check if current_planet = HOME_PLANET.  If not, exit script.
+    if HOME_PLANET not in current_planet:
+        print("Character must be on their home planet on the landing pad.")
+        print("Exiting.")
+        sys.exit(0)
+    else:
+        pass
 
     # global variables
     global deficits
