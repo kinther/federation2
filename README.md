@@ -4,7 +4,7 @@ script.  Send mail in game to Strahd if you have any questions.
 1. Modify planets.json file with your home planet information, replacing
 Ravenloft variables.  For example if you owned the planet Rhea, you would
 replace "Ravenloft" with "Rhea" for the name field.  Another important entry
-is "ISL_to_Planet", which for Rhea would be a single entry of ["sw"], and
+is "ISL_to_Planet", which for Rhea would be a single entry of ["se"], and
 the reverse "Planet_to_ISL" which would be ["nw"].  Do the same for the
 remaining entries under your planet.
 2. Find out which planets you want to buy from by checking their exchange
