@@ -6,7 +6,7 @@ script.  Send mail in game to Strahd if you have any questions.
 Ravenloft variables.  For example if you owned the planet Rhea, you would
 replace "Ravenloft" with "Rhea" for the name field.  Another important entry
 is "ISL_to_Planet", which for Rhea would be a single entry of ["sw"], and
-the reverse "Planet_to_ISL" which would be ["nw"].  Do the same for the
+the reverse "Planet_to_ISL" which would be ["ne"].  Do the same for the
 remaining entries under your planet.
 3. Find out which planets you want to buy from by checking their exchange
 prices for commodities that are your deficits.  If you don't know your full
