@@ -16,6 +16,9 @@ import os  # used to delete files
 import argparse  # used to pass user/password credentials
 import sys  # used to exit script if criteria is met
 
+# global constants
+ranks = ["Founder", "Engineer", "Mogul", "Technocrat", "Gengineer", "Magnate", "Plutrocrat"]
+
 # argparse constants
 parser = argparse.ArgumentParser()
 parser.add_argument("--user", type=str, action="store", required=True)
@@ -52,6 +55,7 @@ stamina_min = 20  # lowest stamina level we want our character to fall to
 stamina_max = 0  # character's maximum stamina level, from output of score
 current_system = ""  # character is on this planet, from output of score
 current_planet = ""  # character is in this system, from output of score
+character_rank = ""  # character's rank, from output of score
 
 # Ship variables
 current_fuel = 0  # ship's current fuel level, from output of st
@@ -181,6 +185,19 @@ def checkLocation():
                 i = line.split(" ")
                 current_planet = i[6]
                 current_system = i[9]
+                
+def checkRank():
+
+    # Bring in global variables
+    global character_rank
+
+    # Check character rank information
+    logger.info(f"Checking rank of {args.user}...")
+    with open("score.txt", "r") as f:
+        for line in f:
+            if args.user in line:
+                i = line.split(" ")
+                character_rank = i[0]
 
 def buyFood():
 
@@ -477,6 +494,8 @@ def player():
     time.sleep(3)
     checkLocation()  # What planet and system are we on right now?
     time.sleep(3)
+    checkRank()
+    time.sleep(3)
 
 def ship():
 
@@ -547,6 +566,15 @@ def main():
     except Exception as e:
         logger.error("Ran into error during initial setup and gathering data.")
         logger.error(e)
+
+    # Check if character is sufficient rank to run script
+    if character_rank not in ranks:
+        logger.info("ERROR: This script is meant to be run by planet owners.")
+        logger.info(f"Your current rank is detected as {character_rank}.")
+        logger.info("Please re-run script when you rank up! Good luck :)")
+        sys.exit(0)
+    else:
+        pass
 
     # Check if current_planet = HOME_PLANET.  If not, exit script.
     if HOME_PLANET not in current_planet:
