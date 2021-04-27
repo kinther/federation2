@@ -550,6 +550,7 @@ def main():
     # Check if current_planet = HOME_PLANET.  If not, exit script.
     if HOME_PLANET not in current_planet:
         print("Character must be on their home planet on the landing pad.")
+        print(f"Detected character on {current_planet} rather than {HOME_PLANET}.}")
         print("Exiting.")
         sys.exit(0)
     else:
