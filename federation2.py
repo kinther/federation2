@@ -7,7 +7,8 @@
 
 # Imports
 import telnetlib  # used to do all things telnet
-import time  # used to provide sleep function and logging file name
+import time  # used to provide sleep function
+from datetime import datetime  # used to provide logging filename
 import re  # used to escape ansi characters
 import json  # used to read planets.json file
 import logging  # used to write logs to file
@@ -29,7 +30,11 @@ timeout = 90  # maybe change this
 tn = telnetlib.Telnet(host, port, timeout=timeout)
 
 # Logging constants
-LOG_FILENAME = time.strftime("%c" + "-fed2.txt")
+now = datetime.now()
+day = now.strftime("%a")
+hour = now.strftime("%H")
+minute = now.strftime("%M")
+LOG_FILENAME = (day + "-" + hour + minute + "-fed2.txt")
 logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
 logger = logging.getLogger()
 
