@@ -664,7 +664,6 @@ def main():
 
         # Deficits loop specific vars
         def_item = deficits[0]
-        tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
 
         # Buy fuel and food
         if current_fuel < fuel_min:
@@ -702,12 +701,15 @@ def main():
                         logger.info(f"{entry} does not sell {def_item}, moving on...")
 
             if i is False:
-                logger.info(f"Could not find {def_item} in planets.json.")
+                logger.info(f"WARNING: Could not find {def_item} in planets.json.")
+                logger.info("Please account for all deficits for maximum efficiency.")
                 logger.info(f"Removing {def_item} from deficit list.")
                 deficits.pop(0)
                 def_item = deficits[0]
             else:
                 if len(remote_planet_id) > 0:
+                    def_item = deficits[0]
+                    tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
                     logger.info(f"Will buy {def_item} from {remote_planet_id}...")
                     break
                 else:
