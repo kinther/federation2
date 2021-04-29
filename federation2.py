@@ -185,7 +185,7 @@ def checkLocation():
                 i = line.split(" ")
                 current_planet = i[6]
                 current_system = i[9]
-                
+
 def checkRank():
 
     # Bring in global variables
@@ -689,19 +689,29 @@ def main():
 
         # Determine which planet to buy deficits[cycle] from
         while True:
+
+            i = False  # find out if deficit is in planets.json or not
+
             for entry in data:
                 if HOME_PLANET not in entry:
                     if def_item in data[entry]["Sell"]:
                         remote_planet_id = entry
+                        i = True
                         break
                     else:
                         logger.info(f"{entry} does not sell {def_item}, moving on...")
 
-            if len(remote_planet_id) > 0:
-                logger.info(f"Will buy {def_item} from {remote_planet_id}...")
-                break
+            if i is False:
+                logger.info(f"Could not find {def_item} in planets.json.")
+                logger.info(f"Removing {def_item} from deficit list.")
+                deficits.pop(0)
+                def_item = deficits[0]
             else:
-                continue
+                if len(remote_planet_id) > 0:
+                    logger.info(f"Will buy {def_item} from {remote_planet_id}...")
+                    break
+                else:
+                    continue
 
         # Determine how many bays to buy of deficit[cycle]
         bays = deficitToBays(def_item)
