@@ -7,17 +7,23 @@
 
 # Imports
 import telnetlib  # used to do all things telnet
-import time  # used to provide sleep function and logging file name
+import time  # used to provide sleep function
+import datetime  # used to provide logging filename
 import re  # used to escape ansi characters
 import json  # used to read planets.json file
 import logging  # used to write logs to file
 import os  # used to delete files
 import argparse  # used to pass user/password credentials
+import sys  # used to exit script if criteria is met
+
+# global constants
+ranks = ["Founder", "Engineer", "Mogul", "Technocrat", "Gengineer", "Magnate", "Plutrocrat"]
 
 # argparse constants
 parser = argparse.ArgumentParser()
 parser.add_argument("--user", type=str, action="store", required=True)
 parser.add_argument("--password", type=str, action="store", required=True)
+parser.add_argument("--planet", type=str, action="store", required=True)
 args = parser.parse_args()
 
 # Telnetlib variables
@@ -29,12 +35,16 @@ timeout = 90  # maybe change this
 tn = telnetlib.Telnet(host, port, timeout=timeout)
 
 # Logging constants
-LOG_FILENAME = time.strftime("%c" + "-fed2.txt")
+now = datetime.datetime.now()
+day = now.strftime("%a")
+hour = now.strftime("%H")
+minute = now.strftime("%M")
+LOG_FILENAME = (day + "-" + hour + minute + "-fed2.txt")
 logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
 logger = logging.getLogger()
 
 # Character constants
-HOME_PLANET = "Ravenloft"  # constant variable used to check exchange info
+HOME_PLANET = args.planet  # passed from player arguments
 DEFICIT = -75  # How much we consider a deficit
 SURPLUS = 15000  # How much we consider a surplus
 
@@ -45,6 +55,7 @@ stamina_min = 20  # lowest stamina level we want our character to fall to
 stamina_max = 0  # character's maximum stamina level, from output of score
 current_system = ""  # character is on this planet, from output of score
 current_planet = ""  # character is in this system, from output of score
+character_rank = ""  # character's rank, from output of score
 
 # Ship variables
 current_fuel = 0  # ship's current fuel level, from output of st
@@ -174,6 +185,19 @@ def checkLocation():
                 i = line.split(" ")
                 current_planet = i[6]
                 current_system = i[9]
+
+def checkRank():
+
+    # Bring in global variables
+    global character_rank
+
+    # Check character rank information
+    logger.info(f"Checking rank of {args.user}...")
+    with open("score.txt", "r") as f:
+        for line in f:
+            if args.user in line:
+                i = line.split(" ")
+                character_rank = i[0]
 
 def buyFood():
 
@@ -470,6 +494,8 @@ def player():
     time.sleep(3)
     checkLocation()  # What planet and system are we on right now?
     time.sleep(3)
+    checkRank()
+    time.sleep(3)
 
 def ship():
 
@@ -541,6 +567,55 @@ def main():
         logger.error("Ran into error during initial setup and gathering data.")
         logger.error(e)
 
+    # Check if character is sufficient rank to run script
+    if character_rank not in ranks:
+        logger.info("ERROR: This script is meant to be run by planet owners.")
+        logger.info(f"Your current rank is detected as {character_rank}.")
+        logger.info("Please re-run script when you rank up! Good luck :)")
+        sys.exit(0)
+    else:
+        pass
+
+    # Check if current_planet = HOME_PLANET.  If not, exit script.
+    if HOME_PLANET not in current_planet:
+        logger.info("ERROR: Character must be on their home planet on the landing pad.")
+        logger.info(f"Detected character on {current_planet} rather than {HOME_PLANET}.")
+        logger.info("Exiting.")
+        sys.exit(0)
+    else:
+        pass
+
+    # Check if cargo_max is less than 525 (can't haul a full 7 bays)
+    if cargo_max < 525:
+        i = str(cargo_max)
+        logger.info("ERROR: Ship is not capable of hauling 525 tons of cargo right now.")
+        logger.info(f"Detected {i} is the max tons we can haul.")
+        logger.info("You may need to upgrade your ship in order to haul 525 tons.")
+        logger.info("Exiting.")
+        sys.exit(0)
+    else:
+        pass
+
+    # Check if current_cargo is less than 525 (can't haul a full 7 bays)
+    if current_cargo < 525:
+        i = str(current_cargo)
+        logger.info("ERROR: Ship is not capable of hauling 525 tons of cargo right now.")
+        logger.info(f"Detected {i} is the max tons we can haul.")
+        logger.info("Please sell some things from the hold and re-start script.")
+        logger.info("Exiting.")
+        sys.exit(0)
+    else:
+        pass
+
+
+    # Check if current_cargo does not equal max cargo
+    if current_cargo != cargo_max:
+        i = str(cargo_max - current_cargo)
+        logger.info("WARNING: Ship is hauling some cargo already in its hold.")
+        logger.info(f"Detected {i} tons in use.")
+    else:
+        pass
+
     # global variables
     global deficits
     global surpluses
@@ -589,7 +664,6 @@ def main():
 
         # Deficits loop specific vars
         def_item = deficits[0]
-        tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
 
         # Buy fuel and food
         if current_fuel < fuel_min:
@@ -614,19 +688,32 @@ def main():
 
         # Determine which planet to buy deficits[cycle] from
         while True:
+
+            i = False  # find out if deficit is in planets.json or not
+
             for entry in data:
                 if HOME_PLANET not in entry:
                     if def_item in data[entry]["Sell"]:
                         remote_planet_id = entry
+                        i = True
                         break
                     else:
                         logger.info(f"{entry} does not sell {def_item}, moving on...")
 
-            if len(remote_planet_id) > 0:
-                logger.info(f"Will buy {def_item} from {remote_planet_id}...")
-                break
+            if i is False:
+                logger.info(f"WARNING: Could not find {def_item} in planets.json.")
+                logger.info("Please account for all deficits for maximum efficiency.")
+                logger.info(f"Removing {def_item} from deficit list.")
+                deficits.pop(0)
+                def_item = deficits[0]
             else:
-                continue
+                if len(remote_planet_id) > 0:
+                    def_item = deficits[0]
+                    tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
+                    logger.info(f"Will buy {def_item} from {remote_planet_id}...")
+                    break
+                else:
+                    continue
 
         # Determine how many bays to buy of deficit[cycle]
         bays = deficitToBays(def_item)
