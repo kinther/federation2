@@ -14,8 +14,7 @@ anything that is in the negative.  Once you have found a planet you want to buy
 from for all of your deficits, enter them into the respective planet's entry
 in planets.json in the "Sell" category.  For example if I wanted to buy
 Alloys and BioChips from Castillo, I would create an entry for it and in the
-Sell line enter ["Alloys", "BioChips"].  (Make sure you account for all your
-deficits here - this is important)
+Sell line enter ["Alloys", "BioChips"].
 3. Place your planet owner on your home planet landing pad before running and
 ensure you have a ship capable of carrying at least 525 tons.  (clear your
 cargo space ahead of time wherever possible)
