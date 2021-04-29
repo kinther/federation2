@@ -31,3 +31,9 @@ version log:
 to print further data to logfile, conversion of user/password passing to
 command line arguments rather than static entries in script, and some PEP8
 updates.
+
+1.2 "BBQ BioChips" - cargo bay checks/notifications, script will now exit
+if run by character below Founder rank, script will exit when character is not
+on their home planet when started, home planet is now passed from command line,
+deficits not accounted for in planets.json will be skipped, and fixed a
+timestamp error on Windows preventing script from running.
