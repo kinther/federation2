@@ -22,7 +22,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": [],
-        "Sell": ["Holos", "Libraries", "Musiks", "Studios"]
+        "Sell": []
     },
 
     "Diamond": {
@@ -35,8 +35,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": [],
-        "Sell": ["Artifacts", "Hypnotapes", "Katydidics", "LubOils",
-        "TQuarks", "Vidicasters"]
+        "Sell": ["Proteins"]
     },
 
     "Zen": {
@@ -49,9 +48,9 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["BioChips", "BioComponents", "Clinics", "Firewalls",
-        "Laboratories", "MicroScalpels", "Probes", "Proteins", "Sensamps",
-        "Sensors", "ToxicMunchers", "Tracers", "Univators"]
+        "Sell": ["BioChips", "BioComponents", "Clinics", "Games",
+                 "Laboratories", "MicroScalpels", "Nanos", "Petrochemicals",
+                 "Tracers", "Univators"]
     },
 
     "Phoenix": {
@@ -64,6 +63,33 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Cereals", "Soya", "Textiles", "Woods"]
+        "Sell": ["Cereals", "Crystals", "Hides", "Nickel", "Nitros", "Spices"]
+    },
+
+    "Umatilla": {
+        "Cartel": "Flight",
+        "System": "Wyld",
+        "ISL_to_Planet": ["sw"],
+        "Planet_to_ISL": ["ne"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [""],
+        "Restaurant_to_LP": [""],
+        "Buy": [],
+        "Sell": ["Controllers", "Libraries", "Probes", "Sensors", "Studios",
+                 "ToxicMunchers"]
+    },
+
+    "Station": {
+        "Cartel": "Flight",
+        "System": "Abyss",
+        "ISL_to_Planet": [""],
+        "Planet_to_ISL": [""],
+        "LP_to_Exchange": ["s", "w"],
+        "Exchange_to_LP": ["e", "n"],
+        "LP_to_Restaurant": [""],
+        "Restaurant_to_LP": [""],
+        "Buy": [],
+        "Sell": ["Pharmaceuticals", "Polymers", "Xmetals"]
     }
 }
