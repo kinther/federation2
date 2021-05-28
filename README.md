@@ -37,3 +37,6 @@ if run by character below Founder rank, script will exit when character is not
 on their home planet when started, home planet is now passed from command line,
 deficits not accounted for in planets.json will be skipped, and fixed a
 timestamp error on Windows preventing script from running.
+
+1.3 "Bargain BioComponents" - fix exchange parsing issue caused by recent
+update and improve script speed by decreasing time.sleep in most cases.
