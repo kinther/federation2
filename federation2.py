@@ -116,6 +116,14 @@ def deleteFiles():
             continue
         break
 
+def nonblank_lines(f):
+    # https://stackoverflow.com/questions/4842057/easiest-way-to-ignore-blank-
+    # lines-when-reading-a-file-in-python
+    for l in f:
+        line = l.rstrip()
+        if line:
+            yield line
+
 # Character functions
 
 def updateScore():
@@ -338,14 +346,16 @@ def parseExchange():
     logger.info("Pulling exchange data into dictionary...")
     with open("exchange.txt", "r") as f:
         next(f)
-        for line in f:
+        lines = nonblank_lines(f)
+        for line in lines:
             i = line.split(" ")
-            commodity = i[2]
-            commodity = commodity[:-1]  # strip colon after commodity name
-            current = i[12]
+            i = list(filter(None, i))
+            commodity = i[0]
+            commodity = commodity[:-1]
+            current = i[7]
             current = current.split("/")
             current = current[0]
-            max = i[14]
+            max = i[9]
             exchange_dict[commodity] = {"Current": current, "Max": max}
 
 def checkDeficits():
