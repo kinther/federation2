@@ -734,6 +734,12 @@ def main():
         boardPlanet()
         time.sleep(1)
 
+        # Move to ISL from home planet
+        logger.info(f"Moving to ISL from {HOME_PLANET}...")
+        for dir in data[HOME_PLANET]["Planet_to_ISL"]:
+            moveDirection(dir)
+            time.sleep(1)
+
         # Jump to remote system
         if data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]:
             logger.info("Jumping to remote system in same cartel...")
@@ -799,6 +805,12 @@ def main():
             jumpSystem(data[HOME_PLANET]["Cartel"])
             time.sleep(1)
             jumpSystem(data[HOME_PLANET]["System"])
+            time.sleep(1)
+
+        # Move to home planet from ISL
+        logger.info(f"Moving to {HOME_PLANET} from ISL...")
+        for dir in data[HOME_PLANET]["ISL_to_Planet"]:
+            moveDirection(dir)
             time.sleep(1)
 
         # Board planet
