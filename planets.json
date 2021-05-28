@@ -9,6 +9,19 @@
         "LP_to_Restaurant": ["s"],
         "Restaurant_to_LP": ["n"],
         "Buy": [],
+        "Sell": ["Munitions", "Tools", "Weapons"]
+    },
+
+    "Vallaki": {
+        "Cartel": "Flight",
+        "System": "Barovia",
+        "ISL_to_Planet": ["e"],
+        "Planet_to_ISL": ["w"],
+        "LP_to_Exchange": ["s","w"],
+        "Exchange_to_LP": ["e","n"],
+        "LP_to_Restaurant": ["s"],
+        "Restaurant_to_LP": ["n"],
+        "Buy": [],
         "Sell": []
     },
 
@@ -22,7 +35,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": [],
-        "Sell": []
+        "Sell": ["Explosives", "Games", "GAsChips", "Holos", "Katydidics", "Musiks"]
     },
 
     "Diamond": {
@@ -35,7 +48,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": [],
-        "Sell": ["Proteins"]
+        "Sell": ["Droids", "Hypnotapes", "Proteins", "Simulations"]
     },
 
     "Zen": {
@@ -50,7 +63,7 @@
         "Buy": [],
         "Sell": ["BioChips", "BioComponents", "Clinics", "Games",
                  "Laboratories", "MicroScalpels", "Nanos", "Petrochemicals",
-                 "Tracers", "Univators"]
+                 "Sensamps", "Tracers", "Univators"]
     },
 
     "Phoenix": {
@@ -63,7 +76,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Cereals", "Crystals", "Hides", "Nickel", "Nitros", "Spices"]
+        "Sell": ["Cereals", "Clays", "Crystals", "Electros", "Hides", "Nickel", "Nitros", "Soya", "Spices", "Textiles", "Woods"]
     },
 
     "Umatilla": {
