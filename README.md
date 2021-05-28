@@ -9,7 +9,7 @@ the reverse "Planet_to_ISL" which would be ["nw"].  Do the same for the
 remaining entries under your planet.
 2. Find out which planets you want to buy from by checking their exchange
 prices for commodities that are your deficits.  If you don't know your full
-deficits list, check out https://www.f2ea.com which should help you identify
+deficits list, check out http://www.f2ea.com which should help you identify
 anything that is in the negative.  Once you have found a planet you want to buy
 from for all of your deficits, enter them into the respective planet's entry
 in planets.json in the "Sell" category.  For example if I wanted to buy
