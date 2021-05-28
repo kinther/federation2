@@ -88,7 +88,7 @@ def login():
     # Wait for string indicating we have logged in successfully
     tn.read_until(b"Linking to Federation DataSpace.")
     logger.info(f"Logged in successfully to {host} on port {port} as {args.user}.")
-    time.sleep(5)
+    time.sleep(2)
 
 def clearBuffer():
     # Attempts to clear the buffer
@@ -134,7 +134,7 @@ def updateScore():
     # Check character score information
     logger.info(f"Updating score info of {args.user}...")
     tn.write(b"score\n")
-    time.sleep(3)
+    time.sleep(1)
     score = tn.read_very_eager().decode("ascii")
     score = escape_ansi(score)
 
@@ -227,7 +227,7 @@ def updateShip():
     # Check ship status information
     logger.info(f"Updating ship info of {args.user}...")
     tn.write(b"st\n")
-    time.sleep(3)
+    time.sleep(1)
     ship = tn.read_very_eager().decode("ascii")
     ship = escape_ansi(ship)
 
@@ -278,7 +278,7 @@ def buyFuel():
     # Tries to buy fuel for the player's ship
     logger.info(f"Buying fuel for {args.user}'s ship...")
     tn.write(b"buy fuel\n")
-    time.sleep(3)
+    time.sleep(1)
 
 # Planet/Exchange functions
 
@@ -290,7 +290,7 @@ def updatePlanet():
     # Check planetary exchange information
     logger.info(f"Updating {HOME_PLANET} planet information...")
     tn.write(b"di planet " + str.encode(HOME_PLANET) + b"\n")
-    time.sleep(3)
+    time.sleep(1)
     planet = tn.read_very_eager().decode("ascii")
     planet = escape_ansi(planet)
 
@@ -328,7 +328,7 @@ def updateExchange():
     # Check planetary exchange information
     logger.info(f"Updating {HOME_PLANET} exchange information...")
     tn.write(b"di exchange " + str.encode(HOME_PLANET) + b"\n")
-    time.sleep(3)
+    time.sleep(1)
     exchange = tn.read_very_eager().decode("ascii")
     exchange = escape_ansi(exchange)
 
@@ -387,21 +387,21 @@ def boardPlanet():
     # Lands or lifts off from planet
     logger.info("Boarding planet...")
     tn.write(b"board\n")
-    time.sleep(3)
+    time.sleep(1)
 
 def moveDirection(direction):
 
     # Moves in a direction the function takes as an argument
     logger.info(f"Moving {direction}...")
     tn.write(str.encode(direction) + b"\n")
-    time.sleep(3)
+    time.sleep(1)
 
 def jumpSystem(system):
 
     # Moves to a new system or cartel from the inter-stellar link
     logger.info(f"Jumping to {system}...")
     tn.write(b"jump " + str.encode(system) + b"\n")
-    time.sleep(3)
+    time.sleep(1)
 
 # Trade functions
 
@@ -413,7 +413,7 @@ def checkPrice(commodity, planet):
     # Checks if a remote exchange is buying a commodity or not
     logger.info(f"Checking if {planet} is buying {commodity}...")
     tn.write(b"c price " + str.encode(commodity) + b" " + str.encode(planet) + b"\n")
-    time.sleep(3)
+    time.sleep(1)
     price = tn.read_very_eager().decode("ascii")
     price = escape_ansi(price)
 
@@ -437,7 +437,7 @@ def buyCommodity(commodity):
     # Used to buy commodities at an exchange
     logger.info(f"Buying {commodity}...")
     tn.write(b"buy " + str.encode(commodity) + b"\n")
-    time.sleep(3)
+    time.sleep(1)
 
 def checkIfSelling(commodity, planet):
 
@@ -447,7 +447,7 @@ def checkIfSelling(commodity, planet):
     # Checks if a remote exchange is buying a commodity or not
     logger.info(f"Checking if {planet} is selling {commodity}...")
     tn.write(b"c price " + str.encode(commodity) + b" " + str.encode(planet) + b"\n")
-    time.sleep(3)
+    time.sleep(1)
     price = tn.read_very_eager().decode("ascii")
     price = escape_ansi(price)
 
@@ -471,7 +471,7 @@ def sellCommodity(commodity):
     # Used to sell commodities at an exchange
     logger.info(f"Selling {commodity}...")
     tn.write(b"sell " + str.encode(commodity) + b"\n")
-    time.sleep(3)
+    time.sleep(1)
 
 def deficitToBays(commodity):
 
@@ -497,45 +497,45 @@ def player():
 
     # Runs all player functions with slight delay
     updateScore()  # Required before any other check can run
-    time.sleep(3)
+    time.sleep(1)
     checkBalance()  # How much money do we have right now?
-    time.sleep(3)
+    time.sleep(1)
     checkStamina()  # How much stamina do we have right now?
-    time.sleep(3)
+    time.sleep(1)
     checkLocation()  # What planet and system are we on right now?
-    time.sleep(3)
+    time.sleep(1)
     checkRank()
-    time.sleep(3)
+    time.sleep(1)
 
 def ship():
 
     # Runs all ship functions with slight delay
     updateShip()  # Required before any other check can run
-    time.sleep(3)
+    time.sleep(1)
     checkFuel()  # How much fuel do we have right now?
-    time.sleep(3)
+    time.sleep(1)
     checkCargo()  # How much cargo do we have right now?
-    time.sleep(3)
+    time.sleep(1)
 
 def planet():
 
     # Runs all planet functions with slight delay
     updatePlanet()  # Required before any other update can run
-    time.sleep(3)
+    time.sleep(1)
     checkTreasury()  # How much money does the treasury have right now?
-    time.sleep(3)
+    time.sleep(1)
 
 def exchange():
 
     # Runs all planet exchange functions with slight delay
     updateExchange()  # Required before any other update can run
-    time.sleep(3)
+    time.sleep(1)
     parseExchange()  # Convert plain text to dictionary
-    time.sleep(3)
+    time.sleep(1)
     checkDeficits()
-    time.sleep(3)
+    time.sleep(1)
     checkSurpluses()
-    time.sleep(3)
+    time.sleep(1)
 
 def gatherData():
 
@@ -543,15 +543,15 @@ def gatherData():
         try:
             # Runs all multi functions
             player()
-            time.sleep(3)
+            time.sleep(1)
             ship()
-            time.sleep(3)
+            time.sleep(1)
             planet()
-            time.sleep(3)
+            time.sleep(1)
             exchange()
-            time.sleep(3)
+            time.sleep(1)
             deleteFiles()
-            time.sleep(3)
+            time.sleep(1)
             break
         except IndexError:
             logger.info("IndexError occurred, trying again...")
@@ -570,9 +570,9 @@ def main():
     # Perform initial setup and gather game data
     try:
         login()
-        time.sleep(3)
+        time.sleep(1)
         gatherData()
-        time.sleep(3)
+        time.sleep(1)
     except Exception as e:
         logger.error("Ran into error during initial setup and gathering data.")
         logger.error(e)
@@ -667,9 +667,9 @@ def main():
                     tn.write(b"\n")
                     time.sleep(60)
                 clearBuffer()  # clear buffer, who knows what happened in 30 mins
-                time.sleep(3)
+                time.sleep(1)
                 exchange()  # run exchange functions
-                time.sleep(3)
+                time.sleep(1)
                 continue
 
         # Deficits loop specific vars
@@ -679,19 +679,19 @@ def main():
         if current_fuel < fuel_min:
             buyFuel()
             logger.info("Current fuel is below minimum, buying fuel.")
-            time.sleep(3)
+            time.sleep(1)
         else:
             logger.info("Current fuel is above minimum.")
             pass
         if current_stamina < stamina_min:
             for dir in data[HOME_PLANET]["LP_to_Restaurant"]:
                 moveDirection(dir)
-                time.sleep(3)
+                time.sleep(1)
             buyFood()
             logger.info("Current stamina is below minimum, buying food.")
             for dir in data[HOME_PLANET]["Restaurant_to_LP"]:
                 moveDirection(dir)
-                time.sleep(3)
+                time.sleep(1)
         else:
             logger.info("Current stamina is above minimum.")
             pass
@@ -732,50 +732,50 @@ def main():
 
         # Board planet
         boardPlanet()
-        time.sleep(3)
+        time.sleep(1)
 
         # Jump to remote system
         if data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]:
             logger.info("Jumping to remote system in same cartel...")
             jumpSystem(data[remote_planet_id]["System"])
-            time.sleep(3)
+            time.sleep(1)
         else:
             logger.info("Jumping to remote system in remote cartel...")
             jumpSystem(data[HOME_PLANET]["Cartel"])
-            time.sleep(3)
+            time.sleep(1)
             jumpSystem(data[remote_planet_id]["Cartel"])
-            time.sleep(3)
+            time.sleep(1)
             jumpSystem(data[remote_planet_id]["System"])
-            time.sleep(3)
+            time.sleep(1)
 
         # Move to remote planet from ISL
         logger.info(f"Moving to {remote_planet_id} from ISL...")
         for dir in data[remote_planet_id]["ISL_to_Planet"]:
             moveDirection(dir)
-            time.sleep(3)
+            time.sleep(1)
 
         # Board planet
         boardPlanet()
-        time.sleep(3)
+        time.sleep(1)
 
         # Move to exchange
         logger.info("Moving to exchange from landing pad...")
         for dir in data[remote_planet_id]["LP_to_Exchange"]:
             moveDirection(dir)
-            time.sleep(3)
+            time.sleep(1)
 
         # Buy deficits from remote exchange
         logger.info("Buying deficit from remote exchange...")
         for _ in range(bays):
             buyCommodity(def_item)
-            time.sleep(2)
-        time.sleep(3)
+            time.sleep(1)
+        time.sleep(1)
 
         # Move to landing pad
         logger.info("Moving to landing pad from exchange...")
         for dir in data[remote_planet_id]["Exchange_to_LP"]:
             moveDirection(dir)
-            time.sleep(3)
+            time.sleep(1)
 
         # Board planet
         boardPlanet()
@@ -785,59 +785,59 @@ def main():
         logger.info(f"Moving to ISL from {remote_planet_id}...")
         for dir in data[remote_planet_id]["Planet_to_ISL"]:
             moveDirection(dir)
-            time.sleep(3)
+            time.sleep(1)
 
         # Jump to remote system
         if data[remote_planet_id]["Cartel"] in data[HOME_PLANET]["Cartel"]:
             logger.info("Jumping to remote system in same cartel...")
             jumpSystem(data[HOME_PLANET]["System"])
-            time.sleep(3)
+            time.sleep(1)
         else:
             logger.info("Jumping to remote system in remote cartel...")
             jumpSystem(data[remote_planet_id]["Cartel"])
-            time.sleep(3)
+            time.sleep(1)
             jumpSystem(data[HOME_PLANET]["Cartel"])
-            time.sleep(3)
+            time.sleep(1)
             jumpSystem(data[HOME_PLANET]["System"])
-            time.sleep(3)
+            time.sleep(1)
 
         # Board planet
         boardPlanet()
-        time.sleep(3)
+        time.sleep(1)
 
         # Move to exchange
         logger.info("Moving to exchange from landing pad...")
         for dir in data[HOME_PLANET]["LP_to_Exchange"]:
             moveDirection(dir)
-            time.sleep(3)
+            time.sleep(1)
 
         # Sell goods
         logger.info("Selling deficit item to remote exchange...")
         for _ in range(bays):
             sellCommodity(def_item)
-            time.sleep(2)
-        time.sleep(3)
+            time.sleep(1)
+        time.sleep(1)
 
         # Move to landing pad
         logger.info("Moving to landing pad from exchange...")
         for dir in data[HOME_PLANET]["Exchange_to_LP"]:
             moveDirection(dir)
-            time.sleep(3)
+            time.sleep(1)
 
         # Iteration data updates to keep things fresh
         iter += 1
 
         prev_balance = balance  # how much we had before cycle began
         player()  # gather new player data
-        time.sleep(2)
+        time.sleep(1)
         diff_balance = (balance-prev_balance)  # how much we made this iteration
 
         ship()  # gather new ship data
-        time.sleep(2)
+        time.sleep(1)
         prev_treasury = treasury  # how much we had before cycle began
 
         planet()  # gather new planet data
-        time.sleep(2)
+        time.sleep(1)
         diff_treasury = (treasury-prev_treasury)  # how much we made this iteration
 
         os.remove("score.txt")  # remove files
@@ -846,7 +846,7 @@ def main():
         logger.info("Removing entry from deficits list...")
         tn.write(b"say Filled " + str.encode(def_item) + b".\n")
         deficits.pop(0)
-        time.sleep(3)
+        time.sleep(1)
 
 if __name__ == "__main__":
     main()
