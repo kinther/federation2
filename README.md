@@ -40,3 +40,5 @@ timestamp error on Windows preventing script from running.
 
 1.3 "Bargain BioComponents" - fix exchange parsing issue caused by recent
 update and improve script speed by decreasing time.sleep in most cases.
+
+1.4 "Celestial Cereals" - support for multiple planets in your system
