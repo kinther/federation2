@@ -877,13 +877,13 @@ def main():
             logger.info(f" That's a difference of {diff_treasury} compared to last iteration.")
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
-            # Pause for 30 minutes if deficits list is empty
+            # Pause for 30 minutes if surpluses list is empty
             while True:
-                if len(deficits) > 0:  # is deficits list empty yet?
+                if len(surpluses) > 0:  # is surpluses list empty yet?
                     break
                 else:
-                    logger.info("Deficits all filled.  Sleeping for 30 minutes...")
-                    tn.write(b"say All deficits filled.  Sleeping for 30 minutes.\n")
+                    logger.info("Surpluses all sold.  Sleeping for 30 minutes...")
+                    tn.write(b"say All surpluses sold.  Sleeping for 30 minutes.\n")
                     for i in range(30):  # Keepalive function so BrokenPipe does not occur
                         tn.write(b"\n")
                         time.sleep(60)
@@ -893,8 +893,8 @@ def main():
                     time.sleep(1)
                     continue
 
-            # Deficits loop specific vars
-            def_item = deficits[0]
+            # Surpluses loop specific vars
+            sur_item = surpluses[0]
 
             # Buy fuel and food
             if current_fuel < fuel_min:
@@ -917,39 +917,54 @@ def main():
                 logger.info("Current stamina is above minimum.")
                 pass
 
-            # Determine which planet to buy deficits[cycle] from
+            # Determine which planet to sell surpluses[cycle] from
             while True:
 
-                i = False  # find out if deficit is in planets.json or not
+                i = False  # find out if surpluse is in planets.json or not
 
                 for entry in data:
                     if HOME_PLANET not in entry:
-                        if def_item in data[entry]["Sell"]:
+                        if sur_item in data[entry]["Buy"]:
                             remote_planet_id = entry
                             i = True
                             break
                         else:
-                            logger.info(f"{entry} does not sell {def_item}, moving on...")
+                            logger.info(f"{entry} does not buy {sur_item}, moving on...")
 
                 if i is False:
-                    logger.info(f"WARNING: Could not find {def_item} in planets.json.")
-                    logger.info("Please account for all deficits for maximum efficiency.")
-                    logger.info(f"Removing {def_item} from deficit list.")
-                    deficits.pop(0)
-                    def_item = deficits[0]
+                    logger.info(f"WARNING: Could not find {sur_item} in planets.json.")
+                    logger.info("Please account for all surpluses for maximum efficiency.")
+                    logger.info(f"Removing {sur_item} from deficit list.")
+                    surpluses.pop(0)
+                    sur_item = surpluses[0]
                 else:
                     if len(remote_planet_id) > 0:
-                        def_item = deficits[0]
-                        tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
-                        logger.info(f"Will buy {def_item} from {remote_planet_id}...")
+                        sur_item = surpluses[0]
+                        tn.write(b"say Surplus item is " + str.encode(def_item) + b".\n")
+                        logger.info(f"Will sell {def_item} to {remote_planet_id}...")
                         break
                     else:
                         continue
 
-            # Determine how many bays to buy of deficit[cycle]
-            bays = deficitToBays(def_item)
-            logger.info(f"Will buy {bays} bays of deficit from remote planet...")
-            tn.write(b"say Will buy " + str.encode(str(bays)) + b" " + str.encode(def_item) + b".\n")
+           # TO-DO : Find out if selected planet is even buying the item or not
+           # maybe move this into above loop logic??
+
+            # Move to exchange
+            logger.info("Moving to exchange from landing pad...")
+            for dir in data[HOME_PLANET]["LP_to_Exchange"]:
+                moveDirection(dir)
+                time.sleep(1)
+
+            # Buy goods
+            logger.info("Buying surplus item from home exchange...")
+            buyCommodity(sur_item)
+            time.sleep(1)
+
+            # Move to landing pad
+            logger.info("Moving to landing pad from exchange...")
+            for dir in data[HOME_PLANET]["Exchange_to_LP"]:
+                moveDirection(dir)
+                time.sleep(1)
 
             # Board planet
             boardPlanet()
@@ -991,11 +1006,9 @@ def main():
                 moveDirection(dir)
                 time.sleep(1)
 
-            # Buy deficits from remote exchange
-            logger.info("Buying deficit from remote exchange...")
-            for _ in range(bays):
-                buyCommodity(def_item)
-                time.sleep(1)
+            # Buy goods
+            logger.info("Selling surplus item to remote exchange...")
+            sellCommodity(sur_item)
             time.sleep(1)
 
             # Move to landing pad
@@ -1044,13 +1057,6 @@ def main():
                 moveDirection(dir)
                 time.sleep(1)
 
-            # Sell goods
-            logger.info("Selling deficit item to remote exchange...")
-            for _ in range(bays):
-                sellCommodity(def_item)
-                time.sleep(1)
-            time.sleep(1)
-
             # Move to landing pad
             logger.info("Moving to landing pad from exchange...")
             for dir in data[HOME_PLANET]["Exchange_to_LP"]:
@@ -1077,7 +1083,10 @@ def main():
             os.remove("ship.txt")  # remove files
             os.remove("planet.txt")  # remove files
             logger.info("Removing entry from deficits list...")
-            tn.write(b"say Filled " + str.encode(def_item) + b".\n")
+            tn.write(b"say Sold " + str.encode(sur_item) + b".\n")
+
+            # TO-DO : Check if surplus is still being bought
+            # If it is, do not pop.  If it is not, pop.
             deficits.pop(0)
             time.sleep(1)
 
