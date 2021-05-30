@@ -16,15 +16,17 @@ import os  # used to delete files
 import argparse  # used to pass user/password credentials
 import sys  # used to exit script if criteria is met
 
-# global constants
-ranks = ["Founder", "Engineer", "Mogul", "Technocrat", "Gengineer", "Magnate", "Plutrocrat"]
-
 # argparse constants
 parser = argparse.ArgumentParser()
 parser.add_argument("--user", type=str, action="store", required=True)
 parser.add_argument("--password", type=str, action="store", required=True)
 parser.add_argument("--planet", type=str, action="store", required=True)
+parser.add_argument("--mode", type=str, action="store", required=True)
 args = parser.parse_args()
+
+# global constants
+ranks = ["Founder", "Engineer", "Mogul", "Technocrat", "Gengineer", "Magnate", "Plutrocrat"]
+mode = args.mode  # determines whether to focus on deficits or surpluses
 
 # Telnetlib variables
 host = "play.federation2.com"  # don't change this
