@@ -21,12 +21,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--user", type=str, action="store", required=True)
 parser.add_argument("--password", type=str, action="store", required=True)
 parser.add_argument("--planet", type=str, action="store", required=True)
-parser.add_argument("--mode", type=str, action="store", required=True)
+parser.add_argument("--mode", type=str, action="store", default="deficit")
 args = parser.parse_args()
 
 # global constants
 ranks = ["Founder", "Engineer", "Mogul", "Technocrat", "Gengineer", "Magnate", "Plutrocrat"]
-mode = args.mode  # determines whether to focus on deficits or surpluses
+mode = (args.mode).lower()  # determines whether to focus on deficits or surpluses
 
 # Telnetlib variables
 host = "play.federation2.com"  # don't change this
@@ -647,220 +647,446 @@ def main():
     f = open("planets.json")
     data = json.load(f)
 
-    while True:
+    if "deficit" in mode:
 
-        # Iteration checks
-        logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-        logger.info(f" This is iteration number {iter}.")
-        logger.info(f" {args.user}'s bank balance is {balance}.")
-        logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
-        logger.info(f" {HOME_PLANET}'s treasury value is {treasury}.")
-        logger.info(f" That's a difference of {diff_treasury} compared to last iteration.")
-        logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-
-        # Pause for 30 minutes if deficits list is empty
-        while True:
-            if len(deficits) > 0:  # is deficits list empty yet?
-                break
-            else:
-                logger.info("Deficits all filled.  Sleeping for 30 minutes...")
-                tn.write(b"say All deficits filled.  Sleeping for 30 minutes.\n")
-                for i in range(30):  # Keepalive function so BrokenPipe does not occur
-                    tn.write(b"\n")
-                    time.sleep(60)
-                clearBuffer()  # clear buffer, who knows what happened in 30 mins
-                time.sleep(1)
-                exchange()  # run exchange functions
-                time.sleep(1)
-                continue
-
-        # Deficits loop specific vars
-        def_item = deficits[0]
-
-        # Buy fuel and food
-        if current_fuel < fuel_min:
-            buyFuel()
-            logger.info("Current fuel is below minimum, buying fuel.")
-            time.sleep(1)
-        else:
-            logger.info("Current fuel is above minimum.")
-            pass
-        if current_stamina < stamina_min:
-            for dir in data[HOME_PLANET]["LP_to_Restaurant"]:
-                moveDirection(dir)
-                time.sleep(1)
-            buyFood()
-            logger.info("Current stamina is below minimum, buying food.")
-            for dir in data[HOME_PLANET]["Restaurant_to_LP"]:
-                moveDirection(dir)
-                time.sleep(1)
-        else:
-            logger.info("Current stamina is above minimum.")
-            pass
-
-        # Determine which planet to buy deficits[cycle] from
         while True:
 
-            i = False  # find out if deficit is in planets.json or not
+            # Iteration checks
+            logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+            logger.info(f" This is iteration number {iter}.")
+            logger.info(f" {args.user}'s bank balance is {balance}.")
+            logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
+            logger.info(f" {HOME_PLANET}'s treasury value is {treasury}.")
+            logger.info(f" That's a difference of {diff_treasury} compared to last iteration.")
+            logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
-            for entry in data:
-                if HOME_PLANET not in entry:
-                    if def_item in data[entry]["Sell"]:
-                        remote_planet_id = entry
-                        i = True
-                        break
-                    else:
-                        logger.info(f"{entry} does not sell {def_item}, moving on...")
-
-            if i is False:
-                logger.info(f"WARNING: Could not find {def_item} in planets.json.")
-                logger.info("Please account for all deficits for maximum efficiency.")
-                logger.info(f"Removing {def_item} from deficit list.")
-                deficits.pop(0)
-                def_item = deficits[0]
-            else:
-                if len(remote_planet_id) > 0:
-                    def_item = deficits[0]
-                    tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
-                    logger.info(f"Will buy {def_item} from {remote_planet_id}...")
+            # Pause for 30 minutes if deficits list is empty
+            while True:
+                if len(deficits) > 0:  # is deficits list empty yet?
                     break
                 else:
+                    logger.info("Deficits all filled.  Sleeping for 30 minutes...")
+                    tn.write(b"say All deficits filled.  Sleeping for 30 minutes.\n")
+                    for i in range(30):  # Keepalive function so BrokenPipe does not occur
+                        tn.write(b"\n")
+                        time.sleep(60)
+                    clearBuffer()  # clear buffer, who knows what happened in 30 mins
+                    time.sleep(1)
+                    exchange()  # run exchange functions
+                    time.sleep(1)
                     continue
 
-        # Determine how many bays to buy of deficit[cycle]
-        bays = deficitToBays(def_item)
-        logger.info(f"Will buy {bays} bays of deficit from remote planet...")
-        tn.write(b"say Will buy " + str.encode(str(bays)) + b" " + str.encode(def_item) + b".\n")
+            # Deficits loop specific vars
+            def_item = deficits[0]
 
-        # Board planet
-        boardPlanet()
-        time.sleep(1)
+            # Buy fuel and food
+            if current_fuel < fuel_min:
+                buyFuel()
+                logger.info("Current fuel is below minimum, buying fuel.")
+                time.sleep(1)
+            else:
+                logger.info("Current fuel is above minimum.")
+                pass
+            if current_stamina < stamina_min:
+                for dir in data[HOME_PLANET]["LP_to_Restaurant"]:
+                    moveDirection(dir)
+                    time.sleep(1)
+                buyFood()
+                logger.info("Current stamina is below minimum, buying food.")
+                for dir in data[HOME_PLANET]["Restaurant_to_LP"]:
+                    moveDirection(dir)
+                    time.sleep(1)
+            else:
+                logger.info("Current stamina is above minimum.")
+                pass
 
-        # Move to ISL from home planet
-        logger.info(f"Moving to ISL from {HOME_PLANET}...")
-        for dir in data[HOME_PLANET]["Planet_to_ISL"]:
-            moveDirection(dir)
+            # Determine which planet to buy deficits[cycle] from
+            while True:
+
+                i = False  # find out if deficit is in planets.json or not
+
+                for entry in data:
+                    if HOME_PLANET not in entry:
+                        if def_item in data[entry]["Sell"]:
+                            remote_planet_id = entry
+                            i = True
+                            break
+                        else:
+                            logger.info(f"{entry} does not sell {def_item}, moving on...")
+
+                if i is False:
+                    logger.info(f"WARNING: Could not find {def_item} in planets.json.")
+                    logger.info("Please account for all deficits for maximum efficiency.")
+                    logger.info(f"Removing {def_item} from deficit list.")
+                    deficits.pop(0)
+                    def_item = deficits[0]
+                else:
+                    if len(remote_planet_id) > 0:
+                        def_item = deficits[0]
+                        tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
+                        logger.info(f"Will buy {def_item} from {remote_planet_id}...")
+                        break
+                    else:
+                        continue
+
+            # Determine how many bays to buy of deficit[cycle]
+            bays = deficitToBays(def_item)
+            logger.info(f"Will buy {bays} bays of deficit from remote planet...")
+            tn.write(b"say Will buy " + str.encode(str(bays)) + b" " + str.encode(def_item) + b".\n")
+
+            # Board planet
+            boardPlanet()
             time.sleep(1)
 
-        # Jump to remote system
-        if data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]:
-            logger.info("Jumping to remote system in same cartel...")
-            jumpSystem(data[remote_planet_id]["System"])
-            time.sleep(1)
-        else:
-            logger.info("Jumping to remote system in remote cartel...")
-            jumpSystem(data[HOME_PLANET]["Cartel"])
-            time.sleep(1)
-            jumpSystem(data[remote_planet_id]["Cartel"])
-            time.sleep(1)
-            jumpSystem(data[remote_planet_id]["System"])
-            time.sleep(1)
+            # Move to ISL from home planet
+            logger.info(f"Moving to ISL from {HOME_PLANET}...")
+            for dir in data[HOME_PLANET]["Planet_to_ISL"]:
+                moveDirection(dir)
+                time.sleep(1)
 
-        # Move to remote planet from ISL
-        logger.info(f"Moving to {remote_planet_id} from ISL...")
-        for dir in data[remote_planet_id]["ISL_to_Planet"]:
-            moveDirection(dir)
-            time.sleep(1)
+            # Jump to remote system
+            if data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]:
+                logger.info("Jumping to remote system in same cartel...")
+                jumpSystem(data[remote_planet_id]["System"])
+                time.sleep(1)
+            else:
+                logger.info("Jumping to remote system in remote cartel...")
+                jumpSystem(data[HOME_PLANET]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[remote_planet_id]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[remote_planet_id]["System"])
+                time.sleep(1)
 
-        # Board planet
-        boardPlanet()
-        time.sleep(1)
+            # Move to remote planet from ISL
+            logger.info(f"Moving to {remote_planet_id} from ISL...")
+            for dir in data[remote_planet_id]["ISL_to_Planet"]:
+                moveDirection(dir)
+                time.sleep(1)
 
-        # Move to exchange
-        logger.info("Moving to exchange from landing pad...")
-        for dir in data[remote_planet_id]["LP_to_Exchange"]:
-            moveDirection(dir)
-            time.sleep(1)
-
-        # Buy deficits from remote exchange
-        logger.info("Buying deficit from remote exchange...")
-        for _ in range(bays):
-            buyCommodity(def_item)
-            time.sleep(1)
-        time.sleep(1)
-
-        # Move to landing pad
-        logger.info("Moving to landing pad from exchange...")
-        for dir in data[remote_planet_id]["Exchange_to_LP"]:
-            moveDirection(dir)
+            # Board planet
+            boardPlanet()
             time.sleep(1)
 
-        # Board planet
-        boardPlanet()
-        time.sleep(3)
+            # Move to exchange
+            logger.info("Moving to exchange from landing pad...")
+            for dir in data[remote_planet_id]["LP_to_Exchange"]:
+                moveDirection(dir)
+                time.sleep(1)
 
-        # Move to ISL from remote planet
-        logger.info(f"Moving to ISL from {remote_planet_id}...")
-        for dir in data[remote_planet_id]["Planet_to_ISL"]:
-            moveDirection(dir)
+            # Buy deficits from remote exchange
+            logger.info("Buying deficit from remote exchange...")
+            for _ in range(bays):
+                buyCommodity(def_item)
+                time.sleep(1)
             time.sleep(1)
 
-        # Jump to remote system
-        if data[remote_planet_id]["Cartel"] in data[HOME_PLANET]["Cartel"]:
-            logger.info("Jumping to remote system in same cartel...")
-            jumpSystem(data[HOME_PLANET]["System"])
-            time.sleep(1)
-        else:
-            logger.info("Jumping to remote system in remote cartel...")
-            jumpSystem(data[remote_planet_id]["Cartel"])
-            time.sleep(1)
-            jumpSystem(data[HOME_PLANET]["Cartel"])
-            time.sleep(1)
-            jumpSystem(data[HOME_PLANET]["System"])
-            time.sleep(1)
+            # Move to landing pad
+            logger.info("Moving to landing pad from exchange...")
+            for dir in data[remote_planet_id]["Exchange_to_LP"]:
+                moveDirection(dir)
+                time.sleep(1)
 
-        # Move to home planet from ISL
-        logger.info(f"Moving to {HOME_PLANET} from ISL...")
-        for dir in data[HOME_PLANET]["ISL_to_Planet"]:
-            moveDirection(dir)
-            time.sleep(1)
+            # Board planet
+            boardPlanet()
+            time.sleep(3)
 
-        # Board planet
-        boardPlanet()
-        time.sleep(1)
+            # Move to ISL from remote planet
+            logger.info(f"Moving to ISL from {remote_planet_id}...")
+            for dir in data[remote_planet_id]["Planet_to_ISL"]:
+                moveDirection(dir)
+                time.sleep(1)
 
-        # Move to exchange
-        logger.info("Moving to exchange from landing pad...")
-        for dir in data[HOME_PLANET]["LP_to_Exchange"]:
-            moveDirection(dir)
-            time.sleep(1)
+            # Jump to remote system
+            if data[remote_planet_id]["Cartel"] in data[HOME_PLANET]["Cartel"]:
+                logger.info("Jumping to remote system in same cartel...")
+                jumpSystem(data[HOME_PLANET]["System"])
+                time.sleep(1)
+            else:
+                logger.info("Jumping to remote system in remote cartel...")
+                jumpSystem(data[remote_planet_id]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[HOME_PLANET]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[HOME_PLANET]["System"])
+                time.sleep(1)
 
-        # Sell goods
-        logger.info("Selling deficit item to remote exchange...")
-        for _ in range(bays):
-            sellCommodity(def_item)
-            time.sleep(1)
-        time.sleep(1)
+            # Move to home planet from ISL
+            logger.info(f"Moving to {HOME_PLANET} from ISL...")
+            for dir in data[HOME_PLANET]["ISL_to_Planet"]:
+                moveDirection(dir)
+                time.sleep(1)
 
-        # Move to landing pad
-        logger.info("Moving to landing pad from exchange...")
-        for dir in data[HOME_PLANET]["Exchange_to_LP"]:
-            moveDirection(dir)
+            # Board planet
+            boardPlanet()
             time.sleep(1)
 
-        # Iteration data updates to keep things fresh
-        iter += 1
+            # Move to exchange
+            logger.info("Moving to exchange from landing pad...")
+            for dir in data[HOME_PLANET]["LP_to_Exchange"]:
+                moveDirection(dir)
+                time.sleep(1)
 
-        prev_balance = balance  # how much we had before cycle began
-        player()  # gather new player data
-        time.sleep(1)
-        diff_balance = (balance-prev_balance)  # how much we made this iteration
+            # Sell goods
+            logger.info("Selling deficit item to remote exchange...")
+            for _ in range(bays):
+                sellCommodity(def_item)
+                time.sleep(1)
+            time.sleep(1)
 
-        ship()  # gather new ship data
-        time.sleep(1)
-        prev_treasury = treasury  # how much we had before cycle began
+            # Move to landing pad
+            logger.info("Moving to landing pad from exchange...")
+            for dir in data[HOME_PLANET]["Exchange_to_LP"]:
+                moveDirection(dir)
+                time.sleep(1)
 
-        planet()  # gather new planet data
-        time.sleep(1)
-        diff_treasury = (treasury-prev_treasury)  # how much we made this iteration
+            # Iteration data updates to keep things fresh
+            iter += 1
 
-        os.remove("score.txt")  # remove files
-        os.remove("ship.txt")  # remove files
-        os.remove("planet.txt")  # remove files
-        logger.info("Removing entry from deficits list...")
-        tn.write(b"say Filled " + str.encode(def_item) + b".\n")
-        deficits.pop(0)
-        time.sleep(1)
+            prev_balance = balance  # how much we had before cycle began
+            player()  # gather new player data
+            time.sleep(1)
+            diff_balance = (balance-prev_balance)  # how much we made this iteration
+
+            ship()  # gather new ship data
+            time.sleep(1)
+            prev_treasury = treasury  # how much we had before cycle began
+
+            planet()  # gather new planet data
+            time.sleep(1)
+            diff_treasury = (treasury-prev_treasury)  # how much we made this iteration
+
+            os.remove("score.txt")  # remove files
+            os.remove("ship.txt")  # remove files
+            os.remove("planet.txt")  # remove files
+            logger.info("Removing entry from deficits list...")
+            tn.write(b"say Filled " + str.encode(def_item) + b".\n")
+            deficits.pop(0)
+            time.sleep(1)
+
+    else if "surplus" in mode:
+
+        while True:
+
+            # Iteration checks
+            logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+            logger.info(f" This is iteration number {iter}.")
+            logger.info(f" {args.user}'s bank balance is {balance}.")
+            logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
+            logger.info(f" {HOME_PLANET}'s treasury value is {treasury}.")
+            logger.info(f" That's a difference of {diff_treasury} compared to last iteration.")
+            logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
+            # Pause for 30 minutes if deficits list is empty
+            while True:
+                if len(deficits) > 0:  # is deficits list empty yet?
+                    break
+                else:
+                    logger.info("Deficits all filled.  Sleeping for 30 minutes...")
+                    tn.write(b"say All deficits filled.  Sleeping for 30 minutes.\n")
+                    for i in range(30):  # Keepalive function so BrokenPipe does not occur
+                        tn.write(b"\n")
+                        time.sleep(60)
+                    clearBuffer()  # clear buffer, who knows what happened in 30 mins
+                    time.sleep(1)
+                    exchange()  # run exchange functions
+                    time.sleep(1)
+                    continue
+
+            # Deficits loop specific vars
+            def_item = deficits[0]
+
+            # Buy fuel and food
+            if current_fuel < fuel_min:
+                buyFuel()
+                logger.info("Current fuel is below minimum, buying fuel.")
+                time.sleep(1)
+            else:
+                logger.info("Current fuel is above minimum.")
+                pass
+            if current_stamina < stamina_min:
+                for dir in data[HOME_PLANET]["LP_to_Restaurant"]:
+                    moveDirection(dir)
+                    time.sleep(1)
+                buyFood()
+                logger.info("Current stamina is below minimum, buying food.")
+                for dir in data[HOME_PLANET]["Restaurant_to_LP"]:
+                    moveDirection(dir)
+                    time.sleep(1)
+            else:
+                logger.info("Current stamina is above minimum.")
+                pass
+
+            # Determine which planet to buy deficits[cycle] from
+            while True:
+
+                i = False  # find out if deficit is in planets.json or not
+
+                for entry in data:
+                    if HOME_PLANET not in entry:
+                        if def_item in data[entry]["Sell"]:
+                            remote_planet_id = entry
+                            i = True
+                            break
+                        else:
+                            logger.info(f"{entry} does not sell {def_item}, moving on...")
+
+                if i is False:
+                    logger.info(f"WARNING: Could not find {def_item} in planets.json.")
+                    logger.info("Please account for all deficits for maximum efficiency.")
+                    logger.info(f"Removing {def_item} from deficit list.")
+                    deficits.pop(0)
+                    def_item = deficits[0]
+                else:
+                    if len(remote_planet_id) > 0:
+                        def_item = deficits[0]
+                        tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
+                        logger.info(f"Will buy {def_item} from {remote_planet_id}...")
+                        break
+                    else:
+                        continue
+
+            # Determine how many bays to buy of deficit[cycle]
+            bays = deficitToBays(def_item)
+            logger.info(f"Will buy {bays} bays of deficit from remote planet...")
+            tn.write(b"say Will buy " + str.encode(str(bays)) + b" " + str.encode(def_item) + b".\n")
+
+            # Board planet
+            boardPlanet()
+            time.sleep(1)
+
+            # Move to ISL from home planet
+            logger.info(f"Moving to ISL from {HOME_PLANET}...")
+            for dir in data[HOME_PLANET]["Planet_to_ISL"]:
+                moveDirection(dir)
+                time.sleep(1)
+
+            # Jump to remote system
+            if data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]:
+                logger.info("Jumping to remote system in same cartel...")
+                jumpSystem(data[remote_planet_id]["System"])
+                time.sleep(1)
+            else:
+                logger.info("Jumping to remote system in remote cartel...")
+                jumpSystem(data[HOME_PLANET]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[remote_planet_id]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[remote_planet_id]["System"])
+                time.sleep(1)
+
+            # Move to remote planet from ISL
+            logger.info(f"Moving to {remote_planet_id} from ISL...")
+            for dir in data[remote_planet_id]["ISL_to_Planet"]:
+                moveDirection(dir)
+                time.sleep(1)
+
+            # Board planet
+            boardPlanet()
+            time.sleep(1)
+
+            # Move to exchange
+            logger.info("Moving to exchange from landing pad...")
+            for dir in data[remote_planet_id]["LP_to_Exchange"]:
+                moveDirection(dir)
+                time.sleep(1)
+
+            # Buy deficits from remote exchange
+            logger.info("Buying deficit from remote exchange...")
+            for _ in range(bays):
+                buyCommodity(def_item)
+                time.sleep(1)
+            time.sleep(1)
+
+            # Move to landing pad
+            logger.info("Moving to landing pad from exchange...")
+            for dir in data[remote_planet_id]["Exchange_to_LP"]:
+                moveDirection(dir)
+                time.sleep(1)
+
+            # Board planet
+            boardPlanet()
+            time.sleep(3)
+
+            # Move to ISL from remote planet
+            logger.info(f"Moving to ISL from {remote_planet_id}...")
+            for dir in data[remote_planet_id]["Planet_to_ISL"]:
+                moveDirection(dir)
+                time.sleep(1)
+
+            # Jump to remote system
+            if data[remote_planet_id]["Cartel"] in data[HOME_PLANET]["Cartel"]:
+                logger.info("Jumping to remote system in same cartel...")
+                jumpSystem(data[HOME_PLANET]["System"])
+                time.sleep(1)
+            else:
+                logger.info("Jumping to remote system in remote cartel...")
+                jumpSystem(data[remote_planet_id]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[HOME_PLANET]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[HOME_PLANET]["System"])
+                time.sleep(1)
+
+            # Move to home planet from ISL
+            logger.info(f"Moving to {HOME_PLANET} from ISL...")
+            for dir in data[HOME_PLANET]["ISL_to_Planet"]:
+                moveDirection(dir)
+                time.sleep(1)
+
+            # Board planet
+            boardPlanet()
+            time.sleep(1)
+
+            # Move to exchange
+            logger.info("Moving to exchange from landing pad...")
+            for dir in data[HOME_PLANET]["LP_to_Exchange"]:
+                moveDirection(dir)
+                time.sleep(1)
+
+            # Sell goods
+            logger.info("Selling deficit item to remote exchange...")
+            for _ in range(bays):
+                sellCommodity(def_item)
+                time.sleep(1)
+            time.sleep(1)
+
+            # Move to landing pad
+            logger.info("Moving to landing pad from exchange...")
+            for dir in data[HOME_PLANET]["Exchange_to_LP"]:
+                moveDirection(dir)
+                time.sleep(1)
+
+            # Iteration data updates to keep things fresh
+            iter += 1
+
+            prev_balance = balance  # how much we had before cycle began
+            player()  # gather new player data
+            time.sleep(1)
+            diff_balance = (balance-prev_balance)  # how much we made this iteration
+
+            ship()  # gather new ship data
+            time.sleep(1)
+            prev_treasury = treasury  # how much we had before cycle began
+
+            planet()  # gather new planet data
+            time.sleep(1)
+            diff_treasury = (treasury-prev_treasury)  # how much we made this iteration
+
+            os.remove("score.txt")  # remove files
+            os.remove("ship.txt")  # remove files
+            os.remove("planet.txt")  # remove files
+            logger.info("Removing entry from deficits list...")
+            tn.write(b"say Filled " + str.encode(def_item) + b".\n")
+            deficits.pop(0)
+            time.sleep(1)
+
+    else:
+
+        # no mode selected or input was incorrect
+        print("Mode must be either 'deficit' or 'surplus'.  Please re-run script.")
+        logger.info("Mode must be either 'deficit' or 'surplus'.  Please re-run script.")
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()
