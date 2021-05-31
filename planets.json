@@ -60,7 +60,7 @@
         "Exchange_to_LP": ["n"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Gold", "RNA"],
+        "Buy": [],
         "Sell": ["BioChips", "BioComponents", "Clinics", "Games",
                  "Laboratories", "MicroScalpels", "Nanos", "Petrochemicals",
                  "Sensamps", "Tracers", "Univators"]
@@ -102,7 +102,7 @@
         "Exchange_to_LP": ["e", "n"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Monopoles", "Propellants", "Synths"],
+        "Buy": [],
         "Sell": ["Pharmaceuticals", "Polymers", "Xmetals"]
     }
 }
