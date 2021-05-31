@@ -34,7 +34,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
-        "Buy": [],
+        "Buy": ["Gold", "LubOils", "Mechparts", "Monopoles", "RNA", "Synths"],
         "Sell": ["Explosives", "Games", "GAsChips", "Holos", "Katydidics", "Musiks"]
     },
 
@@ -47,7 +47,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
-        "Buy": [],
+        "Buy": ["Gold", "Mechparts"],
         "Sell": ["Droids", "Hypnotapes", "Proteins", "Simulations"]
     },
 
@@ -60,7 +60,7 @@
         "Exchange_to_LP": ["n"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": [],
+        "Buy": ["Gold", "RNA"],
         "Sell": ["BioChips", "BioComponents", "Clinics", "Games",
                  "Laboratories", "MicroScalpels", "Nanos", "Petrochemicals",
                  "Sensamps", "Tracers", "Univators"]
@@ -88,7 +88,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": [],
+        "Buy": ["Gold", "Mechparts"],
         "Sell": ["Controllers", "Libraries", "Probes", "Sensors", "Studios",
                  "ToxicMunchers"]
     },
@@ -102,7 +102,7 @@
         "Exchange_to_LP": ["e", "n"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": [],
+        "Buy": ["Monopoles", "Propellants", "Synths"],
         "Sell": ["Pharmaceuticals", "Polymers", "Xmetals"]
     }
 }
