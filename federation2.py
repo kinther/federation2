@@ -957,8 +957,6 @@ def main():
                             logger.info(f"{entry} either does not buy {sur_item} or is not buying currently.  Moving on...")
 
                 if i is False:
-                    logger.info(f"WARNING: Could not find {sur_item} in planets.json.")
-                    logger.info("Please account for all surpluses for maximum efficiency.")
                     logger.info(f"Removing {sur_item} from surplus list.")
                     surpluses.pop(0)
                     sur_item = surpluses[0]
@@ -1092,19 +1090,7 @@ def main():
             os.remove("score.txt")  # remove files
             os.remove("ship.txt")  # remove files
             os.remove("planet.txt")  # remove files
-            logger.info("Removing entry from deficits list...")
-            tn.write(b"say Sold " + str.encode(sur_item) + b".\n")
-
-            # Check if surplus is still being bought
-            # If it is, do not remove entry from list.  If it is not, remove entry from list
-            if checkIfBuying(sur_item, remote_planet_id) == True:
-                logger.info(f"{remote_planet_id} may still be buying {sur_item}.")
-                logger.info("Will continue loop selling surplus until they no longer do.")
-                continue
-                time.sleep(1)
-            else:
-                surpluses.pop(0)
-                time.sleep(1)
+            tn.write(b"say Sold " + str.encode(sur_item) + b" to " + str.encode(remote_planet_id) + b".\n")
 
     else:
 
