@@ -941,7 +941,7 @@ def main():
                 for entry in data:
                     if HOME_PLANET not in entry:
                         if sur_item in data[entry]["Buy"]:
-                            if checkIfBuying(sur_item) == True:
+                            if checkIfBuying(sur_item, entry) == True:
                                  remote_planet_id = entry
                                  i = True
                                  break
@@ -1089,10 +1089,16 @@ def main():
             logger.info("Removing entry from deficits list...")
             tn.write(b"say Sold " + str.encode(sur_item) + b".\n")
 
-            # TO-DO : Check if surplus is still being bought
-            # If it is, do not pop.  If it is not, pop.
-            deficits.pop(0)
-            time.sleep(1)
+            # Check if surplus is still being bought
+            # If it is, do not remove entry from list.  If it is not, remove entry from list
+            if checkIfBuying(sur_item, remote_planet_id) == True:
+                logger.info(f"{remote_planet_id} may still be buying {sur_item}.")
+                logger.info("Will continue loop selling surplus until they no longer do.")
+                continue
+                time.sleep(1)
+            else:
+                surpluses.pop(0)
+                time.sleep(1)
 
     else:
 
