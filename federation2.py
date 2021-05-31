@@ -961,7 +961,7 @@ def main():
                 else:
                     if len(remote_planet_id) > 0:
                         sur_item = surpluses[0]
-                        tn.write(b"say Surplus item is " + str.encode(sur_item) + b".\n")
+                        tn.write(b"say " + str.encode(sur_item) + b" is still on the surpluses list.\n")
                         logger.info(f"Will sell one {sur_item} to {remote_planet_id}...")
                         break
                     else:
