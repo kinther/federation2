@@ -953,8 +953,6 @@ def main():
                                  break
                             else:
                                 continue
-                        else:
-                            logger.info(f"{entry} either does not buy {sur_item} or is not buying currently.  Moving on...")
 
                 if i is False:
                     logger.info(f"Removing {sur_item} from surplus list.")
