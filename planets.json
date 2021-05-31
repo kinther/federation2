@@ -51,6 +51,19 @@
         "Sell": ["Droids", "Hypnotapes", "Proteins", "Simulations"]
     },
 
+    "Paper": {
+        "Cartel": "Flight",
+        "System": "Flight",
+        "ISL_to_Planet": ["s"],
+        "Planet_to_ISL": ["n"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": ["LubOils"],
+        "Sell": ["Droids", "Hypnotapes", "Proteins", "Simulations"]
+    },
+
     "Zen": {
         "Cartel": "Flight",
         "System": "Enso",
@@ -79,6 +92,45 @@
         "Sell": ["Cereals", "Clays", "Crystals", "Electros", "Hides", "Nickel", "Nitros", "Soya", "Spices", "Textiles", "Woods"]
     },
 
+    "Sakura": {
+        "Cartel": "Flight",
+        "System": "Enso",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["n"],
+        "Exchange_to_LP": ["s"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": ["Gold", "LubOils"],
+        "Sell": []
+    },
+
+    "Dahlia": {
+        "Cartel": "Flight",
+        "System": "Flowers",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": ["LubOils"],
+        "Sell": []
+    },
+
+    "Zinnia": {
+        "Cartel": "Flight",
+        "System": "Flowers",
+        "ISL_to_Planet": ["e"],
+        "Planet_to_ISL": ["w"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": ["Gold"],
+        "Sell": []
+    },
+
     "Umatilla": {
         "Cartel": "Flight",
         "System": "Wyld",
@@ -93,6 +145,32 @@
                  "ToxicMunchers"]
     },
 
+    "Rome": {
+        "Cartel": "Flight",
+        "System": "Roman Empire",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": ["Gold"],
+        "Sell": []
+    },
+
+    "Gaul": {
+        "Cartel": "Flight",
+        "System": "Roman Empire",
+        "ISL_to_Planet": ["ne"],
+        "Planet_to_ISL": ["sw"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": ["Gold"],
+        "Sell": []
+    },
+
     "Station": {
         "Cartel": "Flight",
         "System": "Abyss",
@@ -104,5 +182,57 @@
         "Restaurant_to_LP": [],
         "Buy": [],
         "Sell": ["Pharmaceuticals", "Polymers", "Xmetals"]
+    },
+
+    "Foreigner": {
+        "Cartel": "Jukebox",
+        "System": "Jukebox",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": ["Gold"],
+        "Sell": []
+    },
+
+    "Journey": {
+        "Cartel": "Jukebox",
+        "System": "Jukebox",
+        "ISL_to_Planet": ["s"],
+        "Planet_to_ISL": ["n"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": []
+    },
+
+    "Laboratory": {
+        "Cartel": "Jukebox",
+        "System": "Jukebox",
+        "ISL_to_Planet": ["s", "s"],
+        "Planet_to_ISL": ["n", "n"],
+        "LP_to_Exchange": ["sw"],
+        "Exchange_to_LP": ["ne"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": []
+    },
+
+    "Eagles": {
+        "Cartel": "Jukebox",
+        "System": "Jukebox",
+        "ISL_to_Planet": ["s", "s", "e", "s"],
+        "Planet_to_ISL": ["n", "w", "n", "n"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": []
     }
 }
