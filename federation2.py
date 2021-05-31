@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Federation 2 Community Edition automation scripts for planet owners
-# version 1.1 "Anomalous Alloys"
+# version 2.0 "Surplus Shuffle"
 # Written by Strahd of the Barovia system
 # Please don't tell anyone how I script *Lenny face*
 
