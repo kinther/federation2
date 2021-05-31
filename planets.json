@@ -131,19 +131,6 @@
         "Sell": ["Cereals", "Clays", "Crystals", "Electros", "Hides", "Nickel", "Nitros", "Soya", "Spices", "Textiles", "Woods"]
     },
 
-    "Sakura": {
-        "Cartel": "Flight",
-        "System": "Enso",
-        "ISL_to_Planet": [],
-        "Planet_to_ISL": [],
-        "LP_to_Exchange": ["n"],
-        "Exchange_to_LP": ["s"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": ["Gold", "LubOils", "Mechparts", "Monopoles", "Propellants", "RNA", "Synths"],
-        "Sell": []
-    },
-
     "Dahlia": {
         "Cartel": "Flight",
         "System": "Flowers",
@@ -337,6 +324,19 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["LubOils", "Monopoles"],
+        "Sell": []
+    },
+
+    "Sakura": {
+        "Cartel": "Flight",
+        "System": "Enso",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["n"],
+        "Exchange_to_LP": ["s"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": ["Gold", "LubOils", "Mechparts", "Monopoles", "Propellants", "RNA", "Synths"],
         "Sell": []
     }
 }
