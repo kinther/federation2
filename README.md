@@ -15,13 +15,24 @@ from for all of your deficits, enter them into the respective planet's entry
 in planets.json in the "Sell" category.  For example if I wanted to buy
 Alloys and BioChips from Castillo, I would create an entry for it and in the
 Sell line enter ["Alloys", "BioChips"].
-3. Place your planet owner on your home planet landing pad before running and
+3. Find out which planets you want to sell your surpluses to by checking their
+exchange information.  For optimal selling make sure to find at least six to
+eight planets which will buy your surplus item.  Ensure none of these planets
+are "mixed" planets that treat this item as a surplus of their own to maximize
+profits - ideally they should only buy 525 tons or seven bays in total.
+4. Place your planet owner on your home planet landing pad before running and
 ensure you have a ship capable of carrying at least 525 tons.  (clear your
 cargo space ahead of time wherever possible)
 
 Run the script with:
 
-python3 federation2.py --user (username) --password (password) --planet (planet you own)
+python3 federation2.py --user (username) --password (password) --planet 
+(planet name) --mode (deficit or surplus)
+
+or (depending on how you have your environment setup)
+
+python federation2.py --user (username) --password (password) --planet 
+(planet name) --mode (deficit or surplus)
 
 version log:
 
@@ -42,3 +53,9 @@ timestamp error on Windows preventing script from running.
 update and improve script speed by decreasing time.sleep in most cases.
 
 1.4 "Celestial Cereals" - support for multiple planets in your system
+
+2.0 "Surplus Shuffle" - adds support for selling surpluses to remote planets
+with the --mode parameter (allows either "deficit" or "surplus").  Defaults
+to deficit if not specified.
+
+REQUIRES PYTHON3 TO RUN.  THIS WILL NOT RUN WITH PYTHON2.x.
