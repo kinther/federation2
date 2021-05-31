@@ -382,6 +382,43 @@ def checkSurpluses():
         if int(exchange_dict[commodity]["Current"]) > SURPLUS:
             surpluses.append(commodity)
 
+def checkCommodityThreshold(commodity, planet):
+
+    # idea is to check current commodity value for comparison against SURPLUS constant
+    
+    # global variables
+    global SURPLUS
+
+    # temp variables
+    i = 0
+
+    # Clear buffer before issuing commands
+    clearBuffer()
+
+    # Checks commodity level of remote exchange
+    logger.info(f"Checking {commodity} level of {planet} exchange...")
+    tn.write(b"c price " + str.encode(commodity) + b" " + str.encode(planet) + b"\n")
+    time.sleep(1)
+    price = tn.read_very_eager().decode("ascii")
+    price = escape_ansi(price)
+
+    # Write score output to file
+    file = open("price.txt", "w")
+    f = file.write(price)
+    file.close()
+
+    # Check commodity level
+    with open("price.txt", "r") as f:
+        for line in f:
+            if "+++ Exchange has" in line:
+                i = line.split(" ")
+                i = int(i[3])
+
+    if i < SURPLUS:
+        return True
+    else:
+        return False
+
 # Move functions
 
 def boardPlanet():
@@ -1093,15 +1130,12 @@ def main():
             os.remove("price.txt")  # remove files
             tn.write(b"say Sold " + str.encode(sur_item) + b" to " + str.encode(remote_planet_id) + b".\n")
 
-            for commodity in exchange_dict:  # figure out if we are below SURPLUS threshold or not
-                if sur_item in commodity:
-                    if int(exchange_dict[commodity]["Current"]) < SURPLUS:
-                        logger.info(f"{sur_item} is below threshold.  Removing from list.")
-                        surpluses.pop(0)
-                        break
-                    else:
-                        logger.info(f"{sur_item} is still above threshold.  Moving on.")
-                        break
+            # check if we are below SURPLUS defined threshold
+            if checkCommodityThreshold(sur_item, HOME_PLANET) == True:
+                logger.info(f"{sur_item} is under SURPLUS defined threshold.  Removing from list.")
+                surpluses.pop(0)
+            else:
+                logger.info(f"{sur_item} is above SURPLUS defined threshold.  Continuing.")
 
     else:
 
