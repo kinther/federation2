@@ -60,8 +60,47 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["LubOils"],
-        "Sell": ["Droids", "Hypnotapes", "Proteins", "Simulations"]
+        "Buy": ["Propellants"],
+        "Sell": []
+    },
+
+    "Piper": {
+        "Cartel": "Flight",
+        "System": "Flight",
+        "ISL_to_Planet": ["e"],
+        "Planet_to_ISL": ["w"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": ["LubOils", "Monopoles", "Synths"],
+        "Sell": []
+    },
+
+    "Blackbird": {
+        "Cartel": "Flight",
+        "System": "Flight",
+        "ISL_to_Planet": ["sw"],
+        "Planet_to_ISL": ["ne"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": ["Mechparts", "Monopoles", "RNA"],
+        "Sell": []
+    },
+
+    "Cirrus": {
+        "Cartel": "Flight",
+        "System": "Flight",
+        "ISL_to_Planet": ["w"],
+        "Planet_to_ISL": ["e"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": ["Mechparts", "Monopoles", "RNA"],
+        "Sell": []
     },
 
     "Zen": {
@@ -101,7 +140,7 @@
         "Exchange_to_LP": ["s"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Gold", "LubOils"],
+        "Buy": ["Gold", "LubOils", "Mechparts", "Monopoles", "Propellants", "RNA", "Synths"],
         "Sell": []
     },
 
@@ -167,7 +206,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Gold"],
+        "Buy": ["Gold", "Mechparts", "Monopoles", "Synths"],
         "Sell": []
     },
 
@@ -193,7 +232,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Gold"],
+        "Buy": ["Gold", "Monopoles", "RNA"],
         "Sell": []
     },
 
@@ -206,7 +245,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": [],
+        "Buy": ["RNA"],
         "Sell": []
     },
 
@@ -219,7 +258,7 @@
         "Exchange_to_LP": ["ne"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": [],
+        "Buy": ["Synths"],
         "Sell": []
     },
 
@@ -232,7 +271,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": [],
+        "Buy": ["Monopoles", "Synths"],
         "Sell": []
     },
 
@@ -245,7 +284,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": [],
+        "Buy": ["Propellants"],
         "Sell": []
     },
 
@@ -258,7 +297,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": [],
+        "Buy": ["Propellants"],
         "Sell": []
     },
 
@@ -284,7 +323,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["LubOils"],
+        "Buy": ["LubOils", "Monopoles"],
         "Sell": []
     },
 
@@ -297,7 +336,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["LubOils"],
+        "Buy": ["LubOils", "Monopoles"],
         "Sell": []
     }
 }
