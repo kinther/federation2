@@ -407,7 +407,15 @@ def jumpSystem(system):
 
 # Trade functions
 
-def checkPrice(commodity, planet):
+def checkIfBuying(commodity, planet):
+
+    # idea is to only find planets that are buying, not buying and selling
+    # which implies this commodity is a surplus on their planet and is not
+    # profitable to sell to
+
+    # temp variables
+    i = False  # is it buying?
+    ii = False  # is it selling?
 
     # Clear buffer before issuing commands
     clearBuffer()
@@ -427,12 +435,20 @@ def checkPrice(commodity, planet):
     # Check price
     with open("price.txt", "r") as f:
         for line in f:
-            if "not currently trading" in line:
+            if "That exchange is not currently trading" in line:
                 logger.info(f"Remote exchange is not buying {commodity}")
-                return False
-            elif "Exchange will buy":
+            elif "+++ Exchange will buy" in line::
                 logger.info(f"Remote exchange is buying {commodity}.")
-                return True
+                i = True
+            elif "+++ Offer price is" in line:
+                logger.info(f"Remote exchange is selling {commodity}.")
+                ii = True
+
+    # Evaluate whether we should sell to this exchange or not
+    if i == True and ii == True:
+        return True
+    else:
+        return False
 
 def buyCommodity(commodity):
 
@@ -920,34 +936,34 @@ def main():
             # Determine which planet to sell surpluses[cycle] from
             while True:
 
-                i = False  # find out if surpluse is in planets.json or not
+                i = False  # find out if surpluse is in planets.json or if not buying
 
                 for entry in data:
                     if HOME_PLANET not in entry:
                         if sur_item in data[entry]["Buy"]:
-                            remote_planet_id = entry
-                            i = True
-                            break
+                            if checkIfBuying(sur_item) == True:
+                                 remote_planet_id = entry
+                                 i = True
+                                 break
+                            else:
+                                continue
                         else:
-                            logger.info(f"{entry} does not buy {sur_item}, moving on...")
+                            logger.info(f"{entry} either does not buy {sur_item} or is not buying currently.  Moving on...")
 
                 if i is False:
                     logger.info(f"WARNING: Could not find {sur_item} in planets.json.")
                     logger.info("Please account for all surpluses for maximum efficiency.")
-                    logger.info(f"Removing {sur_item} from deficit list.")
+                    logger.info(f"Removing {sur_item} from surplus list.")
                     surpluses.pop(0)
                     sur_item = surpluses[0]
                 else:
                     if len(remote_planet_id) > 0:
                         sur_item = surpluses[0]
-                        tn.write(b"say Surplus item is " + str.encode(def_item) + b".\n")
-                        logger.info(f"Will sell {def_item} to {remote_planet_id}...")
+                        tn.write(b"say Surplus item is " + str.encode(sur_item) + b".\n")
+                        logger.info(f"Will sell one {sur_item} to {remote_planet_id}...")
                         break
                     else:
                         continue
-
-           # TO-DO : Find out if selected planet is even buying the item or not
-           # maybe move this into above loop logic??
 
             # Move to exchange
             logger.info("Moving to exchange from landing pad...")
@@ -1006,7 +1022,7 @@ def main():
                 moveDirection(dir)
                 time.sleep(1)
 
-            # Buy goods
+            # Sell goods
             logger.info("Selling surplus item to remote exchange...")
             sellCommodity(sur_item)
             time.sleep(1)
@@ -1050,18 +1066,6 @@ def main():
             # Board planet
             boardPlanet()
             time.sleep(1)
-
-            # Move to exchange
-            logger.info("Moving to exchange from landing pad...")
-            for dir in data[HOME_PLANET]["LP_to_Exchange"]:
-                moveDirection(dir)
-                time.sleep(1)
-
-            # Move to landing pad
-            logger.info("Moving to landing pad from exchange...")
-            for dir in data[HOME_PLANET]["Exchange_to_LP"]:
-                moveDirection(dir)
-                time.sleep(1)
 
             # Iteration data updates to keep things fresh
             iter += 1
