@@ -48,7 +48,7 @@ logger = logging.getLogger()
 # Character constants
 HOME_PLANET = args.planet  # passed from player arguments
 DEFICIT = -75  # How much we consider a deficit
-SURPLUS = 15000  # How much we consider a surplus
+SURPLUS = 17500  # How much we consider a surplus
 
 # Character variables
 balance = 0  # character's current balance, from output of score
