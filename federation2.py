@@ -21,12 +21,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--user", type=str, action="store", required=True)
 parser.add_argument("--password", type=str, action="store", required=True)
 parser.add_argument("--planet", type=str, action="store", required=True)
-parser.add_argument("--mode", type=str, action="store", default="deficit")
+parser.add_argument("--mode", type=str, action="store", required=True)
 args = parser.parse_args()
 
 # global constants
 ranks = ["Founder", "Engineer", "Mogul", "Technocrat", "Gengineer", "Magnate", "Plutrocrat"]
-mode = (args.mode).lower()  # determines whether to focus on deficits or surpluses
+script_mode = (args.mode).lower()  # determines whether to focus on deficits or surpluses
 
 # Telnetlib variables
 host = "play.federation2.com"  # don't change this
@@ -434,19 +434,25 @@ def checkIfBuying(commodity, planet):
 
     # Check price
     with open("price.txt", "r") as f:
-        for line in f:
-            if "That exchange is not currently trading" in line:
-                logger.info(f"Remote exchange is not buying {commodity}")
-            elif "+++ Exchange will buy" in line::
+        for line in f:  # check if buying - first variable check
+            if "+++ Exchange will buy" in line:
                 logger.info(f"Remote exchange is buying {commodity}.")
                 i = True
-            elif "+++ Offer price is" in line:
+            else:
+                pass
+
+        for line in f:  # check if selling - second variable check
+            if "+++ Offer price is" in line:
                 logger.info(f"Remote exchange is selling {commodity}.")
                 ii = True
+            else:
+                pass
 
     # Evaluate whether we should sell to this exchange or not
-    if i == True and ii == True:
+    if i == True and ii != True:
         return True
+    elif i == True and ii == True:
+        return False
     else:
         return False
 
@@ -663,7 +669,7 @@ def main():
     f = open("planets.json")
     data = json.load(f)
 
-    if "deficit" in mode:
+    if "deficit" in script_mode:
 
         while True:
 
@@ -880,7 +886,7 @@ def main():
             deficits.pop(0)
             time.sleep(1)
 
-    else if "surplus" in mode:
+    elif "surplus" in script_mode:
 
         while True:
 
