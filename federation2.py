@@ -1090,7 +1090,18 @@ def main():
             os.remove("score.txt")  # remove files
             os.remove("ship.txt")  # remove files
             os.remove("planet.txt")  # remove files
+            os.remove("price.txt")  # remove files
             tn.write(b"say Sold " + str.encode(sur_item) + b" to " + str.encode(remote_planet_id) + b".\n")
+
+            for commodity in exchange_dict:  # figure out if we are below SURPLUS threshold or not
+                if sur_item in commodity:
+                    if int(exchange_dict[sur_item]["Current"]) < SURPLUS:
+                        logger.info(f"{sur_item} is below threshold.  Removing from list.")
+                        surpluses.pop(0)
+                        break
+                    else:
+                        logger.info(f"{sur_item} is still above threshold.  Moving on.")
+                        break
 
     else:
 
