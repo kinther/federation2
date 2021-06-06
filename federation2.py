@@ -796,19 +796,17 @@ def main():
             time.sleep(1)
 
             # Move to ISL from home planet
-            logger.info(f"Moving to ISL from {HOME_PLANET} and not jumping...")
+            logger.info(f"Moving to ISL from {HOME_PLANET}...")
             for dir in data[HOME_PLANET]["Planet_to_ISL"]:
                 moveDirection(dir)
                 time.sleep(1)
 
             # Cartel/System jump logic
             # Local system logic
-            if (data[HOME_PLANET]["System"] in data["remote_planet_id"]["System"])
-            and (data[HOME_PLANET]["Cartel"] in data["remote_planet_id"]["Cartel"]):
+            if (data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 pass
             # Local cartel logic
-            elif (data[HOME_PLANET]["System"] not in data["remote_planet_id"]["System"])
-            and (data[HOME_PLANET]["Cartel"] in data["remote_planet_id"]["Cartel"]):
+            elif (data[HOME_PLANET]["System"] not in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 logger.info("Jumping to remote system in same cartel...")
                 jumpSystem(data[remote_planet_id]["System"])
                 time.sleep(1)
@@ -861,19 +859,17 @@ def main():
             time.sleep(3)
 
             # Move to ISL from remote planet
-            logger.info(f"Moving to ISL from {remote_planet_id} and not jumping...")
+            logger.info(f"Moving to ISL from {remote_planet_id}...")
             for dir in data[remote_planet_id]["Planet_to_ISL"]:
                 moveDirection(dir)
                 time.sleep(1)
 
             # Cartel/System jump logic
             # Local cartel logic
-            if (data[HOME_PLANET]["System"] in data["remote_planet_id"]["System"])
-            and (data[HOME_PLANET]["Cartel"] in data["remote_planet_id"]["Cartel"]):
+            if (data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 pass
             # Local cartel logic
-            elif (data[HOME_PLANET]["System"] not in data["remote_planet_id"]["System"])
-            and (data[HOME_PLANET]["Cartel"] in data["remote_planet_id"]["Cartel"]):
+            elif (data[HOME_PLANET]["System"] not in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 logger.info("Jumping to remote system in same cartel...")
                 jumpSystem(data[HOME_PLANET]["System"])
                 time.sleep(1)
@@ -1056,12 +1052,10 @@ def main():
 
             # Cartel/System jump logic
             # Local system logic
-            if (data[HOME_PLANET]["System"] in data["remote_planet_id"]["System"])
-            and (data[HOME_PLANET]["Cartel"] in data["remote_planet_id"]["Cartel"]):
+            if (data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 pass
             # Local cartel logic
-            elif (data[HOME_PLANET]["System"] not in data["remote_planet_id"]["System"])
-            and (data[HOME_PLANET]["Cartel"] in data["remote_planet_id"]["Cartel"]):
+            elif (data[HOME_PLANET]["System"] not in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 logger.info("Jumping to remote system in same cartel...")
                 jumpSystem(data[remote_planet_id]["System"])
                 time.sleep(1)
@@ -1112,19 +1106,17 @@ def main():
             time.sleep(3)
 
             # Move to ISL from remote planet
-            logger.info(f"Moving to ISL from {remote_planet_id} and not jumping...")
+            logger.info(f"Moving to ISL from {remote_planet_id}...")
             for dir in data[remote_planet_id]["ISL_to_Planet"]:
                 moveDirection(dir)
                 time.sleep(1)
 
             # Cartel/System jump logic
             # Local cartel logic
-            if (data[HOME_PLANET]["System"] in data["remote_planet_id"]["System"])
-            and (data[HOME_PLANET]["Cartel"] in data["remote_planet_id"]["Cartel"]):
+            if (data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 pass
             # Local cartel logic
-            elif (data[HOME_PLANET]["System"] not in data["remote_planet_id"]["System"])
-            and (data[HOME_PLANET]["Cartel"] in data["remote_planet_id"]["Cartel"]):
+            elif (data[HOME_PLANET]["System"] not in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 logger.info("Jumping to remote system in same cartel...")
                 jumpSystem(data[HOME_PLANET]["System"])
                 time.sleep(1)
