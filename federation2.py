@@ -385,7 +385,7 @@ def checkSurpluses():
 def checkCommodityThreshold(commodity, planet):
 
     # idea is to check current commodity value for comparison against SURPLUS constant
-    
+
     # global variables
     global SURPLUS
 
@@ -1013,7 +1013,7 @@ def main():
                 time.sleep(1)
 
             # Buy goods
-            logger.info("Buying surplus item from home exchange...")
+            logger.info(f"Buying {sur_item} from home exchange...")
             buyCommodity(sur_item)
             time.sleep(1)
 
@@ -1064,7 +1064,7 @@ def main():
                 time.sleep(1)
 
             # Sell goods
-            logger.info("Selling surplus item to remote exchange...")
+            logger.info(f"Selling {sur_item} to remote exchange...")
             sellCommodity(sur_item)
             time.sleep(1)
 
