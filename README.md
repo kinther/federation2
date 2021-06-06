@@ -1,5 +1,5 @@
-# Strahd's Federation 2 planet owner (rank Founder and above) deficit hauling script.  
-### Send mail in game to Strahd if you have any questions.
+# Federation 2 hauling script
+### Reach out to Strahd or Kinther in game if you have any questions.
 
 1. Add your planet to planets.json with your home planet information, copying
 Ravenloft variables.  For example if you owned the planet Rhea, you would
