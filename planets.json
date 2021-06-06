@@ -2,27 +2,29 @@
     "Ravenloft": {
         "Cartel": "Flight",
         "System": "Barovia",
-        "ISL_to_Planet": [],
-        "Planet_to_ISL": [],
+        "ISL_to_Planet": ["ne"],
+        "Planet_to_ISL": ["sw"],
         "LP_to_Exchange": ["s","w"],
         "Exchange_to_LP": ["e","n"],
         "LP_to_Restaurant": ["s"],
         "Restaurant_to_LP": ["n"],
         "Buy": [],
-        "Sell": ["Munitions", "Tools", "Weapons"]
+        "Sell": ["Gold", "LubOils", "Mechparts", "Monopoles", "Munitions",
+        "Propellants", "RNA", "Synths", "Tools", "Weapons"]
     },
 
     "Vallaki": {
         "Cartel": "Flight",
         "System": "Barovia",
-        "ISL_to_Planet": ["e"],
-        "Planet_to_ISL": ["w"],
-        "LP_to_Exchange": ["s","w"],
-        "Exchange_to_LP": ["e","n"],
-        "LP_to_Restaurant": ["s"],
-        "Restaurant_to_LP": ["n"],
+        "ISL_to_Planet": ["n"],
+        "Planet_to_ISL": ["s"],
+        "LP_to_Exchange": ["e","e"],
+        "Exchange_to_LP": ["w","w"],
+        "LP_to_Restaurant": ["nw"],
+        "Restaurant_to_LP": ["se"],
         "Buy": [],
-        "Sell": []
+        "Sell": ["Crystals", "Fruit", "Meats", "Nickel", "Nitros", "Polymers",
+        "Spices", "Xmetals"]
     },
 
     "Cessna": {
