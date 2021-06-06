@@ -795,31 +795,31 @@ def main():
             boardPlanet()
             time.sleep(1)
 
-            # Move to remote exchange logic
-            if data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]:
-                # Move to ISL from home planet (no jump)
-                logger.info(f"Moving to ISL from {HOME_PLANET} and not jumping...")
-                for dir in data[HOME_PLANET]["Planet_to_ISL"]:
-                    moveDirection(dir)
-                    time.sleep(1)
-            else:
-                # Move to ISL from home planet (jump)
-                logger.info(f"Moving to ISL from {HOME_PLANET} and jumping...")
-                for dir in data[HOME_PLANET]["Planet_to_ISL"]:
-                    moveDirection(dir)
-                    time.sleep(1)
+            # Move to ISL from home planet
+            logger.info(f"Moving to ISL from {HOME_PLANET} and not jumping...")
+            for dir in data[HOME_PLANET]["Planet_to_ISL"]:
+                moveDirection(dir)
+                time.sleep(1)
 
-                # Jump to remote system
-                if data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]:
-                    logger.info("Jumping to remote system in same cartel...")
-                    jumpSystem(data[remote_planet_id]["System"])
-                    time.sleep(1)
+            # Cartel/System jump logic
+            # Local cartel logic
+            if data[HOME_PLANET]["System"] in data["remote_planet_id"]["System"]:
+                pass
+            # Local cartel logic
+            elif data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]:
+                logger.info("Jumping to remote system in same cartel...")
+                jumpSystem(data[remote_planet_id]["System"])
+                time.sleep(1)
+            # Different cartel logic
+            else:
+                logger.info("Jumping to remote system in remote cartel...")
+                jumpSystem(data[HOME_PLANET]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[remote_planet_id]["Cartel"])
+                time.sleep(1)
+                if data[remote_planet_id]["Cartel"] in data[remote_planet_id]["System"]:
+                    pass
                 else:
-                    logger.info("Jumping to remote system in remote cartel...")
-                    jumpSystem(data[HOME_PLANET]["Cartel"])
-                    time.sleep(1)
-                    jumpSystem(data[remote_planet_id]["Cartel"])
-                    time.sleep(1)
                     jumpSystem(data[remote_planet_id]["System"])
                     time.sleep(1)
 
@@ -856,30 +856,31 @@ def main():
             boardPlanet()
             time.sleep(3)
 
-            # Move to home exchange logic
+            # Move to ISL from remote planet
+            logger.info(f"Moving to ISL from {remote_planet_id} and not jumping...")
+            for dir in data[remote_planet_id]["Planet_to_ISL"]:
+                moveDirection(dir)
+                time.sleep(1)
+
+            # Cartel/System jump logic
+            # Local cartel logic
             if data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]:
-                # Move to ISL from remote planet (no jump)
-                logger.info(f"Moving to ISL from {remote_planet_id} and not jumping...")
-                for dir in data[remote_planet_id]["Planet_to_ISL"]:
-                    moveDirection(dir)
-                    time.sleep(1)
+                pass
+            # Local cartel logic
+            elif data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]:
+                logger.info("Jumping to remote system in same cartel...")
+                jumpSystem(data[remote_planet_id]["System"])
+                time.sleep(1)
+            # Different cartel logic
             else:
-                # Move to ISL from remote planet (jump)
-                logger.info(f"Moving to ISL from {remote_planet_id} and jumping...")
-                for dir in data[remote_planet_id]["Planet_to_ISL"]:
-                    moveDirection(dir)
-                    time.sleep(1)
-                # Jump to remote system
-                if data[remote_planet_id]["Cartel"] in data[HOME_PLANET]["Cartel"]:
-                    logger.info("Jumping to remote system in same cartel...")
-                    jumpSystem(data[HOME_PLANET]["System"])
-                    time.sleep(1)
+                logger.info("Jumping to remote system in remote cartel...")
+                jumpSystem(data[remote_planet_id]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[HOME_PLANET]["Cartel"])
+                time.sleep(1)
+                if data[HOME_PLANET]["Cartel"] in data[HOME_PLANET]["System"]:
+                    pass
                 else:
-                    logger.info("Jumping to remote system in remote cartel...")
-                    jumpSystem(data[remote_planet_id]["Cartel"])
-                    time.sleep(1)
-                    jumpSystem(data[HOME_PLANET]["Cartel"])
-                    time.sleep(1)
                     jumpSystem(data[HOME_PLANET]["System"])
                     time.sleep(1)
 
@@ -1040,31 +1041,30 @@ def main():
             boardPlanet()
             time.sleep(1)
 
-            # Move to remote exchange logic
-            if data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]:
-                # Move to ISL from home planet (no jump)
-                logger.info(f"Moving to ISL from {HOME_PLANET} and not jumping...")
-                for dir in data[HOME_PLANET]["Planet_to_ISL"]:
-                    moveDirection(dir)
-                    time.sleep(1)
-            else:
-                # Move to ISL from home planet (jump)
-                logger.info(f"Moving to ISL from {HOME_PLANET} and jumping...")
-                for dir in data[HOME_PLANET]["Planet_to_ISL"]:
-                    moveDirection(dir)
-                    time.sleep(1)
+            # Move to ISL from home planet
+            for dir in data[HOME_PLANET]["Planet_to_ISL"]:
+                moveDirection(dir)
+                time.sleep(1)
 
-                # Jump to remote system
-                if data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]:
-                    logger.info("Jumping to remote system in same cartel...")
-                    jumpSystem(data[remote_planet_id]["System"])
-                    time.sleep(1)
+            # Cartel/System jump logic
+            # Local cartel logic
+            if data[HOME_PLANET]["System"] in data["remote_planet_id"]["System"]:
+                pass
+            # Local cartel logic
+            elif data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]:
+                logger.info("Jumping to remote system in same cartel...")
+                jumpSystem(data[remote_planet_id]["System"])
+                time.sleep(1)
+            # Different cartel logic
+            else:
+                logger.info("Jumping to remote system in remote cartel...")
+                jumpSystem(data[HOME_PLANET]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[remote_planet_id]["Cartel"])
+                time.sleep(1)
+                if data[remote_planet_id]["Cartel"] in data[remote_planet_id]["System"]:
+                    pass
                 else:
-                    logger.info("Jumping to remote system in remote cartel...")
-                    jumpSystem(data[HOME_PLANET]["Cartel"])
-                    time.sleep(1)
-                    jumpSystem(data[remote_planet_id]["Cartel"])
-                    time.sleep(1)
                     jumpSystem(data[remote_planet_id]["System"])
                     time.sleep(1)
 
@@ -1099,31 +1099,31 @@ def main():
             boardPlanet()
             time.sleep(3)
 
-            # Move to home exchange logic
-            if data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]:
-                # Move to ISL from remote planet (no jump)
-                logger.info(f"Moving to ISL from {remote_planet_id} and not jumping...")
-                for dir in data[remote_planet_id]["Planet_to_ISL"]:
-                    moveDirection(dir)
-                    time.sleep(1)
-            else:
-                # Move to ISL from remote planet (jump)
-                logger.info(f"Moving to ISL from {remote_planet_id} and jumping...")
-                for dir in data[remote_planet_id]["Planet_to_ISL"]:
-                    moveDirection(dir)
-                    time.sleep(1)
+            # Move to ISL from remote planet
+            logger.info(f"Moving to ISL from {remote_planet_id} and not jumping...")
+            for dir in data[remote_planet_id]["ISL_to_Planet"]:
+                moveDirection(dir)
+                time.sleep(1)
 
-                # Jump to remote system
-                if data[remote_planet_id]["Cartel"] in data[HOME_PLANET]["Cartel"]:
-                    logger.info("Jumping to remote system in same cartel...")
-                    jumpSystem(data[HOME_PLANET]["System"])
-                    time.sleep(1)
+            # Cartel/System jump logic
+            # Local cartel logic
+            if data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]:
+                pass
+            # Local cartel logic
+            elif data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]:
+                logger.info("Jumping to remote system in same cartel...")
+                jumpSystem(data[remote_planet_id]["System"])
+                time.sleep(1)
+            # Different cartel logic
+            else:
+                logger.info("Jumping to remote system in remote cartel...")
+                jumpSystem(data[remote_planet_id]["Cartel"])
+                time.sleep(1)
+                jumpSystem(data[HOME_PLANET]["Cartel"])
+                time.sleep(1)
+                if data[HOME_PLANET]["Cartel"] in data[HOME_PLANET]["System"]:
+                    pass
                 else:
-                    logger.info("Jumping to remote system in remote cartel...")
-                    jumpSystem(data[remote_planet_id]["Cartel"])
-                    time.sleep(1)
-                    jumpSystem(data[HOME_PLANET]["Cartel"])
-                    time.sleep(1)
                     jumpSystem(data[HOME_PLANET]["System"])
                     time.sleep(1)
 
