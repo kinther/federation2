@@ -834,7 +834,7 @@ def main():
                 time.sleep(1)
 
             # Buy deficits from remote exchange
-            logger.info("Buying deficit from remote exchange...")
+            logger.info(f"Buying {def_item} from remote exchange...")
             for _ in range(bays):
                 buyCommodity(def_item)
                 time.sleep(1)
@@ -886,8 +886,8 @@ def main():
                 moveDirection(dir)
                 time.sleep(1)
 
-            # Sell goods
-            logger.info("Selling deficit item to remote exchange...")
+            # Sell item to home exchange
+            logger.info(f"Selling {def_item} to home exchange...")
             for _ in range(bays):
                 sellCommodity(def_item)
                 time.sleep(1)
