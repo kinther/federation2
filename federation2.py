@@ -869,19 +869,19 @@ def main():
                 for dir in data[remote_planet_id]["Planet_to_ISL"]:
                     moveDirection(dir)
                     time.sleep(1)
-            # Jump to remote system
-            if data[remote_planet_id]["Cartel"] in data[HOME_PLANET]["Cartel"]:
-                logger.info("Jumping to remote system in same cartel...")
-                jumpSystem(data[HOME_PLANET]["System"])
-                time.sleep(1)
-            else:
-                logger.info("Jumping to remote system in remote cartel...")
-                jumpSystem(data[remote_planet_id]["Cartel"])
-                time.sleep(1)
-                jumpSystem(data[HOME_PLANET]["Cartel"])
-                time.sleep(1)
-                jumpSystem(data[HOME_PLANET]["System"])
-                time.sleep(1)
+                # Jump to remote system
+                if data[remote_planet_id]["Cartel"] in data[HOME_PLANET]["Cartel"]:
+                    logger.info("Jumping to remote system in same cartel...")
+                    jumpSystem(data[HOME_PLANET]["System"])
+                    time.sleep(1)
+                else:
+                    logger.info("Jumping to remote system in remote cartel...")
+                    jumpSystem(data[remote_planet_id]["Cartel"])
+                    time.sleep(1)
+                    jumpSystem(data[HOME_PLANET]["Cartel"])
+                    time.sleep(1)
+                    jumpSystem(data[HOME_PLANET]["System"])
+                    time.sleep(1)
 
             # Move to home planet from ISL
             logger.info(f"Moving to {HOME_PLANET} from ISL...")
