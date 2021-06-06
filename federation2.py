@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 
-# Federation 2 Community Edition automation scripts for planet owners
-# version 2.0 "Surplus Shuffle"
-# Written by Strahd of the Barovia system
-# Please don't tell anyone how I script *Lenny face*
+# Federation 2 Community Edition hauling scripts for planet owners
+# version 2.1 "Clandestine Clays"
 
 # Imports
 import telnetlib  # used to do all things telnet
