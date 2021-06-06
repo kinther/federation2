@@ -800,13 +800,13 @@ def main():
             # Move to remote exchange logic
             if data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]:
                 # Move to ISL from home planet (no jump)
-                logger.info(f"Moving to ISL from {HOME_PLANET}...")
+                logger.info(f"Moving to ISL from {HOME_PLANET} and not jumping...")
                 for dir in data[HOME_PLANET]["Planet_to_ISL"]:
                     moveDirection(dir)
                     time.sleep(1)
             else:
                 # Move to ISL from home planet (jump)
-                logger.info(f"Moving to ISL from {HOME_PLANET}...")
+                logger.info(f"Moving to ISL from {HOME_PLANET} and jumping...")
                 for dir in data[HOME_PLANET]["Planet_to_ISL"]:
                     moveDirection(dir)
                     time.sleep(1)
@@ -861,13 +861,13 @@ def main():
             # Move to home exchange logic
             if data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]:
                 # Move to ISL from remote planet (no jump)
-                logger.info(f"Moving to ISL from {remote_planet_id}...")
+                logger.info(f"Moving to ISL from {remote_planet_id} and not jumping...")
                 for dir in data[remote_planet_id]["Planet_to_ISL"]:
                     moveDirection(dir)
                     time.sleep(1)
             else:
                 # Move to ISL from remote planet (jump)
-                logger.info(f"Moving to ISL from {remote_planet_id}...")
+                logger.info(f"Moving to ISL from {remote_planet_id} and jumping...")
                 for dir in data[remote_planet_id]["Planet_to_ISL"]:
                     moveDirection(dir)
                     time.sleep(1)
@@ -1045,13 +1045,13 @@ def main():
             # Move to remote exchange logic
             if data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]:
                 # Move to ISL from home planet (no jump)
-                logger.info(f"Moving to ISL from {HOME_PLANET}...")
+                logger.info(f"Moving to ISL from {HOME_PLANET} and not jumping...")
                 for dir in data[HOME_PLANET]["Planet_to_ISL"]:
                     moveDirection(dir)
                     time.sleep(1)
             else:
                 # Move to ISL from home planet (jump)
-                logger.info(f"Moving to ISL from {HOME_PLANET}...")
+                logger.info(f"Moving to ISL from {HOME_PLANET} and jumping...")
                 for dir in data[HOME_PLANET]["Planet_to_ISL"]:
                     moveDirection(dir)
                     time.sleep(1)
@@ -1104,13 +1104,13 @@ def main():
             # Move to home exchange logic
             if data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]:
                 # Move to ISL from remote planet (no jump)
-                logger.info(f"Moving to ISL from {remote_planet_id}...")
+                logger.info(f"Moving to ISL from {remote_planet_id} and not jumping...")
                 for dir in data[remote_planet_id]["Planet_to_ISL"]:
                     moveDirection(dir)
                     time.sleep(1)
             else:
                 # Move to ISL from remote planet (jump)
-                logger.info(f"Moving to ISL from {remote_planet_id}...")
+                logger.info(f"Moving to ISL from {remote_planet_id} and jumping...")
                 for dir in data[remote_planet_id]["Planet_to_ISL"]:
                     moveDirection(dir)
                     time.sleep(1)
