@@ -1,30 +1,42 @@
 # Federation 2 hauling script
-### Reach out to Strahd or Kinther in game if you have any questions.
+## Reach out to Strahd or Kinther in game if you have any questions.
 
-1. Add your planet to planets.json with your home planet information, copying
+### Requirements
+* Python3
+* Windows/MacOS/Linux
+
+### General advice for running the script
+* Place your planet owner on your home planet landing pad before running!
+* Ensure you have a ship capable of carrying at least 525 tons!
+* Clear your cargo space ahead of time wherever possible!
+
+### General advice for the "Sell" field in planets.json file
+* Add your planet to planets.json with your home planet information, copying
 Ravenloft variables.  For example if you owned the planet Rhea, you would
 change "Ravenloft" to "Rhea" for the name field.  Another important entry
 is "ISL_to_Planet", which for Rhea would be a single entry of ["se"], and
 the reverse "Planet_to_ISL" which would be ["nw"].  Do the same for the
 remaining entries under your new planet entry.
-2. Find out which planets you want to buy from by checking their exchange
+* Make sure you add a comma after each new planet unless it is the last one
+in planets.json.  Without this the file will not be read properly and the script
+will fail!
+* Find out which planets you want to buy from by checking their exchange
 prices for commodities that are your deficits.  If you don't know your full
-deficits list, check out https://f2ea.com/ which should help you identify
-anything that is in the negative.  Once you have found a planet you want to buy
-from for all of your deficits, enter them into the respective planet's entry
-in planets.json in the "Sell" category.  For example if I wanted to buy
-Alloys and BioChips from Castillo, I would create an entry for it and in the
-Sell line enter ["Alloys", "BioChips"].
-3. Find out which planets you want to sell your surpluses to by checking their
-exchange information.  For optimal selling make sure to find at least six to
-eight planets which will buy your surplus item.  Ensure none of these planets
-are "mixed" planets that treat this item as a surplus of their own to maximize
-profits - ideally they should only buy 525 tons or seven bays in total.
-4. Place your planet owner on your home planet landing pad before running and
-ensure you have a ship capable of carrying at least 525 tons.  (clear your
-cargo space ahead of time wherever possible)
+deficits list, run a "di exchange" and look for anything that is -525 current.
 
-Run the script with:
+### General advice for the "Buy" field in planets.json file
+* Check which planets you want to sell your surpluses to by checking their
+exchange information.  A quick "check price commodity" will help you figure
+out if they are buying.  If you're in a cartel you can also run the more
+verbose "check price commodity cartel" to get a full list.
+* For optimal selling make sure to find at least six to eight planets which will
+buy your surplus commodity.  Ensure none of these planets are "mixed" planets
+that treat this item as a surplus of their own.  This would be one that both
+buys and sells the commodity, which means they have set their commodity max to
+something higher than 0. **To maximize profits** - ideally each planet should
+only buy 525 tons or seven bays in total.
+
+### Run the script with:
 
 python3 federation2.py --user (username) --password (password) --planet
 (planet name) --mode (deficit or surplus)
@@ -58,4 +70,7 @@ update and improve script speed by decreasing time.sleep in most cases.
 with the --mode parameter (allows either "deficit" or "surplus").  Defaults
 to deficit if not specified.
 
-REQUIRES PYTHON3 TO RUN.  THIS WILL NOT RUN WITH PYTHON2.x.
+2.1 "Clandestine Clays" - adds checks on whether a remote exchange is selling
+a commodity and if that is above a certain threshold, improvements to the jump
+system routine to reduce extra jumps, rank is checked only once instead of
+every iteration, and improvements to logging.
