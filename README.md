@@ -45,32 +45,3 @@ or (depending on how you have your environment setup)
 
 python federation2.py --user (username) --password (password) --planet
 (planet name) --mode (deficit or surplus)
-
-### Version log
-
-1.0 "Deficit Dance" - Initial release.  Runs through deficit loop cycle.
-
-1.1 "Anomalous Alloys" - bug fixes in deficit loop logic, minor enhancements
-to print further data to logfile, conversion of user/password passing to
-command line arguments rather than static entries in script, and some PEP8
-updates.
-
-1.2 "BBQ BioChips" - cargo bay checks/notifications, script will now exit
-if run by character below Founder rank, script will exit when character is not
-on their home planet when started, home planet is now passed from command line,
-deficits not accounted for in planets.json will be skipped, and fixed a
-timestamp error on Windows preventing script from running.
-
-1.3 "Bargain BioComponents" - fix exchange parsing issue caused by recent
-update and improve script speed by decreasing time.sleep in most cases.
-
-1.4 "Celestial Cereals" - support for multiple planets in your system
-
-2.0 "Surplus Shuffle" - adds support for selling surpluses to remote planets
-with the --mode parameter (allows either "deficit" or "surplus").  Defaults
-to deficit if not specified.
-
-2.1 "Clandestine Clays" - adds checks on whether a remote exchange is selling
-a commodity and if that is above a certain threshold, improvements to the jump
-system routine to reduce extra jumps, rank is checked only once instead of
-every iteration, and improvements to logging.
