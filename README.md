@@ -10,7 +10,7 @@
 * Ensure you have a ship capable of carrying at least 525 tons!
 * Clear your cargo space ahead of time wherever possible!
 
-### General advice for the "Sell" field in planets.json file
+### General advice for the "Sell" field in planets.json file (aka deficits)
 * Add your planet to planets.json with your home planet information, copying
 Ravenloft variables.  For example if you owned the planet Rhea, you would
 change "Ravenloft" to "Rhea" for the name field.  Another important entry
@@ -24,7 +24,7 @@ will fail!
 prices for commodities that are your deficits.  If you don't know your full
 deficits list, run a "di exchange" and look for anything that is -525 current.
 
-### General advice for the "Buy" field in planets.json file
+### General advice for the "Buy" field in planets.json file (aka surpluses)
 * Check which planets you want to sell your surpluses to by checking their
 exchange information.  A quick "check price commodity" will help you figure
 out if they are buying.  If you're in a cartel you can also run the more
@@ -36,7 +36,7 @@ buys and sells the commodity, which means they have set their commodity max to
 something higher than 0. **To maximize profits** - ideally each planet should
 only buy 525 tons or seven bays in total.
 
-### Run the script with:
+### Run the script with
 
 python3 federation2.py --user (username) --password (password) --planet
 (planet name) --mode (deficit or surplus)
