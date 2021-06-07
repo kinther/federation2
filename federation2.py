@@ -781,9 +781,12 @@ def main():
                 for entry in data:
                     if HOME_PLANET not in entry:
                         if def_item in data[entry]["Sell"]:
-                            remote_planet_id = entry
-                            i = True
-                            break
+                            if checkIfSelling(def_item, entry) == True:
+                                remote_planet_id = entry
+                                i = True
+                                break
+                            else:
+                                pass
                         else:
                             logger.info(f"{entry} does not sell {def_item}, moving on...")
 
