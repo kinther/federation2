@@ -527,7 +527,7 @@ def checkIfSelling(commodity, planet):
         for line in f:
             if "not currently trading" in line:
                 logger.info(f"Remote exchange is not selling {commodity}")
-            elif "tons for sale":
+            elif "tons for sale" in line:
                 logger.info(f"Remote exchange is selling {commodity}.")
                 ii = True
                 iii = line.split(" ")
