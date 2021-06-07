@@ -46,7 +46,7 @@ or (depending on how you have your environment setup)
 python federation2.py --user (username) --password (password) --planet
 (planet name) --mode (deficit or surplus)
 
-version log:
+### Version log
 
 1.0 "Deficit Dance" - Initial release.  Runs through deficit loop cycle.
 
