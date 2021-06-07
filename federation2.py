@@ -536,7 +536,7 @@ def checkIfSelling(commodity, planet):
                 pass
 
     # Check threshold and True/False
-    if ii == True and i > 15000:
+    if ii == True and i > 10000:
         return True
     else:
         return False
