@@ -500,6 +500,13 @@ def buyCommodity(commodity):
 
 def checkIfSelling(commodity, planet):
 
+    # idea is to only find planets that are selling and have current stock
+    # above a certain threshold.
+
+    # temp variables
+    i = 0  # commodity current value
+    ii = False  # is exchange selling?
+
     # Clear buffer before issuing commands
     clearBuffer()
 
@@ -520,10 +527,15 @@ def checkIfSelling(commodity, planet):
         for line in f:
             if "not currently trading" in line:
                 logger.info(f"Remote exchange is not selling {commodity}")
-                return False
             elif "tons for sale":
                 logger.info(f"Remote exchange is selling {commodity}.")
-                return True
+                ii = True
+                iii = line.split(" ")
+                i = int(iii[3])
+            else:
+                pass
+
+    return i,ii
 
 def sellCommodity(commodity):
 
