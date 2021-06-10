@@ -36,7 +36,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
-        "Buy": ["Gold", "LubOils", "Mechparts", "Monopoles", "RNA", "Synths"],
+        "Buy": ["Fruit", "Gold", "LubOils", "Meats", "Mechparts", "Monopoles", "Polymers", "RNA", "Spices", "Synths"],
         "Sell": ["Explosives", "Games", "GAsChips", "Holos", "Katydidics", "Musiks"]
     },
 
@@ -49,7 +49,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
-        "Buy": ["Gold", "Mechparts"],
+        "Buy": ["Gold", "Mechparts", "Nickel", "Spices"],
         "Sell": ["Droids", "Hypnotapes", "Proteins", "Simulations"]
     },
 
@@ -62,7 +62,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Propellants"],
+        "Buy": ["Meats", "Propellants", "Spices"],
         "Sell": []
     },
 
@@ -75,7 +75,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["LubOils", "Monopoles", "Synths"],
+        "Buy": ["LubOils", "Monopoles", "Nickel", "Synths"],
         "Sell": []
     },
 
@@ -88,7 +88,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Mechparts", "Monopoles", "RNA"],
+        "Buy": ["Fruit", "Mechparts", "Monopoles", "Nitros", "RNA"],
         "Sell": []
     },
 
@@ -101,7 +101,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Mechparts", "Monopoles", "RNA"],
+        "Buy": ["Fruit", "Mechparts", "Monopoles", "RNA", "Spices"],
         "Sell": []
     },
 
@@ -142,7 +142,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["LubOils"],
+        "Buy": ["Fruit", "LubOils"],
         "Sell": []
     },
 
@@ -168,7 +168,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Gold", "Mechparts"],
+        "Buy": ["Fruit", "Gold", "Meats", "Mechparts", "Spices"],
         "Sell": ["Controllers", "Libraries", "Probes", "Sensors", "Studios",
                  "ToxicMunchers"]
     },
@@ -182,7 +182,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Gold"],
+        "Buy": ["Fruit", "Gold", "Nickel", "Nitros", "Spices"],
         "Sell": []
     },
 
@@ -195,7 +195,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Gold", "Mechparts", "Monopoles", "Synths"],
+        "Buy": ["Fruit", "Gold", "Mechparts", "Monopoles", "Nickel", "Spices", "Synths"],
         "Sell": []
     },
 
@@ -208,7 +208,7 @@
         "Exchange_to_LP": ["e", "n"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": [],
+        "Buy": ["Nickel", "Spices"],
         "Sell": ["Pharmaceuticals", "Polymers", "Xmetals"]
     },
 
@@ -221,7 +221,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Gold", "Monopoles", "RNA"],
+        "Buy": ["Gold", "Meats", "Monopoles", "Nickel", "RNA"],
         "Sell": []
     },
 
@@ -234,7 +234,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["RNA"],
+        "Buy": ["Meats", "Polymers", "RNA", "Spices"],
         "Sell": []
     },
 
@@ -247,7 +247,7 @@
         "Exchange_to_LP": ["ne"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Synths"],
+        "Buy": ["Meats", "Spices", "Synths"],
         "Sell": []
     },
 
@@ -260,7 +260,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Monopoles", "Synths"],
+        "Buy": ["Monopoles", "Nickel", "Polymers", "Synths"],
         "Sell": []
     },
 
