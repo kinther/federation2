@@ -27,5 +27,5 @@ a commodity and if that is above a certain threshold, improvements to the jump
 system routine to reduce extra jumps, rank is checked only once instead of
 every iteration, and improvements to logging.
 
-2.11 "Clandestine Clays" - hotfix to resolve company name conflicting with
+2.1.1 "Clandestine Clays" - hotfix to resolve company name conflicting with
 planet name issue.
