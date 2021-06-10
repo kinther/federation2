@@ -263,7 +263,7 @@ def checkCargo():
     logger.info(f"Checking cargo space of {args.user}'s ship...")
     with open("ship.txt", "r") as f:
         for line in f:
-            if "Cargo space" in line:
+            if "Cargo space: " in line:
                 i = line.split(" ")
                 i = i[7]
                 i = i.split("/")
@@ -308,7 +308,7 @@ def checkTreasury():
     logger.info(f"Checking treasury of {HOME_PLANET}...")
     with open("planet.txt", "r") as f:
         for line in f:
-            if "Treasury" in line:
+            if "Treasury: " in line:
                 i = line.split(" ")
                 i = i[3]
                 i = i[:-3]
