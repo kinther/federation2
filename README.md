@@ -7,6 +7,7 @@
 
 ### General advice for running the script
 * Place your planet owner on your home planet landing pad before running!
+* Quit the game before running! The script will "take over" as your character.
 * Ensure you have a ship capable of carrying at least 525 tons!
 * Clear your cargo space ahead of time wherever possible!
 
