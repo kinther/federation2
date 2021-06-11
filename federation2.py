@@ -106,16 +106,27 @@ def deleteFiles():
 
     while True:
         # deletes all generated files
+        logger.info("Trying to delete previous files...")
         try:
             os.remove("score.txt")
+        except FileNotFoundError as e:
+            pass
+        try:
             os.remove("ship.txt")
+        except FileNotFoundError as e:
+            pass
+        try:
             os.remove("planet.txt")
+        except FileNotFoundError as e:
+            pass
+        try:
             os.remove("exchange.txt")
+        except FileNotFoundError as e:
+            pass
+        try:
             os.remove("price.txt")
-            break
-
-        except:
-            continue
+        except FileNotFoundError as e:
+            pass
 
         break
 
@@ -416,6 +427,36 @@ def parseExchange():
     except Exception as e:
         print(e.message)
         print(e.args)
+
+def checkCurrentCommodity(commodity):
+
+    # Bring in global variables
+    global exchange_dict
+
+    # temporary variables
+    current = 0
+
+    # parse plaintext exchange data and extract current data
+    logger.info("Checking current commodity level required...")
+    try:
+        with open("exchange.txt", "r") as f:
+            lines = nonblank_lines(f)
+            for line in lines:
+                if commodity in line:
+                    i = line.split(" ")
+                    i = list(filter(None, i))
+                    current = i[7]
+                    current = current.split("/")
+                    current = int(current[0])
+                    exchange_dict[commodity] = {"Current": current}
+                else:
+                    pass
+
+    except Exception as e:
+        print(e.message)
+        print(e.args)
+
+    return current
 
 def checkDeficits():
 
@@ -894,6 +935,7 @@ def main():
             while True:
 
                 i = False  # find out if deficit is in planets.json or not
+                ii = False  # do we still need this deficit item?
 
                 for entry in data:
                     if HOME_PLANET not in entry:
@@ -907,18 +949,29 @@ def main():
                         else:
                             logger.info(f"{entry} does not sell {def_item}, moving on...")
 
-                if i is False:
+                if i is False:  # item wasn't in planets.json
                     logger.info(f"WARNING: Could not find {def_item} in planets.json.")
                     logger.info("Please account for all deficits for maximum efficiency.")
                     logger.info(f"Removing {def_item} from deficit list.")
                     deficits.pop(0)
                     def_item = deficits[0]
-                else:
+                else:  # item was found and remote planet is selling it
                     if len(remote_planet_id) > 0:
                         def_item = deficits[0]
-                        tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
-                        logger.info(f"Will buy {def_item} from {remote_planet_id}...")
-                        break
+                        updateExchange()
+                        time.sleep(1)
+                        ii = checkCurrentCommodity(def_item)
+                        if ii < DEFICIT:  # item is still needed
+                            tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
+                            logger.info(f"Will buy {def_item} from {remote_planet_id}...")
+                            break
+                        elif ii > DEFICIT:  # item is not needed anymore
+                            logger.info(f"{def_item} appears to not be needed anymore, removing...")
+                            deficits.pop(0)
+                            def_item = deficits[0]
+                            continue
+                        else:
+                            continue
                     else:
                         continue
 
