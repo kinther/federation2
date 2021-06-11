@@ -111,6 +111,7 @@ def deleteFiles():
             os.remove("ship.txt")
             os.remove("planet.txt")
             os.remove("exchange.txt")
+            os.remove("price.txt")
             break
 
         except:
