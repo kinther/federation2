@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Federation 2 Community Edition hauling scripts for planet owners
-# version 2.1.1 "Clandestine Clays" - hotfix
+# version 2.2 "Smuggled Semiconductors"
 
 # Imports
 import telnetlib  # used to do all things telnet
