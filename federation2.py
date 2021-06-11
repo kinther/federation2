@@ -345,18 +345,20 @@ def parseExchange():
     # parse plaintext exchange data and extract current data
     logger.info("Pulling exchange data into dictionary...")
     with open("exchange.txt", "r") as f:
-        next(f)
         lines = nonblank_lines(f)
         for line in lines:
-            i = line.split(" ")
-            i = list(filter(None, i))
-            commodity = i[0]
-            commodity = commodity[:-1]
-            current = i[7]
-            current = current.split("/")
-            current = current[0]
-            max = i[9]
-            exchange_dict[commodity] = {"Current": current, "Max": max}
+            if "Stock: current" in line:
+                i = line.split(" ")
+                i = list(filter(None, i))
+                commodity = i[0]
+                commodity = commodity[:-1]
+                current = i[7]
+                current = current.split("/")
+                current = current[0]
+                max = i[9]
+                exchange_dict[commodity] = {"Current": current, "Max": max}
+            else:
+                pass
 
 def checkDeficits():
 
