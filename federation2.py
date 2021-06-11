@@ -685,26 +685,46 @@ def exchange():
 
 def gatherData():
 
+    # Runs all multi functions
+
     while True:
         try:
-            # Runs all multi functions
             player()
             time.sleep(1)
+
+        except Exception as e:
+            logger.error("Ran into error running player function.  Please try again.")
+            print(e.message)
+            print(e.args)
+
+        try:
             ship()
             time.sleep(1)
+
+        except Exception as e:
+            logger.error("Ran into error running ship function.  Please try again.")
+            print(e.message)
+            print(e.args)
+
+        try:
             planet()
             time.sleep(1)
+
+        except Exception as e:
+            logger.error("Ran into error running planet function.  Please try again.")
+            print(e.message)
+            print(e.args)
+
+        try:
             exchange()
             time.sleep(1)
-            break
-        except IndexError:
-            logger.info("IndexError occurred, trying again...")
-            continue
-        except ValueError:
-            logger.info("ValueError occurred, trying again...")
-            continue
-        break
 
+        except Exception as e:
+            logger.error("Ran into error running exchange function.  Please try again.")
+            print(e.message)
+            print(e.args)
+
+        break
 
 # Main function
 
@@ -715,15 +735,38 @@ def main():
     try:
         login()
         time.sleep(1)
+
+    except Exception as e:
+        logger.error("Ran into error during initial logon.  Please try again.")
+        print(e.message)
+        print(e.args)
+
+    try:
         gatherData()
         time.sleep(1)
+
+    except Exception as e:
+        logger.error("Ran into error during initial gathering of data.  Please try again.")
+        print(e.message)
+        print(e.args)
+
+    try:
         checkRank()
         time.sleep(1)
+
+    except Exception as e:
+        logger.error("Ran into error during check of character rank.  Please try again.")
+        print(e.message)
+        print(e.args)
+
+    try:
         deleteFiles()
         time.sleep(1)
+
     except Exception as e:
-        logger.error("Ran into error during initial setup and gathering data.")
-        logger.error(e)
+        logger.error("Ran into error during initial deleting of files.  Please try again.")
+        print(e.message)
+        print(e.args)
 
     # Check if character is sufficient rank to run script
     if character_rank not in ranks:
