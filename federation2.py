@@ -51,7 +51,7 @@ SURPLUS = 18000  # How much we consider a surplus
 # Character variables
 balance = 0  # character's current balance, from output of score
 current_stamina = 0  # character's current stamina, from output of score
-stamina_min = 20  # lowest stamina level we want our character to fall to
+stamina_min = 35  # lowest stamina level we want our character to fall to
 stamina_max = 0  # character's maximum stamina level, from output of score
 current_system = ""  # character is on this planet, from output of score
 current_planet = ""  # character is in this system, from output of score
@@ -59,7 +59,7 @@ character_rank = ""  # character's rank, from output of score
 
 # Ship variables
 current_fuel = 0  # ship's current fuel level, from output of st
-fuel_min = 100  # lowest fuel level we want our ship to fall to
+fuel_min = 250  # lowest fuel level we want our ship to fall to
 fuel_max = 0  # ship's maximum stamina level, from output of st
 current_cargo = 0  # total cargo currently being hauled
 cargo_min = 0  # not sure if needed
