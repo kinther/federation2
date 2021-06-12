@@ -33,7 +33,6 @@ timeout = 90  # maybe change this
 
 # telnetlib constants
 tn = telnetlib.Telnet(host, port, timeout=timeout)
-tn.set_debuglevel(400)
 
 # Logging constants
 now = datetime.datetime.now()
