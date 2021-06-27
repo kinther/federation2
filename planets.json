@@ -75,7 +75,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["LubOils", "Monopoles", "Nickel", "Synths"],
-        "Sell": []
+        "Sell": ["Furs"]
     },
 
     "Blackbird": {
@@ -116,7 +116,7 @@
         "Buy": [],
         "Sell": ["BioChips", "BioComponents", "Clinics", "Games",
                  "Laboratories", "MicroScalpels", "Nanos", "Petrochemicals",
-                 "Sensamps", "Tracers", "Univators"]
+                 "Propellants", "Sensamps", "Tracers", "Univators"]
     },
 
     "Phoenix": {
@@ -142,7 +142,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["Fruit", "LubOils"],
-        "Sell": []
+        "Sell": ["Radioactives"]
     },
 
     "Zinnia": {
@@ -169,7 +169,7 @@
         "Restaurant_to_LP": [],
         "Buy": ["Fruit", "Gold", "Meats", "Mechparts", "Spices"],
         "Sell": ["Controllers", "Libraries", "Probes", "Sensors", "Studios",
-                 "ToxicMunchers"]
+                 "ToxicMunchers", "Weapons"]
     },
 
     "Rome": {
@@ -208,7 +208,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["Nickel", "Spices"],
-        "Sell": ["Pharmaceuticals", "Polymers", "Xmetals"]
+        "Sell": ["LubOils", "Pharmaceuticals", "Polymers", "Xmetals"]
     },
 
     "Foreigner": {
