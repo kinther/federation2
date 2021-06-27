@@ -9,8 +9,7 @@
         "LP_to_Restaurant": ["s"],
         "Restaurant_to_LP": ["n"],
         "Buy": [],
-        "Sell": ["Gold", "LubOils", "Mechparts", "Monopoles", "Munitions",
-        "Propellants", "RNA", "Synths", "Tools", "Weapons"]
+        "Sell": ["Controllers", "NanoFabrics", "Synths", "TQuarks"]
     },
 
     "Vallaki": {
