@@ -22,8 +22,7 @@
         "LP_to_Restaurant": ["nw"],
         "Restaurant_to_LP": ["se"],
         "Buy": [],
-        "Sell": ["Crystals", "Fruit", "Meats", "Nickel", "Nitros", "Polymers",
-        "Spices", "Xmetals"]
+        "Sell": ["Crystals", "Fruit", "Meats", "Nickel", "Nitros", "Polymers", "Radioactives", "Spices", "Xmetals"]
     },
 
     "Cessna": {
@@ -49,7 +48,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": ["Gold", "Mechparts", "Nickel", "Spices"],
-        "Sell": ["Droids", "Hypnotapes", "Proteins", "Simulations"]
+        "Sell": ["Droids", "Hypnotapes", "Proteins", "Simulations", "Vidicasters"]
     },
 
     "Paper": {
@@ -114,7 +113,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["BioChips", "BioComponents", "Clinics", "Games", "Laboratories", "LubOils", "MicroScalpels", "Nanos", "Petrochemicals", "Propellants", "Sensamps", "Tracers", "Univators"]
+        "Sell": ["BioChips", "BioComponents", "Clinics", "Games", "Laboratories", "LubOils", "MicroScalpels", "Nanos", "Petrochemicals", "Propellants", "Proteins", "Sensamps", "Tracers", "Univators"]
     },
 
     "Phoenix": {
@@ -153,7 +152,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Furs", "Weapons"]
+        "Sell": ["Furs", "Propellants", "Weapons"]
     },
 
     "Umatilla": {
