@@ -114,9 +114,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["BioChips", "BioComponents", "Clinics", "Games",
-                 "Laboratories", "MicroScalpels", "Nanos", "Petrochemicals",
-                 "Propellants", "Sensamps", "Tracers", "Univators"]
+        "Sell": ["BioChips", "BioComponents", "Clinics", "Games", "Laboratories", "LubOils", "MicroScalpels", "Nanos", "Petrochemicals", "Propellants", "Sensamps", "Tracers", "Univators"]
     },
 
     "Phoenix": {
@@ -155,7 +153,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Weapons"]
+        "Sell": ["Furs", "Weapons"]
     },
 
     "Umatilla": {
@@ -168,8 +166,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["Fruit", "Gold", "Meats", "Mechparts", "Spices"],
-        "Sell": ["Controllers", "Libraries", "Probes", "Sensors", "Studios",
-                 "ToxicMunchers", "Weapons"]
+        "Sell": ["Controllers", "Libraries", "Probes", "Sensors", "Studios", "ToxicMunchers", "Weapons"]
     },
 
     "Rome": {
