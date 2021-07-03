@@ -925,7 +925,7 @@ def main():
                                 i = True
                                 break
                             else:
-                                logger.info(f"{entry} is below buying threshold of 10000 tons, moving on...")
+                                logger.info(f"{entry} is below buying threshold of 7500 tons, moving on...")
                                 pass
                         else:
                             logger.info(f"{entry} does not sell {def_item}, moving on...")
