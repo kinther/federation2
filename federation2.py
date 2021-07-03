@@ -925,7 +925,7 @@ def main():
                                 i = True
                                 break
                             else:
-                                logger.info("Inside for entry in data loop, if/if/else.")
+                                logger.info(f"{entry} is below buying threshold of 10000 tons, moving on...")
                                 pass
                         else:
                             logger.info(f"{entry} does not sell {def_item}, moving on...")
@@ -952,7 +952,6 @@ def main():
                             def_item = deficits[0]
                             continue
                         else:
-                            logger.info("Inside i is False loop, else/else.")
                             continue
                     else:
                         continue
