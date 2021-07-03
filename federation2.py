@@ -639,7 +639,7 @@ def checkIfSelling(commodity, planet):
         logger.exception(e)
 
     # Check threshold and True/False
-    if ii == True and i > 10000:
+    if ii == True and i > 7500:
         return True
     else:
         return False
