@@ -179,8 +179,7 @@ def checkBalance():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def checkStamina():
 
@@ -204,8 +203,7 @@ def checkStamina():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def checkLocation():
 
@@ -226,8 +224,7 @@ def checkLocation():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def checkRank():
 
@@ -246,8 +243,7 @@ def checkRank():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def buyFood():
 
@@ -299,8 +295,7 @@ def checkFuel():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def checkCargo():
 
@@ -323,8 +318,7 @@ def checkCargo():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def buyFuel():
 
@@ -377,8 +371,7 @@ def checkTreasury():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def updateExchange():
 
@@ -425,8 +418,7 @@ def parseExchange():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def checkCurrentCommodity(commodity):
 
@@ -453,8 +445,7 @@ def checkCurrentCommodity(commodity):
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     return current
 
@@ -514,8 +505,7 @@ def checkCommodityThreshold(commodity, planet):
                     i = int(i[3])
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     if i < SURPLUS:
         return True
@@ -590,8 +580,7 @@ def checkIfBuying(commodity, planet):
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     # Evaluate whether we should sell to this exchange or not
     if i == True and ii != True:
@@ -647,8 +636,7 @@ def checkIfSelling(commodity, planet):
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     # Check threshold and True/False
     if ii == True and i > 10000:
@@ -736,8 +724,7 @@ def gatherData():
 
         except Exception as e:
             logger.error("Ran into error running player function.  Please try again.")
-            print(e.message)
-            print(e.args)
+            logger.exception(e)
 
         try:
             ship()
@@ -745,8 +732,7 @@ def gatherData():
 
         except Exception as e:
             logger.error("Ran into error running ship function.  Please try again.")
-            print(e.message)
-            print(e.args)
+            logger.exception(e)
 
         try:
             planet()
@@ -754,8 +740,7 @@ def gatherData():
 
         except Exception as e:
             logger.error("Ran into error running planet function.  Please try again.")
-            print(e.message)
-            print(e.args)
+            logger.exception(e)
 
         try:
             exchange()
@@ -763,8 +748,7 @@ def gatherData():
 
         except Exception as e:
             logger.error("Ran into error running exchange function.  Please try again.")
-            print(e.message)
-            print(e.args)
+            logger.exception(e)
 
         break
 
@@ -780,8 +764,7 @@ def main():
 
     except Exception as e:
         logger.error("Ran into error during initial logon.  Please try again.")
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     try:
         gatherData()
@@ -789,8 +772,7 @@ def main():
 
     except Exception as e:
         logger.error("Ran into error during initial gathering of data.  Please try again.")
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     try:
         checkRank()
@@ -798,8 +780,7 @@ def main():
 
     except Exception as e:
         logger.error("Ran into error during check of character rank.  Please try again.")
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     try:
         deleteFiles()
@@ -807,8 +788,7 @@ def main():
 
     except Exception as e:
         logger.error("Ran into error during initial deleting of files.  Please try again.")
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     # Check if character is sufficient rank to run script
     if character_rank not in ranks:
