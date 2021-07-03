@@ -4,6 +4,7 @@
 ### Requirements
 * Python3
 * Windows/MacOS/Linux
+* Your planet owner must have a remote price checking service (help remote)
 
 ### General advice for running the script
 * Place your planet owner on your home planet landing pad before running!
