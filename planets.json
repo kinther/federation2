@@ -22,7 +22,7 @@
         "LP_to_Restaurant": ["nw"],
         "Restaurant_to_LP": ["se"],
         "Buy": [],
-        "Sell": ["Crystals", "Fruit", "Meats", "Nickel", "Nitros", "Polymers", "Radioactives", "Spices", "Xmetals"]
+        "Sell": ["Alloys", "Crystals", "Fruit", "Meats", "Nickel", "Nitros", "Petrochemicals", "Polymers", "Radioactives", "Semiconductors", "Spices", "Xmetals"]
     },
 
     "Cessna": {
@@ -126,7 +126,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Cereals", "Clays", "Crystals", "Electros", "Hides", "Nickel", "Nitros", "Soya", "Spices", "Textiles", "Woods"]
+        "Sell": ["Cereals", "Clays", "Electros", "Hides", "Soya", "Textiles", "Woods"]
     },
 
     "Dahlia": {
@@ -165,7 +165,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["Fruit", "Gold", "Meats", "Mechparts", "Spices"],
-        "Sell": ["Controllers", "Libraries", "Probes", "Sensors", "Studios", "ToxicMunchers", "Weapons"]
+        "Sell": ["Libraries", "Probes", "Sensors", "Studios", "ToxicMunchers", "Weapons"]
     },
 
     "Rome": {
@@ -204,7 +204,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["Nickel", "Spices"],
-        "Sell": ["LubOils", "Pharmaceuticals", "Polymers", "Xmetals"]
+        "Sell": ["LubOils", "Pharmaceuticals"]
     },
 
     "Foreigner": {
