@@ -1111,6 +1111,22 @@ def main():
             deficits.pop(0)
             time.sleep(1)
 
+            # end of iteration checks to ensure we are still able to move forward
+            if current_planet not in HOME_PLANET:
+                logger.info(f"Detected location is not {HOME_PLANET}.")
+                logger.info("Something went wrong, closing script to ensure player safety.")
+                sys.exit(0)
+            else:
+                pass
+
+            if (cargo_max - current_cargo) < 525:
+                logger.info(f"Detected {current_cargo} extra tons in ship's hold.")
+                logger.info("This is below the minimum tons required of 525 to function properly.")
+                logger.info("Something went wrong, closing script to ensure we don't buy items unnecessarily.")
+                sys.exit(0)
+            else:
+                pass
+
     elif "surplus" in script_mode:
 
         while True:
@@ -1336,6 +1352,22 @@ def main():
             os.remove("planet.txt")  # remove files
             os.remove("price.txt")  # remove files
             tn.write(b"say Sold " + str.encode(sur_item) + b" to " + str.encode(remote_planet_id) + b".\n")
+
+            # end of iteration checks to ensure we are still able to move forward
+            if current_planet not in HOME_PLANET:
+                logger.info(f"Detected location is not {HOME_PLANET}.")
+                logger.info("Something went wrong, closing script to ensure player safety.")
+                sys.exit(0)
+            else:
+                pass
+
+            if (cargo_max - current_cargo) < 525:
+                logger.info(f"Detected {current_cargo} extra tons in ship's hold.")
+                logger.info("This is below the minimum tons required of 525 to function properly.")
+                logger.info("Something went wrong, closing script to ensure we don't buy items unnecessarily.")
+                sys.exit(0)
+            else:
+                pass
 
             # check if we are below SURPLUS defined threshold
             if checkCommodityThreshold(sur_item, HOME_PLANET) == True:
