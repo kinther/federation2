@@ -4,6 +4,7 @@
 ### Requirements
 * Python3
 * Windows/MacOS/Linux
+* Your planet owner must have a remote price checking service (help remote)
 
 ### General advice for running the script
 * Place your planet owner on your home planet landing pad before running!
@@ -24,6 +25,10 @@ will fail!
 * Find out which planets you want to buy from by checking their exchange
 prices for commodities that are your deficits.  If you don't know your full
 deficits list, run a "di exchange" and look for anything that is -525 current.
+* Check whether planets you are buying a commodity from have surpluses of >
+7500.  If a planet you want to buy from drops below 7500 it will be skipped so
+that prices do not climb and impact your profits.  To get around this you can
+add the same commodity to multiple planets, which will give you "backups".
 
 ### General advice for the "Buy" field in planets.json file (aka surpluses)
 * Check which planets you want to sell your surpluses to by checking their

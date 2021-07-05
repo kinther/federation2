@@ -36,3 +36,13 @@ also try to sell, thereby buying commodities for no reason), food/fuel will
 be bought more often, added numerous try/except blocks to improve script
 runtime, and fixed the parsing of exchange data so that it sees less
 ValueError or IndexError exceptions.
+
+2.3 "LanzariK Lozenges" - altered exception handling to print exceptions to the
+logfile, improved verbosity when the checkIfSelling function is used and the
+remote exchange is below a certain threshold, updated README with more info on
+how to run the script, and added more logic to end of each iteration so that
+if a user is not on the expected planet the script will exit (thus ensuring
+something bad doesn't happen like dying) or if there are extra tons in the
+cargo hold the script will not continuously buy more and waste money.  closed
+out old WinError issue which appears to be due to my old crappy wifi router,
+not an actual bug in the code.

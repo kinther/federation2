@@ -51,19 +51,6 @@
         "Sell": ["Droids", "Hypnotapes", "Proteins", "Simulations", "Vidicasters"]
     },
 
-    "Paper": {
-        "Cartel": "Flight",
-        "System": "Flight",
-        "ISL_to_Planet": ["s"],
-        "Planet_to_ISL": ["n"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": ["Meats", "Propellants", "Spices"],
-        "Sell": []
-    },
-
     "Piper": {
         "Cartel": "Flight",
         "System": "Flight",
@@ -142,6 +129,19 @@
         "Sell": ["Radioactives"]
     },
 
+    "Zinnia": {
+        "Cartel": "Flight",
+        "System": "Flowers",
+        "ISL_to_Planet": ["e"],
+        "Planet_to_ISL": ["w"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Hypnotapes"]
+    },
+
     "Memory": {
         "Cartel": "Flight",
         "System": "Trial",
@@ -165,7 +165,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["Fruit", "Gold", "Meats", "Mechparts", "Spices"],
-        "Sell": ["Libraries", "Probes", "Sensors", "Studios", "ToxicMunchers", "Weapons"]
+        "Sell": ["Hypnotapes", "Libraries", "Probes", "Sensors", "Studios", "ToxicMunchers", "Weapons"]
     },
 
     "Rome": {
@@ -191,7 +191,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["Fruit", "Gold", "Mechparts", "Monopoles", "Nickel", "Spices", "Synths"],
-        "Sell": []
+        "Sell": ["Clinics"]
     },
 
     "Station": {

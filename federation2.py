@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Federation 2 Community Edition hauling scripts for planet owners
-# version 2.2 "Smuggled Semiconductors"
+# version 2.3 "LanzariK Lozenges"
 
 # Imports
 import telnetlib  # used to do all things telnet
@@ -179,8 +179,7 @@ def checkBalance():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def checkStamina():
 
@@ -204,8 +203,7 @@ def checkStamina():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def checkLocation():
 
@@ -226,8 +224,7 @@ def checkLocation():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def checkRank():
 
@@ -246,8 +243,7 @@ def checkRank():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def buyFood():
 
@@ -299,8 +295,7 @@ def checkFuel():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def checkCargo():
 
@@ -323,8 +318,7 @@ def checkCargo():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def buyFuel():
 
@@ -377,8 +371,7 @@ def checkTreasury():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def updateExchange():
 
@@ -425,8 +418,7 @@ def parseExchange():
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
 def checkCurrentCommodity(commodity):
 
@@ -453,8 +445,7 @@ def checkCurrentCommodity(commodity):
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     return current
 
@@ -514,8 +505,7 @@ def checkCommodityThreshold(commodity, planet):
                     i = int(i[3])
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     if i < SURPLUS:
         return True
@@ -590,8 +580,7 @@ def checkIfBuying(commodity, planet):
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     # Evaluate whether we should sell to this exchange or not
     if i == True and ii != True:
@@ -647,11 +636,10 @@ def checkIfSelling(commodity, planet):
                     pass
 
     except Exception as e:
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     # Check threshold and True/False
-    if ii == True and i > 10000:
+    if ii == True and i > 7500:
         return True
     else:
         return False
@@ -736,8 +724,7 @@ def gatherData():
 
         except Exception as e:
             logger.error("Ran into error running player function.  Please try again.")
-            print(e.message)
-            print(e.args)
+            logger.exception(e)
 
         try:
             ship()
@@ -745,8 +732,7 @@ def gatherData():
 
         except Exception as e:
             logger.error("Ran into error running ship function.  Please try again.")
-            print(e.message)
-            print(e.args)
+            logger.exception(e)
 
         try:
             planet()
@@ -754,8 +740,7 @@ def gatherData():
 
         except Exception as e:
             logger.error("Ran into error running planet function.  Please try again.")
-            print(e.message)
-            print(e.args)
+            logger.exception(e)
 
         try:
             exchange()
@@ -763,8 +748,7 @@ def gatherData():
 
         except Exception as e:
             logger.error("Ran into error running exchange function.  Please try again.")
-            print(e.message)
-            print(e.args)
+            logger.exception(e)
 
         break
 
@@ -780,8 +764,7 @@ def main():
 
     except Exception as e:
         logger.error("Ran into error during initial logon.  Please try again.")
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     try:
         gatherData()
@@ -789,8 +772,7 @@ def main():
 
     except Exception as e:
         logger.error("Ran into error during initial gathering of data.  Please try again.")
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     try:
         checkRank()
@@ -798,8 +780,7 @@ def main():
 
     except Exception as e:
         logger.error("Ran into error during check of character rank.  Please try again.")
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     try:
         deleteFiles()
@@ -807,8 +788,7 @@ def main():
 
     except Exception as e:
         logger.error("Ran into error during initial deleting of files.  Please try again.")
-        print(e.message)
-        print(e.args)
+        logger.exception(e)
 
     # Check if character is sufficient rank to run script
     if character_rank not in ranks:
@@ -945,6 +925,7 @@ def main():
                                 i = True
                                 break
                             else:
+                                logger.info(f"{entry} is below buying threshold of 7500 tons, moving on...")
                                 pass
                         else:
                             logger.info(f"{entry} does not sell {def_item}, moving on...")
@@ -1129,6 +1110,22 @@ def main():
             tn.write(b"say Filled " + str.encode(def_item) + b".\n")
             deficits.pop(0)
             time.sleep(1)
+
+            # end of iteration checks to ensure we are still able to move forward
+            if current_planet not in HOME_PLANET:
+                logger.info(f"Detected location is not {HOME_PLANET}.")
+                logger.info("Something went wrong, closing script to ensure player safety.")
+                sys.exit(0)
+            else:
+                pass
+
+            if (cargo_max - current_cargo) < 525:
+                logger.info(f"Detected {current_cargo} extra tons in ship's hold.")
+                logger.info("This is below the minimum tons required of 525 to function properly.")
+                logger.info("Something went wrong, closing script to ensure we don't buy items unnecessarily.")
+                sys.exit(0)
+            else:
+                pass
 
     elif "surplus" in script_mode:
 
@@ -1355,6 +1352,22 @@ def main():
             os.remove("planet.txt")  # remove files
             os.remove("price.txt")  # remove files
             tn.write(b"say Sold " + str.encode(sur_item) + b" to " + str.encode(remote_planet_id) + b".\n")
+
+            # end of iteration checks to ensure we are still able to move forward
+            if current_planet not in HOME_PLANET:
+                logger.info(f"Detected location is not {HOME_PLANET}.")
+                logger.info("Something went wrong, closing script to ensure player safety.")
+                sys.exit(0)
+            else:
+                pass
+
+            if (cargo_max - current_cargo) < 525:
+                logger.info(f"Detected {current_cargo} extra tons in ship's hold.")
+                logger.info("This is below the minimum tons required of 525 to function properly.")
+                logger.info("Something went wrong, closing script to ensure we don't buy items unnecessarily.")
+                sys.exit(0)
+            else:
+                pass
 
             # check if we are below SURPLUS defined threshold
             if checkCommodityThreshold(sur_item, HOME_PLANET) == True:
