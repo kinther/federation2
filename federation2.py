@@ -314,6 +314,7 @@ def checkCargo():
                     i = i.split("/")
                     current_cargo = int(i[0])
                     cargo_max = int(i[1])
+                    current_cargo = (cargo_max - current_cargo)
                 else:
                     pass
 
@@ -1119,7 +1120,7 @@ def main():
             else:
                 pass
 
-            if (cargo_max - current_cargo) < 525:
+            if (cargo_max - current_cargo) > 525:
                 logger.info(f"Detected {current_cargo} extra tons in ship's hold.")
                 logger.info("This is below the minimum tons required of 525 to function properly.")
                 logger.info("Something went wrong, closing script to ensure we don't buy items unnecessarily.")
