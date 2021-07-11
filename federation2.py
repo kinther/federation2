@@ -833,7 +833,7 @@ def main():
 
 
     # Check if current_cargo does not equal max cargo
-    if current_cargo != cargo_max:
+    if current_cargo > 0:
         i = str(current_cargo)
         logger.info("WARNING: Ship is hauling some cargo already in its hold.")
         logger.info(f"Detected {i} tons in use.")
