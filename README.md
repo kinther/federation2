@@ -25,7 +25,7 @@ will fail!
 * Find out which planets you want to buy from by checking their exchange
 prices for commodities that are your deficits.  If you don't know your full
 deficits list, run a "di exchange" and look for anything that is -525 current.
-* Check whether planets you are buying a commodity from have surpluses of >
+* Check whether planets you are buying a commodity from have surpluses of greater than
 7500.  If a planet you want to buy from drops below 7500 it will be skipped so
 that prices do not climb and impact your profits.  To get around this you can
 add the same commodity to multiple planets, which will give you "backups".
