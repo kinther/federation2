@@ -821,7 +821,7 @@ def main():
         pass
 
     # Check if current_cargo is less than 525 (can't haul a full 7 bays)
-    if current_cargo < 525:
+    if (cargo_max - current_cargo) < 525:
         i = str(current_cargo)
         logger.info("ERROR: Ship is not capable of hauling 525 tons of cargo right now.")
         logger.info(f"Detected {i} is the max tons we can haul.")
