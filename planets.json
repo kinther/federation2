@@ -22,7 +22,7 @@
         "LP_to_Restaurant": ["nw"],
         "Restaurant_to_LP": ["se"],
         "Buy": [],
-        "Sell": ["Alloys", "Crystals", "Fruit", "Hides", "Meats", "Nickel", "Nitros", "Petrochemicals", "Polymers", "Radioactives", "Semiconductors", "Spices", "Xmetals"]
+        "Sell": ["Alloys", "Crystals", "Fruit", "Furs", "Hides", "LanzariK", "Meats", "Nickel", "Nitros", "Petrochemicals", "Polymers", "Radioactives", "Semiconductors", "Spices", "Xmetals"]
     },
 
     "Cessna": {
