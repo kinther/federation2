@@ -24,7 +24,7 @@
         "Buy": [],
         "Sell": ["Alloys", "Crystals", "Fruit", "Furs", "Hides", "LanzariK", "Meats", "Nickel", "Nitros", "Petrochemicals", "Polymers", "Radioactives", "Semiconductors", "Spices", "Xmetals"]
     },
-	
+
     "Krezk": {
         "Cartel": "Flight",
         "System": "Barovia",
@@ -35,7 +35,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["BioComponents", "Clinics", "Laboratories", "MicroScalpels", "Probes", "Proteins", "Sensors", "Tracers"]
+        "Sell": ["BioComponents", "Clinics", "Holos", "Laboratories", "MicroScalpels", "Probes", "Proteins", "Sensors", "Tracers"]
     },
 
     "Cessna": {
