@@ -92,9 +92,14 @@ def login():
 
 def clearBuffer():
     # Attempts to clear the buffer
-    tn.write(b"\n")
-    i = tn.read_very_eager().decode("ascii")
-    time.sleep(3)
+    try:
+        tn.write(b"\n")
+        i = tn.read_very_eager().decode("ascii")
+        time.sleep(1)
+    except Exception as e:
+        print("Issue with clearing buffer.")
+        logger.exception(e)
+        pass
 
 def escape_ansi(line):
     # https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi
