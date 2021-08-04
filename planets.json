@@ -35,7 +35,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["BioComponents", "Clinics", "Holos", "Laboratories", "MicroScalpels", "Probes", "Proteins", "Sensors", "Tracers"]
+        "Sell": ["BioComponents", "Clinics", "Games", "Holos", "Hypnotapes", "MicroScalpels", "Probes", "Proteins", "Simulations", "Tracers"]
     },
 
     "Cessna": {
