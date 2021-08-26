@@ -9,7 +9,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Controllers", "NanoFabrics", "Synths", "TQuarks"]
+        "Sell": ["Artifacts", "Firewalls", "Libraries", "Simulations", "Studios"]
     },
 
     "Vallaki": {
@@ -36,6 +36,19 @@
         "Restaurant_to_LP": ["e"],
         "Buy": [],
         "Sell": ["BioComponents", "Clinics", "Games", "Holos", "Hypnotapes", "MicroScalpels", "Probes", "Proteins", "Simulations", "Tracers"]
+    },
+
+    "Winery": {
+        "Cartel": "Flight",
+        "System": "Barovia",
+        "ISL_to_Planet": ["w"],
+        "Planet_to_ISL": ["e"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["w"],
+        "Restaurant_to_LP": ["e"],
+        "Buy": [],
+        "Sell": ["Cereals", "Textiles", "Woods"]
     },
 
     "Cessna": {
@@ -139,7 +152,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Radioactives"]
+        "Sell": ["Generators", "Radioactives"]
     },
 
     "Zinnia": {
@@ -152,7 +165,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Hypnotapes"]
+        "Sell": ["AntiMatter", "Hypnotapes", "Lasers", "Livestock", "Munitions", "Tools"]
     },
 
     "Memory": {
