@@ -1,6 +1,6 @@
 {
     "Ravenloft": {
-        "Cartel": "Flight",
+        "Cartel": "Barovia",
         "System": "Barovia",
         "ISL_to_Planet": ["ne"],
         "Planet_to_ISL": ["sw"],
@@ -13,7 +13,7 @@
     },
 
     "Vallaki": {
-        "Cartel": "Flight",
+        "Cartel": "Barovia",
         "System": "Barovia",
         "ISL_to_Planet": ["n"],
         "Planet_to_ISL": ["s"],
@@ -26,7 +26,7 @@
     },
 
     "Krezk": {
-        "Cartel": "Flight",
+        "Cartel": "Barovia",
         "System": "Barovia",
         "ISL_to_Planet": ["nw"],
         "Planet_to_ISL": ["se"],
@@ -39,7 +39,7 @@
     },
 
     "Winery": {
-        "Cartel": "Flight",
+        "Cartel": "Barovia",
         "System": "Barovia",
         "ISL_to_Planet": ["w"],
         "Planet_to_ISL": ["e"],
@@ -49,6 +49,45 @@
         "Restaurant_to_LP": ["e"],
         "Buy": [],
         "Sell": ["Cereals", "Textiles", "Woods"]
+    },
+
+    "Berez": {
+        "Cartel": "Barovia",
+        "System": "Barovia",
+        "ISL_to_Planet": ["sw"],
+        "Planet_to_ISL": ["ne"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["s"],
+        "Restaurant_to_LP": ["n"],
+        "Buy": [],
+        "Sell": []
+    },
+
+    "Village": {
+        "Cartel": "Barovia",
+        "System": "Barovia",
+        "ISL_to_Planet": ["e"],
+        "Planet_to_ISL": ["w"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["w"],
+        "Restaurant_to_LP": ["e"],
+        "Buy": [],
+        "Sell": []
+    },
+
+    "Tser Pool": {
+        "Cartel": "Barovia",
+        "System": "Barovia",
+        "ISL_to_Planet": ["se"],
+        "Planet_to_ISL": ["nw"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["w"],
+        "Restaurant_to_LP": ["e"],
+        "Buy": [],
+        "Sell": []
     },
 
     "Cessna": {
