@@ -22,7 +22,7 @@
         "LP_to_Restaurant": ["nw", "in"],
         "Restaurant_to_LP": ["out", "se"],
         "Buy": [],
-        "Sell": ["Alloys", "Crystals", "Fruit", "Furs", "Hides", "LanzariK", "Meats", "Nickel", "Nitros", "Petrochemicals", "Polymers", "Radioactives", "RNA", "Semiconductors", "Spices", "Xmetals"]
+        "Sell": ["Alloys", "Crystals", "Fruit", "Furs", "Hides", "LanzariK", "Nickel", "Nitros", "Petrochemicals", "Polymers", "Radioactives", "RNA", "Semiconductors", "Spices", "Xmetals"]
     },
 
     "Krezk": {
@@ -48,7 +48,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Cereals", "Textiles", "Woods"]
+        "Sell": ["Cereals", "Meats", "Textiles", "Woods"]
     },
 
     "Berez": {
