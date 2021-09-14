@@ -23,7 +23,7 @@ parser.add_argument("--mode", type=str, action="store", required=True)
 args = parser.parse_args()
 
 # global constants
-ranks = ["Founder", "Engineer", "Mogul", "Technocrat", "Gengineer", "Magnate", "Plutrocrat"]
+ranks = ["Founder", "Engineer", "Mogul", "Technocrat", "Gengineer", "Magnate", "Plutocrat"]
 script_mode = (args.mode).lower()  # determines whether to focus on deficits or surpluses
 
 # Telnetlib variables
