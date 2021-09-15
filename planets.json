@@ -22,7 +22,7 @@
         "LP_to_Restaurant": ["nw", "in"],
         "Restaurant_to_LP": ["out", "se"],
         "Buy": [],
-        "Sell": ["Crystals", "Fruit", "Hides", "LanzariK", "Nickel", "Nitros", "Petrochemicals", "Polymers", "Radioactives", "RNA", "Semiconductors", "Spices", "Xmetals"]
+        "Sell": []
     },
 
     "Krezk": {
@@ -90,6 +90,19 @@
         "Sell": ["Alloys"]
     },
 
+    "Goto": {
+        "Cartel": "Barovia",
+        "System": "Easy",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Crystals", "Nickel", "Petrochemicals", "Polymers", "Radioactives", "Xmetals"]
+    },
+
     "Cessna": {
         "Cartel": "Flight",
         "System": "Flight",
@@ -113,7 +126,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": ["Gold", "Mechparts", "Nickel", "Spices"],
-        "Sell": ["Droids", "Hypnotapes", "Proteins", "Simulations", "Vidicasters"]
+        "Sell": []
     },
 
     "Piper": {
@@ -125,8 +138,8 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["LubOils", "Monopoles", "Nickel", "Synths"],
-        "Sell": ["Furs"]
+        "Buy": ["LubOils", "Monopoles", "Nickel", "Spices", "Synths"],
+        "Sell": []
     },
 
     "Blackbird": {
@@ -165,7 +178,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["BioChips", "BioComponents", "Clinics", "Games", "Laboratories", "LubOils", "MicroScalpels", "Nanos", "Petrochemicals", "Propellants", "Proteins", "Sensamps", "Tracers", "Univators"]
+        "Sell": ["BioChips", "BioComponents", "Clinics", "Games", "Laboratories", "LanzariK", "LubOils", "MicroScalpels", "Nanos", "Petrochemicals", "Propellants", "Proteins", "RNA", "Sensamps", "Tracers", "Univators"]
     },
 
     "Phoenix": {
@@ -178,7 +191,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Cereals", "Clays", "Electros", "Hides", "Soya", "Textiles", "Woods"]
+        "Sell": ["Cereals", "Clays", "Electros", "Hides", "Nitros", "Semiconductors", "Soya", "Textiles", "Woods"]
     },
 
     "Dahlia": {
