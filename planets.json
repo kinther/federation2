@@ -22,7 +22,7 @@
         "LP_to_Restaurant": ["nw", "in"],
         "Restaurant_to_LP": ["out", "se"],
         "Buy": [],
-        "Sell": ["Alloys", "Crystals", "Fruit", "Hides", "LanzariK", "Nickel", "Nitros", "Petrochemicals", "Polymers", "Radioactives", "RNA", "Semiconductors", "Spices", "Xmetals"]
+        "Sell": ["Crystals", "Fruit", "Hides", "LanzariK", "Nickel", "Nitros", "Petrochemicals", "Polymers", "Radioactives", "RNA", "Semiconductors", "Spices", "Xmetals"]
     },
 
     "Krezk": {
@@ -87,7 +87,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": []
+        "Sell": ["Alloys"]
     },
 
     "Cessna": {
@@ -139,7 +139,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["Fruit", "Mechparts", "Monopoles", "Nitros", "RNA"],
-        "Sell": []
+        "Sell": ["Alloys"]
     },
 
     "Cirrus": {
