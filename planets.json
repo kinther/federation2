@@ -112,8 +112,8 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
-        "Buy": ["Fruit", "Gold", "LubOils", "Meats", "Mechparts", "Monopoles", "Polymers", "RNA", "Spices", "Synths"],
-        "Sell": ["Explosives", "Games", "GAsChips", "Holos", "Katydidics", "Musiks"]
+        "Buy": [],
+        "Sell": ["AntiMatter", "Explosives", "Games", "GAsChips", "Holos", "Katydidics", "Musiks"]
     },
 
     "Diamond": {
@@ -138,8 +138,8 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["LubOils", "Monopoles", "Nickel", "Spices", "Synths"],
-        "Sell": []
+        "Buy": [],
+        "Sell": ["LubOils", "Monopoles", "Nickel", "Spices", "Synths"]
     },
 
     "Blackbird": {
