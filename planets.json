@@ -191,7 +191,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Cereals", "Clays", "Electros", "Hides", "Nitros", "Semiconductors", "Soya", "Textiles", "Woods"]
+        "Sell": ["Cereals", "Clays", "Electros", "Hides", "Nitros", "Semiconductors", "Soya", "Spices",   "Textiles", "Woods"]
     },
 
     "Dahlia": {
@@ -242,8 +242,34 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Fruit", "Gold", "Meats", "Mechparts", "Spices"],
+        "Buy": [],
         "Sell": ["Hypnotapes", "Libraries", "Probes", "Sensors", "Studios", "ToxicMunchers", "Weapons"]
+    },
+
+    "Olympia": {
+        "Cartel": "Flight",
+        "System": "Wyld",
+        "ISL_to_Planet": ["ne"],
+        "Planet_to_ISL": ["sw"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Fruit", "Gold", "Monopoles", "Munitions"]
+    },
+
+    "Cascadia": {
+        "Cartel": "Flight",
+        "System": "Wyld",
+        "ISL_to_Planet": ["se"],
+        "Planet_to_ISL": ["nw"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Nanos"]
     },
 
     "Rome": {
