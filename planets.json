@@ -9,7 +9,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Artifacts", "Firewalls", "Katydidics", "Libraries", "Powerpacks", "Simulations", "Studios"]
+        "Sell": ["Artifacts", "Firewalls", "Hypnotapes", "Katydidics", "Libraries", "Powerpacks", "Simulations", "Studios"]
     },
 
     "Vallaki": {
