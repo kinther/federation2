@@ -22,7 +22,7 @@
         "LP_to_Restaurant": ["nw", "in"],
         "Restaurant_to_LP": ["out", "se"],
         "Buy": [],
-        "Sell": []
+        "Sell": ["Clays", "LanzariK", "Nickel", "Nitros", "Polymers"]
     },
 
     "Krezk": {
