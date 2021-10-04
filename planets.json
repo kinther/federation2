@@ -22,7 +22,7 @@
         "LP_to_Restaurant": ["nw", "in"],
         "Restaurant_to_LP": ["out", "se"],
         "Buy": [],
-        "Sell": ["Clays", "LanzariK", "Nickel", "Nitros", "Polymers"]
+        "Sell": ["Clays", "Crystals", "LanzariK", "Nickel", "Nitros", "Petrochemicals", "Polymers"]
     },
 
     "Krezk": {
@@ -48,7 +48,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Cereals", "Furs", "Meats", "Textiles", "Woods"]
+        "Sell": ["Cereals", "Furs", "Fruit", "Meats", "Textiles", "Woods"]
     },
 
     "Berez": {
@@ -61,7 +61,7 @@
         "LP_to_Restaurant": ["s"],
         "Restaurant_to_LP": ["n"],
         "Buy": [],
-        "Sell": []
+        "Sell": ["Hides"]
     },
 
     "Village": {
@@ -74,7 +74,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": []
+        "Sell": ["Soya"]
     },
 
     "Tser Pool": {
@@ -87,7 +87,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Alloys"]
+        "Sell": ["Alloys", "Livestock", "Spices"]
     },
 
     "Goto": {
