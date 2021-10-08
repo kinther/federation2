@@ -100,7 +100,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Crystals", "Nickel", "Petrochemicals", "Polymers", "Radioactives", "Xmetals"]
+        "Sell": ["Crystals", "Lasers", "Munitions", "Nanos", "Nickel", "Petrochemicals", "Polymers", "Radioactives", "Tools", "Xmetals", "Weapons"]
     },
 
     "Cessna": {
