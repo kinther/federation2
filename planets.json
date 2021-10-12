@@ -90,6 +90,19 @@
         "Sell": ["Alloys", "Livestock", "Spices"]
     },
 
+    "Amber Temple": {
+        "Cartel": "Barovia",
+        "System": "Barovia",
+        "ISL_to_Planet": ["s"],
+        "Planet_to_ISL": ["n"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["BioChips", "ToxicMunchers"]
+    },
+
     "Goto": {
         "Cartel": "Barovia",
         "System": "Easy",
