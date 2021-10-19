@@ -74,7 +74,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Soya"]
+        "Sell": ["Meats", "Monopoles", "Semiconductors", "Soya", "Spices", "Textiles"]
     },
 
     "Tser Pool": {
