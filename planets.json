@@ -100,7 +100,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["BioChips", "Musiks", "Sensamps", "ToxicMunchers"]
+        "Sell": ["BioChips", "GAsChips", "Musiks", "NanoFabrics", "Sensamps", "Synths", "ToxicMunchers"]
     },
 
     "Goto": {
