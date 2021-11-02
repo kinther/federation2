@@ -48,7 +48,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Cereals", "Furs", "Fruit", "Meats", "Textiles", "Woods"]
+        "Sell": ["Cereals", "Furs", "Fruit", "Meats", "Textiles", "Woods", "Xmetals"]
     },
 
     "Berez": {
