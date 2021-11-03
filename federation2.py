@@ -936,7 +936,12 @@ def main():
                     logger.info("Please account for all deficits for maximum efficiency.")
                     logger.info(f"Removing {def_item} from deficit list.")
                     deficits.pop(0)
-                    def_item = deficits[0]
+                    try:
+                        def_item = deficits[0]
+                    except:
+                        print(deficits[0])
+                        print("Ran into an error")
+                        sys.exit(0)
                 else:  # item was found and remote planet is selling it
                     if len(remote_planet_id) > 0:
                         def_item = deficits[0]
