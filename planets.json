@@ -116,6 +116,19 @@
         "Sell": ["Crystals", "Lasers", "Munitions", "Nanos", "Nickel", "Petrochemicals", "Polymers", "Radioactives", "Tools", "Xmetals", "Weapons"]
     },
 
+    "Targoviste": {
+        "Cartel": "Barovia",
+        "System": "Valachia",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["sw"],
+        "Restaurant_to_LP": ["ne"],
+        "Buy": [],
+        "Sell": []
+    },
+
     "Cessna": {
         "Cartel": "Flight",
         "System": "Flight",
