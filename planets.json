@@ -1,6 +1,6 @@
 {
     "Ravenloft": {
-        "Cartel": "Flight",
+        "Cartel": "Barovia",
         "System": "Barovia",
         "ISL_to_Planet": ["ne"],
         "Planet_to_ISL": ["sw"],
@@ -9,11 +9,11 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Controllers", "NanoFabrics", "Synths", "TQuarks"]
+        "Sell": ["Artifacts", "Firewalls", "Hypnotapes", "Katydidics", "Libraries", "Powerpacks", "Simulations", "Studios"]
     },
 
     "Vallaki": {
-        "Cartel": "Flight",
+        "Cartel": "Barovia",
         "System": "Barovia",
         "ISL_to_Planet": ["n"],
         "Planet_to_ISL": ["s"],
@@ -22,11 +22,11 @@
         "LP_to_Restaurant": ["nw", "in"],
         "Restaurant_to_LP": ["out", "se"],
         "Buy": [],
-        "Sell": ["Alloys", "Crystals", "Fruit", "Furs", "Hides", "LanzariK", "Meats", "Nickel", "Nitros", "Petrochemicals", "Polymers", "Radioactives", "RNA", "Semiconductors", "Spices", "Xmetals"]
+        "Sell": ["Clays", "Controllers", "Crystals", "Droids", "Generators", "LanzariK", "Nickel", "Nitros", "Petrochemicals", "Pharmaceuticals", "Polymers"]
     },
 
     "Krezk": {
-        "Cartel": "Flight",
+        "Cartel": "Barovia",
         "System": "Barovia",
         "ISL_to_Planet": ["nw"],
         "Planet_to_ISL": ["se"],
@@ -35,7 +35,98 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["BioComponents", "Clinics", "Holos", "Laboratories", "MicroScalpels", "Probes", "Proteins", "Sensors", "Tracers"]
+        "Sell": ["BioComponents", "Clinics", "Games", "Holos", "Hypnotapes", "MicroScalpels", "Probes", "Proteins", "Simulations", "Tracers"]
+    },
+
+    "Winery": {
+        "Cartel": "Barovia",
+        "System": "Barovia",
+        "ISL_to_Planet": ["w"],
+        "Planet_to_ISL": ["e"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["w"],
+        "Restaurant_to_LP": ["e"],
+        "Buy": [],
+        "Sell": ["Cereals", "Furs", "Fruit", "Gold", "Meats", "Textiles", "Woods", "Xmetals"]
+    },
+
+    "Berez": {
+        "Cartel": "Barovia",
+        "System": "Barovia",
+        "ISL_to_Planet": ["sw"],
+        "Planet_to_ISL": ["ne"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["s"],
+        "Restaurant_to_LP": ["n"],
+        "Buy": [],
+        "Sell": ["Hides"]
+    },
+
+    "Village": {
+        "Cartel": "Barovia",
+        "System": "Barovia",
+        "ISL_to_Planet": ["e"],
+        "Planet_to_ISL": ["w"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["w"],
+        "Restaurant_to_LP": ["e"],
+        "Buy": [],
+        "Sell": ["Cereals", "Livestock", "Meats", "Monopoles", "Semiconductors", "Soya", "Spices", "Textiles"]
+    },
+
+    "Tser Pool": {
+        "Cartel": "Barovia",
+        "System": "Barovia",
+        "ISL_to_Planet": ["se"],
+        "Planet_to_ISL": ["nw"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["w"],
+        "Restaurant_to_LP": ["e"],
+        "Buy": [],
+        "Sell": ["Alloys", "Livestock", "Spices"]
+    },
+
+    "Amber Temple": {
+        "Cartel": "Barovia",
+        "System": "Barovia",
+        "ISL_to_Planet": ["s"],
+        "Planet_to_ISL": ["n"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["BioChips", "GAsChips", "Musiks", "NanoFabrics", "Sensamps", "Synths", "ToxicMunchers"]
+    },
+
+    "Goto": {
+        "Cartel": "Barovia",
+        "System": "Easy",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Crystals", "Lasers", "Munitions", "Nanos", "Nickel", "Petrochemicals", "Polymers", "Radioactives", "Tools", "Xmetals", "Weapons"]
+    },
+
+    "Targoviste": {
+        "Cartel": "Barovia",
+        "System": "Valachia",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["sw"],
+        "Restaurant_to_LP": ["ne"],
+        "Buy": [],
+        "Sell": []
     },
 
     "Cessna": {
@@ -47,8 +138,8 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
-        "Buy": ["Fruit", "Gold", "LubOils", "Meats", "Mechparts", "Monopoles", "Polymers", "RNA", "Spices", "Synths"],
-        "Sell": ["Explosives", "Games", "GAsChips", "Holos", "Katydidics", "Musiks"]
+        "Buy": [],
+        "Sell": ["AntiMatter", "Explosives", "Games", "GAsChips", "Holos", "Katydidics", "Musiks"]
     },
 
     "Diamond": {
@@ -61,7 +152,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": ["Gold", "Mechparts", "Nickel", "Spices"],
-        "Sell": ["Droids", "Hypnotapes", "Proteins", "Simulations", "Vidicasters"]
+        "Sell": []
     },
 
     "Piper": {
@@ -73,8 +164,8 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["LubOils", "Monopoles", "Nickel", "Synths"],
-        "Sell": ["Furs"]
+        "Buy": [],
+        "Sell": ["LubOils", "Monopoles", "Nickel", "Spices", "Synths"]
     },
 
     "Blackbird": {
@@ -87,7 +178,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["Fruit", "Mechparts", "Monopoles", "Nitros", "RNA"],
-        "Sell": []
+        "Sell": ["Alloys"]
     },
 
     "Cirrus": {
@@ -113,7 +204,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["BioChips", "BioComponents", "Clinics", "Games", "Laboratories", "LubOils", "MicroScalpels", "Nanos", "Petrochemicals", "Propellants", "Proteins", "Sensamps", "Tracers", "Univators"]
+        "Sell": ["BioChips", "BioComponents", "Clinics", "Games", "Laboratories", "LanzariK", "LubOils", "MicroScalpels", "Nanos", "Petrochemicals", "Propellants", "Proteins", "RNA", "Sensamps", "Tracers", "Univators"]
     },
 
     "Phoenix": {
@@ -126,7 +217,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Cereals", "Clays", "Electros", "Hides", "Soya", "Textiles", "Woods"]
+        "Sell": ["Cereals", "Clays", "Electros", "Hides", "Nitros", "Semiconductors", "Soya", "Spices",   "Textiles", "Woods"]
     },
 
     "Dahlia": {
@@ -139,7 +230,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Radioactives"]
+        "Sell": ["Generators", "Radioactives"]
     },
 
     "Zinnia": {
@@ -152,7 +243,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Hypnotapes"]
+        "Sell": ["AntiMatter", "Hypnotapes", "Lasers", "Livestock", "Munitions", "Tools"]
     },
 
     "Memory": {
@@ -177,8 +268,34 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Fruit", "Gold", "Meats", "Mechparts", "Spices"],
+        "Buy": [],
         "Sell": ["Hypnotapes", "Libraries", "Probes", "Sensors", "Studios", "ToxicMunchers", "Weapons"]
+    },
+
+    "Olympia": {
+        "Cartel": "Flight",
+        "System": "Wyld",
+        "ISL_to_Planet": ["ne"],
+        "Planet_to_ISL": ["sw"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Fruit", "Gold", "Monopoles", "Munitions"]
+    },
+
+    "Cascadia": {
+        "Cartel": "Flight",
+        "System": "Wyld",
+        "ISL_to_Planet": ["se"],
+        "Planet_to_ISL": ["nw"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Nanos"]
     },
 
     "Rome": {
@@ -218,135 +335,5 @@
         "Restaurant_to_LP": [],
         "Buy": ["Nickel", "Spices"],
         "Sell": ["LubOils", "Pharmaceuticals"]
-    },
-
-    "Foreigner": {
-        "Cartel": "Jukebox",
-        "System": "Jukebox",
-        "ISL_to_Planet": [],
-        "Planet_to_ISL": [],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": ["Gold", "Meats", "Monopoles", "Nickel", "RNA"],
-        "Sell": []
-    },
-
-    "Journey": {
-        "Cartel": "Jukebox",
-        "System": "Jukebox",
-        "ISL_to_Planet": ["s"],
-        "Planet_to_ISL": ["n"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": ["Meats", "Polymers", "RNA", "Spices"],
-        "Sell": []
-    },
-
-    "Laboratory": {
-        "Cartel": "Jukebox",
-        "System": "Jukebox",
-        "ISL_to_Planet": ["s", "s"],
-        "Planet_to_ISL": ["n", "n"],
-        "LP_to_Exchange": ["sw"],
-        "Exchange_to_LP": ["ne"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": ["Meats", "Spices", "Synths"],
-        "Sell": []
-    },
-
-    "Eagles": {
-        "Cartel": "Jukebox",
-        "System": "Jukebox",
-        "ISL_to_Planet": ["s", "s", "e", "s"],
-        "Planet_to_ISL": ["n", "w", "n", "n"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": ["Monopoles", "Nickel", "Polymers", "Synths"],
-        "Sell": []
-    },
-
-    "Saw": {
-        "Cartel": "Waveform",
-        "System": "Waveform",
-        "ISL_to_Planet": [],
-        "Planet_to_ISL": [],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": ["Propellants"],
-        "Sell": []
-    },
-
-    "Sine": {
-        "Cartel": "Waveform",
-        "System": "Waveform",
-        "ISL_to_Planet": ["ne"],
-        "Planet_to_ISL": ["sw"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": ["Propellants"],
-        "Sell": []
-    },
-
-    "Square": {
-        "Cartel": "Waveform",
-        "System": "Waveform",
-        "ISL_to_Planet": ["e"],
-        "Planet_to_ISL": ["w"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": [],
-        "Sell": []
-    },
-
-    "Pulse": {
-        "Cartel": "Waveform",
-        "System": "Waveform",
-        "ISL_to_Planet": ["s"],
-        "Planet_to_ISL": ["n"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": ["LubOils", "Monopoles"],
-        "Sell": []
-    },
-
-    "Triangle": {
-        "Cartel": "Waveform",
-        "System": "Waveform",
-        "ISL_to_Planet": ["w"],
-        "Planet_to_ISL": ["e"],
-        "LP_to_Exchange": ["e"],
-        "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": ["LubOils", "Monopoles"],
-        "Sell": []
-    },
-
-    "Sakura": {
-        "Cartel": "Flight",
-        "System": "Enso",
-        "ISL_to_Planet": [],
-        "Planet_to_ISL": [],
-        "LP_to_Exchange": ["n"],
-        "Exchange_to_LP": ["s"],
-        "LP_to_Restaurant": [],
-        "Restaurant_to_LP": [],
-        "Buy": ["Gold", "LubOils", "Mechparts", "Monopoles", "Propellants", "RNA", "Synths"],
-        "Sell": []
     }
 }
