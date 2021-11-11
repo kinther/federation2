@@ -126,7 +126,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": [],
-        "Sell": []
+        "Sell": ["Alloys", "Clays", "Crystals", "Fruit", "Furs", "Gold", "Hides", "Livestock", "Meats", "Nickel", "Petrochemicals", "Radioactives", "Semiconductors", "Soya", "Spices", "Textiles", "Woods", "Xmetals"]
     },
 
     "Cessna": {
