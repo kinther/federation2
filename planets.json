@@ -61,7 +61,7 @@
         "LP_to_Restaurant": ["s"],
         "Restaurant_to_LP": ["n"],
         "Buy": [],
-        "Sell": ["Hides"]
+        "Sell": ["AntiMatter", "Electros", "Lasers", "Tools", "TQuarks", "Vidicasters", "Weapons"]
     },
 
     "Village": {
@@ -126,7 +126,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": [],
-        "Sell": ["Alloys", "Clays", "Crystals", "Fruit", "Furs", "Gold", "Hides", "Livestock", "Meats", "Nickel", "Petrochemicals", "Radioactives", "Semiconductors", "Soya", "Spices", "Textiles", "Woods", "Xmetals"]
+        "Sell": ["Alloys", "Clays", "Crystals", "Fruit", "Furs", "Gold", "Hides", "Livestock", "Meats", "Mechparts", "Monopoles", "Munitions", "Nickel", "Petrochemicals", "Polymers", "Radioactives", "Semiconductors", "Soya", "Spices", "Textiles", "Woods", "Xmetals"]
     },
 
     "Cessna": {
