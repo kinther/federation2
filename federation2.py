@@ -40,7 +40,7 @@ day = now.strftime("%a")
 hour = now.strftime("%H")
 minute = now.strftime("%M")
 LOG_FILENAME = (day + "-" + hour + minute + "-fed2.txt")
-basicConfig(filename=LOG_FILENAME, level=logging.INFO)
+basicConfig(filename=LOG_FILENAME, level=INFO)
 logger = getLogger()
 
 # Character constants
