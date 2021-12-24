@@ -11,11 +11,11 @@ from re import compile  # used to escape ansi characters
 from json import load  # used to read planets.json file
 import logging  # used to write logs to file
 from os import remove  # used to delete files
-import argparse  # used to pass user/password credentials
+from argparse import ArgumentParser  # used to pass user/password credentials
 from sys import exit  # used to exit script if criteria is met
 
 # argparse constants
-parser = argparse.ArgumentParser()
+parser = ArgumentParser()
 parser.add_argument("--user", type=str, action="store", required=True)
 parser.add_argument("--password", type=str, action="store", required=True)
 parser.add_argument("--planet", type=str, action="store", required=True)
