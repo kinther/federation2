@@ -5,12 +5,12 @@
 
 # Imports
 import telnetlib  # used to do all things telnet
-from time import sleep # used to provide sleep function
+from time import sleep  # used to provide sleep function
 import datetime  # used to provide logging filename
 import re  # used to escape ansi characters
 import json  # used to read planets.json file
 import logging  # used to write logs to file
-import os  # used to delete files
+from os import remove  # used to delete files
 import argparse  # used to pass user/password credentials
 import sys  # used to exit script if criteria is met
 
@@ -115,23 +115,23 @@ def deleteFiles():
         # deletes all generated files
         logger.info("Trying to delete previous files...")
         try:
-            os.remove("score.txt")
+            remove("score.txt")
         except FileNotFoundError as e:
             pass
         try:
-            os.remove("ship.txt")
+            remove("ship.txt")
         except FileNotFoundError as e:
             pass
         try:
-            os.remove("planet.txt")
+            remove("planet.txt")
         except FileNotFoundError as e:
             pass
         try:
-            os.remove("exchange.txt")
+            remove("exchange.txt")
         except FileNotFoundError as e:
             pass
         try:
-            os.remove("price.txt")
+            remove("price.txt")
         except FileNotFoundError as e:
             pass
 
@@ -1116,9 +1116,9 @@ def main():
             sleep(1)
             diff_treasury = (treasury-prev_treasury)  # how much we made this iteration
 
-            os.remove("score.txt")  # remove files
-            os.remove("ship.txt")  # remove files
-            os.remove("planet.txt")  # remove files
+            remove("score.txt")  # remove files
+            remove("ship.txt")  # remove files
+            remove("planet.txt")  # remove files
             logger.info("Removing entry from deficits list...")
             tn.write(b"say Filled " + str.encode(def_item) + b".\n")
             deficits.pop(0)
@@ -1360,10 +1360,10 @@ def main():
             sleep(1)
             diff_treasury = (treasury-prev_treasury)  # how much we made this iteration
 
-            os.remove("score.txt")  # remove files
-            os.remove("ship.txt")  # remove files
-            os.remove("planet.txt")  # remove files
-            os.remove("price.txt")  # remove files
+            remove("score.txt")  # remove files
+            remove("ship.txt")  # remove files
+            remove("planet.txt")  # remove files
+            remove("price.txt")  # remove files
             tn.write(b"say Sold " + str.encode(sur_item) + b" to " + str.encode(remote_planet_id) + b".\n")
 
             # end of iteration checks to ensure we are still able to move forward
