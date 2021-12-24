@@ -7,7 +7,7 @@
 import telnetlib  # used to do all things telnet
 from time import sleep  # used to provide sleep function
 import datetime  # used to provide logging filename
-import re  # used to escape ansi characters
+from re import compile  # used to escape ansi characters
 from json import load  # used to read planets.json file
 import logging  # used to write logs to file
 from os import remove  # used to delete files
@@ -106,7 +106,7 @@ def clearBuffer():
 def escape_ansi(line):
     # https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi
     # -escape-sequences-from-a-string-in-python
-    ansi_escape = re.compile(r'(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]')
+    ansi_escape = compile(r'(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]')
     return ansi_escape.sub('', line)
 
 def deleteFiles():
