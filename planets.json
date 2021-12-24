@@ -87,7 +87,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Alloys", "Livestock", "Spices"]
+        "Sell": []
     },
 
     "Amber Temple": {
