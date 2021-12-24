@@ -12,7 +12,7 @@ import json  # used to read planets.json file
 import logging  # used to write logs to file
 from os import remove  # used to delete files
 import argparse  # used to pass user/password credentials
-import sys  # used to exit script if criteria is met
+from sys import exit  # used to exit script if criteria is met
 
 # argparse constants
 parser = argparse.ArgumentParser()
@@ -803,7 +803,7 @@ def main():
         logger.info("ERROR: This script is meant to be run by planet owners.")
         logger.info(f"Your current rank is detected as {character_rank}.")
         logger.info("Please re-run script when you rank up! Good luck :)")
-        sys.exit(0)
+        exit(0)
     else:
         pass
 
@@ -812,7 +812,7 @@ def main():
         logger.info("ERROR: Character must be on their home planet on the landing pad.")
         logger.info(f"Detected character on {current_planet} rather than {HOME_PLANET}.")
         logger.info("Exiting.")
-        sys.exit(0)
+        exit(0)
     else:
         pass
 
@@ -823,7 +823,7 @@ def main():
         logger.info(f"Detected {i} is the max tons we can haul.")
         logger.info("You may need to upgrade your ship in order to haul 525 tons.")
         logger.info("Exiting.")
-        sys.exit(0)
+        exit(0)
     else:
         pass
 
@@ -834,7 +834,7 @@ def main():
         logger.info(f"Detected {i} is the max tons we can haul.")
         logger.info("Please sell some things from the hold and re-start script.")
         logger.info("Exiting.")
-        sys.exit(0)
+        exit(0)
     else:
         pass
 
@@ -948,7 +948,7 @@ def main():
                     except:
                         print(deficits[0])
                         print("Ran into an error")
-                        sys.exit(0)
+                        exit(0)
                 else:  # item was found and remote planet is selling it
                     if len(remote_planet_id) > 0:
                         def_item = deficits[0]
@@ -1128,7 +1128,7 @@ def main():
             if current_planet not in HOME_PLANET:
                 logger.info(f"Detected location is not {HOME_PLANET}.")
                 logger.info("Something went wrong, closing script to ensure player safety.")
-                sys.exit(0)
+                exit(0)
             else:
                 pass
 
@@ -1136,7 +1136,7 @@ def main():
                 logger.info(f"Detected {current_cargo} extra tons in ship's hold.")
                 logger.info("This is below the minimum tons required of 525 to function properly.")
                 logger.info("Something went wrong, closing script to ensure we don't buy items unnecessarily.")
-                sys.exit(0)
+                exit(0)
             else:
                 pass
 
@@ -1370,7 +1370,7 @@ def main():
             if current_planet not in HOME_PLANET:
                 logger.info(f"Detected location is not {HOME_PLANET}.")
                 logger.info("Something went wrong, closing script to ensure player safety.")
-                sys.exit(0)
+                exit(0)
             else:
                 pass
 
@@ -1378,7 +1378,7 @@ def main():
                 logger.info(f"Detected {current_cargo} extra tons in ship's hold.")
                 logger.info("This is below the minimum tons required of 525 to function properly.")
                 logger.info("Something went wrong, closing script to ensure we don't buy items unnecessarily.")
-                sys.exit(0)
+                exit(0)
             else:
                 pass
 
@@ -1394,7 +1394,7 @@ def main():
         # no mode selected or input was incorrect
         print("Mode must be either 'deficit' or 'surplus'.  Please re-run script.")
         logger.info("Mode must be either 'deficit' or 'surplus'.  Please re-run script.")
-        sys.exit(0)
+        exit(0)
 
 if __name__ == "__main__":
     main()
