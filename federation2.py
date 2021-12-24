@@ -6,7 +6,7 @@
 # Imports
 import telnetlib  # used to do all things telnet
 from time import sleep  # used to provide sleep function
-import datetime  # used to provide logging filename
+from datetime import datetime  # used to provide logging filename
 from re import compile  # used to escape ansi characters
 from json import load  # used to read planets.json file
 import logging  # used to write logs to file
@@ -35,7 +35,7 @@ timeout = 90  # maybe change this
 tn = telnetlib.Telnet(host, port, timeout=timeout)
 
 # Logging constants
-now = datetime.datetime.now()
+now = datetime.now()
 day = now.strftime("%a")
 hour = now.strftime("%H")
 minute = now.strftime("%M")
