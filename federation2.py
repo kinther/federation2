@@ -8,7 +8,7 @@ import telnetlib  # used to do all things telnet
 from time import sleep  # used to provide sleep function
 import datetime  # used to provide logging filename
 import re  # used to escape ansi characters
-import json  # used to read planets.json file
+from json import load  # used to read planets.json file
 import logging  # used to write logs to file
 from os import remove  # used to delete files
 import argparse  # used to pass user/password credentials
@@ -864,7 +864,7 @@ def main():
 
     # Open planets.json file
     f = open("planets.json")
-    data = json.load(f)
+    data = load(f)
 
     if "deficit" in script_mode:
 
