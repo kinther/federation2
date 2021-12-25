@@ -61,7 +61,7 @@
         "LP_to_Restaurant": ["s"],
         "Restaurant_to_LP": ["n"],
         "Buy": [],
-        "Sell": ["AntiMatter", "Electros", "Explosives", "Lasers", "Tools", "TQuarks", "Vidicasters", "Weapons"]
+        "Sell": ["AntiMatter", "Electros", "Explosives", "Lasers", "Nanos", "Tools", "TQuarks", "Vidicasters", "Weapons"]
     },
 
     "Village": {
