@@ -36,17 +36,15 @@ def main():
         logger.error("Ran into error during check of character rank.  Please try again.")
         logger.exception(e)
 
-    # try:
-    #     deleteFiles()
-    #     sleep(1)
-    #
-    # except Exception as e:
-    #     logger.error("Ran into error during initial deleting of files.  Please try again.")
-    #     logger.exception(e)
+    try:
+        deleteFiles()
+        sleep(1)
+
+    except Exception as e:
+        logger.error("Ran into error during initial deleting of files.  Please try again.")
+        logger.exception(e)
 
     # Check if character is sufficient rank to run script
-    print(character_rank)
-    print(ranks)
     if character_rank not in ranks:
         logger.info("ERROR: This script is meant to be run by planet owners.")
         logger.info(f"Your current rank is detected as {character_rank}.")
