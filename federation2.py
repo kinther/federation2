@@ -5,6 +5,7 @@
 
 # Imports
 from fed_utils import *  # used to pull in all custom functions from fed_utils.py
+import fed_vars as v  # used to makes variables global across files
 
 # Main function
 
@@ -45,26 +46,26 @@ def main():
         logger.exception(e)
 
     # Check if character is sufficient rank to run script
-    if character_rank not in ranks:
+    if v.character_rank not in ranks:
         logger.info("ERROR: This script is meant to be run by planet owners.")
-        logger.info(f"Your current rank is detected as {character_rank}.")
+        logger.info(f"Your current rank is detected as {v.character_rank}.")
         logger.info("Please re-run script when you rank up! Good luck :)")
         exit(0)
     else:
         pass
 
     # Check if current_planet = HOME_PLANET.  If not, exit script.
-    if HOME_PLANET not in current_planet:
+    if HOME_PLANET not in v.current_planet:
         logger.info("ERROR: Character must be on their home planet on the landing pad.")
-        logger.info(f"Detected character on {current_planet} rather than {HOME_PLANET}.")
+        logger.info(f"Detected character on {v.current_planet} rather than {HOME_PLANET}.")
         logger.info("Exiting.")
         exit(0)
     else:
         pass
 
     # Check if cargo_max is less than 525 (can't haul a full 7 bays)
-    if cargo_max < 525:
-        i = str(cargo_max)
+    if v.cargo_max < 525:
+        i = str(v.cargo_max)
         logger.info("ERROR: Ship is not capable of hauling 525 tons of cargo right now.")
         logger.info(f"Detected {i} is the max tons we can haul.")
         logger.info("You may need to upgrade your ship in order to haul 525 tons.")
@@ -74,8 +75,8 @@ def main():
         pass
 
     # Check if current_cargo is less than 525 (can't haul a full 7 bays)
-    if (cargo_max - current_cargo) < 525:
-        i = str(current_cargo)
+    if (v.cargo_max - v.current_cargo) < 525:
+        i = str(v.current_cargo)
         logger.info("ERROR: Ship is not capable of hauling 525 tons of cargo right now.")
         logger.info(f"Detected {i} is the max tons we can haul.")
         logger.info("Please sell some things from the hold and re-start script.")
@@ -86,18 +87,12 @@ def main():
 
 
     # Check if current_cargo does not equal max cargo
-    if current_cargo > 0:
-        i = str(current_cargo)
+    if v.current_cargo > 0:
+        i = str(v.current_cargo)
         logger.info("WARNING: Ship is hauling some cargo already in its hold.")
         logger.info(f"Detected {i} tons in use.")
     else:
         pass
-
-    # global variables
-    global deficits
-    global surpluses
-    global balance
-    global treasury
 
     # while loop variables
     iter = 0  # how many times have we gone through the loop?
@@ -119,15 +114,15 @@ def main():
             # Iteration checks
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
             logger.info(f" This is iteration number {iter}.")
-            logger.info(f" {args.user}'s bank balance is {balance}.")
+            logger.info(f" {args.user}'s bank balance is {v.balance}.")
             logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
-            logger.info(f" {HOME_PLANET}'s treasury value is {treasury}.")
+            logger.info(f" {HOME_PLANET}'s treasury value is {v.treasury}.")
             logger.info(f" That's a difference of {diff_treasury} compared to last iteration.")
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
             # Pause for 30 minutes if deficits list is empty
             while True:
-                if len(deficits) > 0:  # is deficits list empty yet?
+                if len(v.deficits) > 0:  # is deficits list empty yet?
                     break
                 else:
                     logger.info("Deficits all filled.  Sleeping for 30 minutes...")
@@ -142,17 +137,17 @@ def main():
                     continue
 
             # Deficits loop specific vars
-            def_item = deficits[0]
+            def_item = v.deficits[0]
 
             # Buy fuel and food
-            if current_fuel < fuel_min:
+            if v.current_fuel < v.fuel_min:
                 buyFuel()
                 logger.info("Current fuel is below minimum, buying fuel.")
                 sleep(1)
             else:
                 logger.info("Current fuel is above minimum.")
                 pass
-            if current_stamina < stamina_min:
+            if v.current_stamina < v.stamina_min:
                 for dir in data[HOME_PLANET]["LP_to_Restaurant"]:
                     moveDirection(dir)
                     sleep(1)
@@ -188,16 +183,16 @@ def main():
                     logger.info(f"WARNING: Could not find {def_item} in planets.json.")
                     logger.info("Please account for all deficits for maximum efficiency.")
                     logger.info(f"Removing {def_item} from deficit list.")
-                    deficits.pop(0)
+                    v.deficits.pop(0)
                     try:
-                        def_item = deficits[0]
+                        def_item = v.deficits[0]
                     except:
-                        print(deficits[0])
+                        print(v.deficits[0])
                         print("Ran into an error")
                         exit(0)
                 else:  # item was found and remote planet is selling it
                     if len(remote_planet_id) > 0:
-                        def_item = deficits[0]
+                        def_item = v.deficits[0]
                         updateExchange()
                         sleep(1)
                         ii = checkCurrentCommodity(def_item)
@@ -207,8 +202,8 @@ def main():
                             break
                         elif ii > DEFICIT:  # item is not needed anymore
                             logger.info(f"{def_item} appears to not be needed anymore, removing...")
-                            deficits.pop(0)
-                            def_item = deficits[0]
+                            v.deficits.pop(0)
+                            def_item = v.deficits[0]
                             continue
                         else:
                             continue
@@ -349,37 +344,37 @@ def main():
             # Iteration data updates to keep things fresh
             iter += 1
 
-            prev_balance = balance  # how much we had before cycle began
+            prev_balance = v.balance  # how much we had before cycle began
             player()  # gather new player data
             sleep(1)
-            diff_balance = (balance-prev_balance)  # how much we made this iteration
+            diff_balance = (v.balance-prev_balance)  # how much we made this iteration
 
             ship()  # gather new ship data
             sleep(1)
-            prev_treasury = treasury  # how much we had before cycle began
+            prev_treasury = v.treasury  # how much we had before cycle began
 
             planet()  # gather new planet data
             sleep(1)
-            diff_treasury = (treasury-prev_treasury)  # how much we made this iteration
+            diff_treasury = (v.treasury-prev_treasury)  # how much we made this iteration
 
             remove("score.txt")  # remove files
             remove("ship.txt")  # remove files
             remove("planet.txt")  # remove files
             logger.info("Removing entry from deficits list...")
             tn.write(b"say Filled " + str.encode(def_item) + b".\n")
-            deficits.pop(0)
+            v.deficits.pop(0)
             sleep(1)
 
             # end of iteration checks to ensure we are still able to move forward
-            if current_planet not in HOME_PLANET:
+            if v.current_planet not in HOME_PLANET:
                 logger.info(f"Detected location is not {HOME_PLANET}.")
                 logger.info("Something went wrong, closing script to ensure player safety.")
                 exit(0)
             else:
                 pass
 
-            if (cargo_max - current_cargo) < 525:
-                logger.info(f"Detected {current_cargo} extra tons in ship's hold.")
+            if (v.cargo_max - v.current_cargo) < 525:
+                logger.info(f"Detected {v.current_cargo} extra tons in ship's hold.")
                 logger.info("This is below the minimum tons required of 525 to function properly.")
                 logger.info("Something went wrong, closing script to ensure we don't buy items unnecessarily.")
                 exit(0)
@@ -393,15 +388,15 @@ def main():
             # Iteration checks
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
             logger.info(f" This is iteration number {iter}.")
-            logger.info(f" {args.user}'s bank balance is {balance}.")
+            logger.info(f" {args.user}'s bank balance is {v.balance}.")
             logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
-            logger.info(f" {HOME_PLANET}'s treasury value is {treasury}.")
+            logger.info(f" {HOME_PLANET}'s treasury value is {v.treasury}.")
             logger.info(f" That's a difference of {diff_treasury} compared to last iteration.")
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
             # Pause for 30 minutes if surpluses list is empty
             while True:
-                if len(surpluses) > 0:  # is surpluses list empty yet?
+                if len(v.surpluses) > 0:  # is surpluses list empty yet?
                     break
                 else:
                     logger.info("Surpluses all sold.  Sleeping for 30 minutes...")
@@ -416,17 +411,17 @@ def main():
                     continue
 
             # Surpluses loop specific vars
-            sur_item = surpluses[0]
+            sur_item = v.surpluses[0]
 
             # Buy fuel and food
-            if current_fuel < fuel_min:
+            if v.current_fuel < v.fuel_min:
                 buyFuel()
                 logger.info("Current fuel is below minimum, buying fuel.")
                 sleep(1)
             else:
                 logger.info("Current fuel is above minimum.")
                 pass
-            if current_stamina < stamina_min:
+            if v.current_stamina < v.stamina_min:
                 for dir in data[HOME_PLANET]["LP_to_Restaurant"]:
                     moveDirection(dir)
                     sleep(1)
@@ -458,11 +453,11 @@ def main():
 
                 if i is False:
                     logger.info(f"Removing {sur_item} from surplus list.")
-                    surpluses.pop(0)
-                    sur_item = surpluses[0]
+                    v.surpluses.pop(0)
+                    sur_item = v.surpluses[0]
                 else:
                     if len(remote_planet_id) > 0:
-                        sur_item = surpluses[0]
+                        sur_item = v.surpluses[0]
                         tn.write(b"say " + str.encode(sur_item) + b" is still on the surpluses list.\n")
                         logger.info(f"Will sell one {sur_item} to {remote_planet_id}...")
                         break
@@ -593,18 +588,18 @@ def main():
             # Iteration data updates to keep things fresh
             iter += 1
 
-            prev_balance = balance  # how much we had before cycle began
+            prev_balance = v.balance  # how much we had before cycle began
             player()  # gather new player data
             sleep(1)
-            diff_balance = (balance-prev_balance)  # how much we made this iteration
+            diff_balance = (v.balance-prev_balance)  # how much we made this iteration
 
             ship()  # gather new ship data
             sleep(1)
-            prev_treasury = treasury  # how much we had before cycle began
+            prev_treasury = v.treasury  # how much we had before cycle began
 
             planet()  # gather new planet data
             sleep(1)
-            diff_treasury = (treasury-prev_treasury)  # how much we made this iteration
+            diff_treasury = (v.treasury-prev_treasury)  # how much we made this iteration
 
             remove("score.txt")  # remove files
             remove("ship.txt")  # remove files
@@ -613,15 +608,15 @@ def main():
             tn.write(b"say Sold " + str.encode(sur_item) + b" to " + str.encode(remote_planet_id) + b".\n")
 
             # end of iteration checks to ensure we are still able to move forward
-            if current_planet not in HOME_PLANET:
+            if v.current_planet not in HOME_PLANET:
                 logger.info(f"Detected location is not {HOME_PLANET}.")
                 logger.info("Something went wrong, closing script to ensure player safety.")
                 exit(0)
             else:
                 pass
 
-            if (cargo_max - current_cargo) < 525:
-                logger.info(f"Detected {current_cargo} extra tons in ship's hold.")
+            if (v.cargo_max - v.current_cargo) < 525:
+                logger.info(f"Detected {v.current_cargo} extra tons in ship's hold.")
                 logger.info("This is below the minimum tons required of 525 to function properly.")
                 logger.info("Something went wrong, closing script to ensure we don't buy items unnecessarily.")
                 exit(0)
@@ -631,7 +626,7 @@ def main():
             # check if we are below SURPLUS defined threshold
             if checkCommodityThreshold(sur_item, HOME_PLANET) == True:
                 logger.info(f"{sur_item} is under SURPLUS defined threshold.  Removing from list.")
-                surpluses.pop(0)
+                v.surpluses.pop(0)
             else:
                 logger.info(f"{sur_item} is above SURPLUS defined threshold.  Continuing.")
 

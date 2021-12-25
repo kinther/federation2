@@ -12,6 +12,7 @@ from logging import basicConfig, getLogger  # used to write logs to file
 from os import remove  # used to delete files
 from argparse import ArgumentParser  # used to pass user/password credentials
 from sys import exit  # used to exit script if criteria is met
+import fed_vars as v  # used to makes variables global across files
 
 # argparse constants
 parser = ArgumentParser()
@@ -42,33 +43,10 @@ LOG_FILENAME = (day + "-" + hour + minute + "-fed2.txt")
 basicConfig(filename=LOG_FILENAME, level=20)
 logger = getLogger()
 
-# Character constants
+# Character/ship constants
 HOME_PLANET = args.planet  # passed from player arguments
 DEFICIT = -75  # How much we consider a deficit
 SURPLUS = 18000  # How much we consider a surplus
-
-# Character variables
-balance = 0  # character's current balance, from output of score
-current_stamina = 0  # character's current stamina, from output of score
-stamina_min = 35  # lowest stamina level we want our character to fall to
-stamina_max = 0  # character's maximum stamina level, from output of score
-current_system = ""  # character is on this planet, from output of score
-current_planet = ""  # character is in this system, from output of score
-character_rank = ""  # character's rank, from output of score
-
-# Ship variables
-current_fuel = 0  # ship's current fuel level, from output of st
-fuel_min = 250  # lowest fuel level we want our ship to fall to
-fuel_max = 0  # ship's maximum stamina level, from output of st
-current_cargo = 0  # total cargo currently being hauled
-cargo_min = 0  # not sure if needed
-cargo_max = 0  # maximum tonnage ship can haul
-
-# Planet variables
-treasury = 0  # planet's current balance, from output of di planet
-exchange_dict = {}  # used to hold the exchange information
-deficits = []  # used to hold the current deficits list
-surpluses = []  # used to hold the current surpluses list
 
 # Global functions
 
@@ -167,9 +145,6 @@ def updateScore():
 
 def checkBalance():
 
-    # Bring in global variables
-    global balance
-
     # Check character balance information
     logger.info(f"Checking bank balance of {args.user}...")
     try:
@@ -182,7 +157,7 @@ def checkBalance():
                     i = i.split(",")  # parse output to remove comma separation
                     i = "".join(i)  # rejoin list entries into single string
                     i = int(i)  # turn string into integer
-                    balance = i
+                    v.balance = i
                 else:
                     pass
 
@@ -190,10 +165,6 @@ def checkBalance():
         logger.exception(e)
 
 def checkStamina():
-
-    # Bring in global variables
-    global current_stamina
-    global stamina_max
 
     # Check character stamina information
     logger.info(f"Checking stamina of {args.user}...")
@@ -204,9 +175,9 @@ def checkStamina():
                     i = line.split(" ")
                     i = i[9]
                     i = i.split("/")
-                    current_stamina = int(i[0])
+                    v.current_stamina = int(i[0])
                     imax = i[1]
-                    stamina_max = int(imax[:-1])
+                    v.stamina_max = int(imax[:-1])
                 else:
                     pass
 
@@ -215,10 +186,6 @@ def checkStamina():
 
 def checkLocation():
 
-    # Bring in global variables
-    global current_planet
-    global current_system
-
     # Check character location information
     logger.info(f"Checking location of {args.user}...")
     try:
@@ -226,8 +193,8 @@ def checkLocation():
             for line in f:
                 if "You are currently on" in line:
                     i = line.split(" ")
-                    current_planet = i[6]
-                    current_system = i[9]
+                    v.current_planet = i[6]
+                    v.current_system = i[9]
                 else:
                     pass
 
@@ -236,9 +203,6 @@ def checkLocation():
 
 def checkRank():
 
-    # Bring in global variables
-    global character_rank
-
     # Check character rank information
     logger.info(f"Checking rank of {args.user}...")
     try:
@@ -246,7 +210,7 @@ def checkRank():
             for line in f:
                 if args.user in line:
                     i = line.split(" ")
-                    character_rank = i[0]
+                    v.character_rank = i[0]
                 else:
                     pass
 
@@ -284,10 +248,6 @@ def updateShip():
 
 def checkFuel():
 
-    # Bring in global variables
-    global current_fuel
-    global fuel_max
-
     # Check character location information
     logger.info(f"Checking fuel of {args.user}'s ship...")
     try:
@@ -297,8 +257,8 @@ def checkFuel():
                     i = line.split(" ")
                     ii = i[13]
                     ii = ii.split("/")
-                    current_fuel = int(ii[0])
-                    fuel_max = int(ii[1])
+                    v.current_fuel = int(ii[0])
+                    v.fuel_max = int(ii[1])
                 else:
                     pass
 
@@ -306,10 +266,6 @@ def checkFuel():
         logger.exception(e)
 
 def checkCargo():
-
-    # Bring in global variables
-    global current_cargo
-    global cargo_max
 
     # Check character location information
     logger.info(f"Checking cargo space of {args.user}'s ship...")
@@ -320,9 +276,9 @@ def checkCargo():
                     i = line.split(" ")
                     i = i[7]
                     i = i.split("/")
-                    current_cargo = int(i[0])
-                    cargo_max = int(i[1])
-                    current_cargo = (cargo_max - current_cargo)
+                    v.current_cargo = int(i[0])
+                    v.cargo_max = int(i[1])
+                    v.current_cargo = (v.cargo_max - v.current_cargo)
                 else:
                     pass
 
@@ -360,9 +316,6 @@ def updatePlanet():
 
 def checkTreasury():
 
-    # Bring in global variables
-    global treasury
-
     # Check character location information
     logger.info(f"Checking treasury of {HOME_PLANET}...")
     try:
@@ -375,7 +328,7 @@ def checkTreasury():
                     i = i.split(",")
                     i = "".join(i)
                     i = int(i)
-                    treasury = i
+                    v.treasury = i
                 else:
                     pass
 
@@ -404,9 +357,6 @@ def updateExchange():
 
 def parseExchange():
 
-    # Bring in global variables
-    global exchange_dict
-
     # parse plaintext exchange data and extract current data
     logger.info("Pulling exchange data into dictionary...")
     try:
@@ -422,7 +372,7 @@ def parseExchange():
                     current = current.split("/")
                     current = current[0]
                     max = i[9]
-                    exchange_dict[commodity] = {"Current": current, "Max": max}
+                    v.exchange_dict[commodity] = {"Current": current, "Max": max}
                 else:
                     pass
 
@@ -430,9 +380,6 @@ def parseExchange():
         logger.exception(e)
 
 def checkCurrentCommodity(commodity):
-
-    # Bring in global variables
-    global exchange_dict
 
     # temporary variables
     current = 0
@@ -449,7 +396,7 @@ def checkCurrentCommodity(commodity):
                     current = i[7]
                     current = current.split("/")
                     current = int(current[0])
-                    exchange_dict[commodity] = {"Current": current}
+                    v.exchange_dict[commodity] = {"Current": current}
                 else:
                     pass
 
@@ -465,9 +412,9 @@ def checkDeficits():
 
     # Checks what home planet has current deficits of and writes to list
     logger.info("Checking home planet deficits...")
-    for commodity in exchange_dict:
-        if int(exchange_dict[commodity]["Current"]) < DEFICIT:
-            deficits.append(commodity)
+    for commodity in v.exchange_dict:
+        if int(v.exchange_dict[commodity]["Current"]) < DEFICIT:
+            v.deficits.append(commodity)
 
 def checkSurpluses():
 
@@ -476,9 +423,9 @@ def checkSurpluses():
 
     # Checks what home planet has current surpluses of and writes to list
     logger.info("Checking home planet surpluses...")
-    for commodity in exchange_dict:
-        if int(exchange_dict[commodity]["Current"]) > SURPLUS:
-            surpluses.append(commodity)
+    for commodity in v.exchange_dict:
+        if int(v.exchange_dict[commodity]["Current"]) > SURPLUS:
+            v.surpluses.append(commodity)
 
 def checkCommodityThreshold(commodity, planet):
 
@@ -662,18 +609,15 @@ def sellCommodity(commodity):
 
 def deficitToBays(commodity):
 
-    # Bring in global variables
-    global exchange_dict
-
     # Temporary variables
     bays = 0
 
     # Used to determine how many bays of a deficit to buy
     logger.info(f"Identifying how many bays to buy of {commodity}...")
     # Check current deficit value by parsing dictionary based on commodity key
-    for item in exchange_dict:
+    for item in v.exchange_dict:
         if commodity in item:
-            bays = int(exchange_dict[commodity]["Current"])
+            bays = int(v.exchange_dict[commodity]["Current"])
             bays = int((bays / 75) * -1)
 
     return bays
