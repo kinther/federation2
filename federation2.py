@@ -101,7 +101,7 @@ def clearBuffer():
         print("Issue with clearing buffer.")
         logger.exception(e)
         pass
-    print(i)
+    i = ""  # get rid of whatever was in the buffer, we don't need it
 
 def escape_ansi(line):
     # https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi
