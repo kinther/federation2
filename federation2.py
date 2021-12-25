@@ -4,7 +4,7 @@
 # version 2.4 "Kurious Katydidics"
 
 # Imports
-from federation2.fed_utils import *  # used to pull in all custom functions from fed_utils.py
+from fed_utils import *  # used to pull in all custom functions from fed_utils.py
 
 # argparse constants
 parser = ArgumentParser()
