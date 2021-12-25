@@ -45,8 +45,8 @@ def main():
         logger.exception(e)
 
     # Check if character is sufficient rank to run script
-    print(fed_utils.character_rank)
-    print(fed_utils.ranks)
+    print(character_rank)
+    print(ranks)
     if character_rank not in ranks:
         logger.info("ERROR: This script is meant to be run by planet owners.")
         logger.info(f"Your current rank is detected as {character_rank}.")
