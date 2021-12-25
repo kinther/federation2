@@ -74,7 +74,6 @@ surpluses = []  # used to hold the current surpluses list
 
 def login():
 
-    print("In the login fuction")
     # Wait for Login prompt, then write username and hit enter
     tn.read_until(b"Login:")
     tn.write((args.user).encode("ascii") + b"\n")
@@ -92,7 +91,6 @@ def login():
 
 def clearBuffer():
 
-    print("In the clearBuffer function")
     # Attempts to clear the buffer
     i = ""
     try:
@@ -106,6 +104,7 @@ def clearBuffer():
     i = ""  # get rid of whatever was in the buffer, we don't need it
 
 def escape_ansi(line):
+    
     # https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi
     # -escape-sequences-from-a-string-in-python
     ansi_escape = compile(r'(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]')
