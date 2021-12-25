@@ -17,6 +17,7 @@ from sys import exit  # used to exit script if criteria is met
 
 def login():
 
+    print("In the login fuction")
     # Wait for Login prompt, then write username and hit enter
     tn.read_until(b"Login:")
     tn.write((args.user).encode("ascii") + b"\n")
@@ -33,6 +34,8 @@ def login():
     sleep(2)
 
 def clearBuffer():
+
+    print("In the clearBuffer function")
     # Attempts to clear the buffer
     i = ""
     try:
