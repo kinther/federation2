@@ -4,7 +4,7 @@
 # version 2.3 "LanzariK Lozenges"
 
 # Imports
-import telnetlib  # used to do all things telnet
+from telnetlib import Telnet  # used to do all things telnet
 from time import sleep  # used to provide sleep function
 from datetime import datetime  # used to provide logging filename
 from re import compile  # used to escape ansi characters
@@ -32,7 +32,7 @@ port = 30003  # don't change this
 timeout = 90  # maybe change this
 
 # telnetlib constants
-tn = telnetlib.Telnet(host, port, timeout=timeout)
+tn = Telnet(host, port, timeout=timeout)
 
 # Logging constants
 now = datetime.now()
