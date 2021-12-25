@@ -5,7 +5,6 @@
 
 # Imports
 from fed_utils import *  # used to pull in all custom functions from fed_utils.py
-from fed_vars import *  # used to pull in all the custom vars from fed_vars.py
 
 # Main function
 

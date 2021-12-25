@@ -12,7 +12,6 @@ from logging import basicConfig, getLogger  # used to write logs to file
 from os import remove  # used to delete files
 from argparse import ArgumentParser  # used to pass user/password credentials
 from sys import exit  # used to exit script if criteria is met
-from fed_vars import *  # used to pull in global variables
 
 # argparse constants
 parser = ArgumentParser()
@@ -47,6 +46,29 @@ logger = getLogger()
 HOME_PLANET = args.planet  # passed from player arguments
 DEFICIT = -75  # How much we consider a deficit
 SURPLUS = 18000  # How much we consider a surplus
+
+# Character variables
+balance = 0  # character's current balance, from output of score
+current_stamina = 0  # character's current stamina, from output of score
+stamina_min = 35  # lowest stamina level we want our character to fall to
+stamina_max = 0  # character's maximum stamina level, from output of score
+current_system = ""  # character is on this planet, from output of score
+current_planet = ""  # character is in this system, from output of score
+character_rank = ""  # character's rank, from output of score
+
+# Ship variables
+current_fuel = 0  # ship's current fuel level, from output of st
+fuel_min = 250  # lowest fuel level we want our ship to fall to
+fuel_max = 0  # ship's maximum stamina level, from output of st
+current_cargo = 0  # total cargo currently being hauled
+cargo_min = 0  # not sure if needed
+cargo_max = 0  # maximum tonnage ship can haul
+
+# Planet variables
+treasury = 0  # planet's current balance, from output of di planet
+exchange_dict = {}  # used to hold the exchange information
+deficits = []  # used to hold the current deficits list
+surpluses = []  # used to hold the current surpluses list
 
 # Global functions
 
