@@ -46,3 +46,7 @@ something bad doesn't happen like dying) or if there are extra tons in the
 cargo hold the script will not continuously buy more and waste money.  closed
 out old WinError issue which appears to be due to my old crappy wifi router,
 not an actual bug in the code.
+
+2.4 "Kurious Katydidics" - Reduced memory usage by only importing functions
+needed to run from python modules.  Moved all functions to fed_utils.py and
+dynamic variables to fed_vars.py.

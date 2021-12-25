@@ -48,7 +48,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Cereals", "Furs", "Fruit", "Gold", "Meats", "Textiles", "Woods", "Xmetals"]
+        "Sell": ["Cereals", "Furs", "Fruit", "Gold", "LubOils", "Meats", "Textiles", "Woods", "Xmetals"]
     },
 
     "Berez": {
@@ -61,7 +61,7 @@
         "LP_to_Restaurant": ["s"],
         "Restaurant_to_LP": ["n"],
         "Buy": [],
-        "Sell": ["Hides"]
+        "Sell": ["AntiMatter", "Electros", "Explosives", "Lasers", "Nanos", "Tools", "TQuarks", "Vidicasters", "Weapons"]
     },
 
     "Village": {
@@ -87,7 +87,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Alloys", "Livestock", "Spices"]
+        "Sell": []
     },
 
     "Amber Temple": {
@@ -116,6 +116,19 @@
         "Sell": ["Crystals", "Lasers", "Munitions", "Nanos", "Nickel", "Petrochemicals", "Polymers", "Radioactives", "Tools", "Xmetals", "Weapons"]
     },
 
+    "Targoviste": {
+        "Cartel": "Barovia",
+        "System": "Valachia",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["sw"],
+        "Restaurant_to_LP": ["ne"],
+        "Buy": [],
+        "Sell": ["Alloys", "Clays", "Crystals", "Fruit", "Furs", "Gold", "Hides", "Livestock", "Meats", "Mechparts", "Monopoles", "Munitions", "Nickel", "Petrochemicals", "Polymers", "Radioactives", "Semiconductors", "Soya", "Spices", "Textiles", "Woods", "Xmetals"]
+    },
+
     "Cessna": {
         "Cartel": "Flight",
         "System": "Flight",
@@ -126,7 +139,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": [],
-        "Sell": ["AntiMatter", "Explosives", "Games", "GAsChips", "Holos", "Katydidics", "Musiks"]
+        "Sell": ["AntiMatter", "Explosives", "Games", "GAsChips", "Holos", "Katydidics", "Musiks", "Univators"]
     },
 
     "Diamond": {
@@ -138,7 +151,7 @@
         "Exchange_to_LP": ["w"],
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
-        "Buy": ["Gold", "Mechparts", "Nickel", "Spices"],
+        "Buy": ["Gold", "Mechparts", "Nickel", "Spices", "Univators"],
         "Sell": []
     },
 
@@ -311,16 +324,16 @@
         "Sell": ["Clinics"]
     },
 
-    "Station": {
-        "Cartel": "Flight",
-        "System": "Abyss",
+    "Ultima": {
+        "Cartel": "Barovia",
+        "System": "Creative",
         "ISL_to_Planet": [],
         "Planet_to_ISL": [],
         "LP_to_Exchange": ["s", "w"],
         "Exchange_to_LP": ["e", "n"],
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
-        "Buy": ["Nickel", "Spices"],
-        "Sell": ["LubOils", "Pharmaceuticals"]
+        "Buy": [],
+        "Sell": ["Livestock", "Tools", "TQuarks"]
     }
 }
