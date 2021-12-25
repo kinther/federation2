@@ -12,7 +12,6 @@ from logging import basicConfig, getLogger  # used to write logs to file
 from os import remove  # used to delete files
 from argparse import ArgumentParser  # used to pass user/password credentials
 from sys import exit  # used to exit script if criteria is met
-from federation2 import *  # test
 
 # argparse constants
 parser = ArgumentParser()
