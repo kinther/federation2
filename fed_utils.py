@@ -54,17 +54,17 @@ def login():
 
     # Wait for Login prompt, then write username and hit enter
     tn.read_until(b"Login:")
-    tn.write((args.user).encode("ascii") + b"\n")
+    tn.write((v.Character.name).encode("ascii") + b"\n")
     sleep(2)
 
     # Wait for Password prompt, then write password and hit enter
     tn.read_until(b"Password:")
-    tn.write((args.password).encode("ascii") + b"\n")
+    tn.write((v.Character.password).encode("ascii") + b"\n")
     sleep(2)
 
     # Wait for string indicating we have logged in successfully
     tn.read_until(b"Linking to Federation DataSpace.")
-    logger.info(f"Logged in successfully to {host} on port {port} as {args.user}.")
+    logger.info(f"Logged in successfully to {host} on port {port} as {v.Character.name}.")
     sleep(2)
 
 def clearBuffer():
@@ -132,7 +132,7 @@ def updateScore():
     clearBuffer()
 
     # Check character score information
-    logger.info(f"Updating score info of {args.user}...")
+    logger.info(f"Updating score info of {v.Character.name}...")
     tn.write(b"score\n")
     sleep(1)
     score = tn.read_very_eager().decode("ascii")
@@ -146,7 +146,7 @@ def updateScore():
 def checkBalance():
 
     # Check character balance information
-    logger.info(f"Checking bank balance of {args.user}...")
+    logger.info(f"Checking bank balance of {v.Character.name}...")
     try:
         with open("score.txt", "r") as f:
             for line in f:
@@ -157,7 +157,7 @@ def checkBalance():
                     i = i.split(",")  # parse output to remove comma separation
                     i = "".join(i)  # rejoin list entries into single string
                     i = int(i)  # turn string into integer
-                    v.balance = i
+                    v.Character.balance = i
                 else:
                     pass
 
@@ -167,7 +167,7 @@ def checkBalance():
 def checkStamina():
 
     # Check character stamina information
-    logger.info(f"Checking stamina of {args.user}...")
+    logger.info(f"Checking stamina of {v.Character.name}...")
     try:
         with open("score.txt", "r") as f:
             for line in f:
@@ -175,9 +175,9 @@ def checkStamina():
                     i = line.split(" ")
                     i = i[9]
                     i = i.split("/")
-                    v.current_stamina = int(i[0])
+                    v.Character.current_stamina = int(i[0])
                     imax = i[1]
-                    v.stamina_max = int(imax[:-1])
+                    v.Character.stamina_max = int(imax[:-1])
                 else:
                     pass
 
@@ -187,14 +187,14 @@ def checkStamina():
 def checkLocation():
 
     # Check character location information
-    logger.info(f"Checking location of {args.user}...")
+    logger.info(f"Checking location of {v.Character.name}...")
     try:
         with open("score.txt", "r") as f:
             for line in f:
                 if "You are currently on" in line:
                     i = line.split(" ")
-                    v.current_planet = i[6]
-                    v.current_system = i[9]
+                    v.Character.current_planet = i[6]
+                    v.Character.current_system = i[9]
                 else:
                     pass
 
@@ -204,13 +204,13 @@ def checkLocation():
 def checkRank():
 
     # Check character rank information
-    logger.info(f"Checking rank of {args.user}...")
+    logger.info(f"Checking rank of {v.Character.name}...")
     try:
         with open("score.txt", "r") as f:
             for line in f:
-                if args.user in line:
+                if v.Character.name in line:
                     i = line.split(" ")
-                    v.character_rank = i[0]
+                    v.Character.character_rank = i[0]
                 else:
                     pass
 
@@ -223,7 +223,7 @@ def buyFood():
     clearBuffer()
 
     # Tries to buy food for the player
-    logger.info(f"Buying food for {args.user}...")
+    logger.info(f"Buying food for {v.Character.name}...")
     tn.write(b"buy food\n")
     sleep(1)
 
@@ -235,7 +235,7 @@ def updateShip():
     clearBuffer()
 
     # Check ship status information
-    logger.info(f"Updating ship info of {args.user}...")
+    logger.info(f"Updating ship info of {v.Character.name}...")
     tn.write(b"st\n")
     sleep(1)
     ship = tn.read_very_eager().decode("ascii")
@@ -249,7 +249,7 @@ def updateShip():
 def checkFuel():
 
     # Check character location information
-    logger.info(f"Checking fuel of {args.user}'s ship...")
+    logger.info(f"Checking fuel of {v.Character.name}'s ship...")
     try:
         with open("ship.txt", "r") as f:
             for line in f:
@@ -268,7 +268,7 @@ def checkFuel():
 def checkCargo():
 
     # Check character location information
-    logger.info(f"Checking cargo space of {args.user}'s ship...")
+    logger.info(f"Checking cargo space of {v.Character.name}'s ship...")
     try:
         with open("ship.txt", "r") as f:
             for line in f:
@@ -291,7 +291,7 @@ def buyFuel():
     clearBuffer()
 
     # Tries to buy fuel for the player's ship
-    logger.info(f"Buying fuel for {args.user}'s ship...")
+    logger.info(f"Buying fuel for {v.Character.name}'s ship...")
     tn.write(b"buy fuel\n")
     sleep(1)
 

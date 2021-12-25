@@ -46,18 +46,18 @@ def main():
         logger.exception(e)
 
     # Check if character is sufficient rank to run script
-    if v.character_rank not in ranks:
+    if v.Character.character_rank not in ranks:
         logger.info("ERROR: This script is meant to be run by planet owners.")
-        logger.info(f"Your current rank is detected as {v.character_rank}.")
+        logger.info(f"Your current rank is detected as {v.Character.character_rank}.")
         logger.info("Please re-run script when you rank up! Good luck :)")
         exit(0)
     else:
         pass
 
     # Check if current_planet = HOME_PLANET.  If not, exit script.
-    if HOME_PLANET not in v.current_planet:
+    if HOME_PLANET not in v.Character.current_planet:
         logger.info("ERROR: Character must be on their home planet on the landing pad.")
-        logger.info(f"Detected character on {v.current_planet} rather than {HOME_PLANET}.")
+        logger.info(f"Detected character on {v.Character.current_planet} rather than {HOME_PLANET}.")
         logger.info("Exiting.")
         exit(0)
     else:
@@ -114,7 +114,7 @@ def main():
             # Iteration checks
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
             logger.info(f" This is iteration number {iter}.")
-            logger.info(f" {args.user}'s bank balance is {v.balance}.")
+            logger.info(f" {v.Character.name}'s bank balance is {v.Character.balance}.")
             logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
             logger.info(f" {HOME_PLANET}'s treasury value is {v.treasury}.")
             logger.info(f" That's a difference of {diff_treasury} compared to last iteration.")
@@ -147,7 +147,7 @@ def main():
             else:
                 logger.info("Current fuel is above minimum.")
                 pass
-            if v.current_stamina < v.stamina_min:
+            if v.Character.current_stamina < v.Character.stamina_min:
                 for dir in data[HOME_PLANET]["LP_to_Restaurant"]:
                     moveDirection(dir)
                     sleep(1)
@@ -344,10 +344,10 @@ def main():
             # Iteration data updates to keep things fresh
             iter += 1
 
-            prev_balance = v.balance  # how much we had before cycle began
+            prev_balance = v.Character.balance  # how much we had before cycle began
             player()  # gather new player data
             sleep(1)
-            diff_balance = (v.balance-prev_balance)  # how much we made this iteration
+            diff_balance = (v.Character.balance-prev_balance)  # how much we made this iteration
 
             ship()  # gather new ship data
             sleep(1)
@@ -366,7 +366,7 @@ def main():
             sleep(1)
 
             # end of iteration checks to ensure we are still able to move forward
-            if v.current_planet not in HOME_PLANET:
+            if v.Character.current_planet not in HOME_PLANET:
                 logger.info(f"Detected location is not {HOME_PLANET}.")
                 logger.info("Something went wrong, closing script to ensure player safety.")
                 exit(0)
@@ -388,7 +388,7 @@ def main():
             # Iteration checks
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
             logger.info(f" This is iteration number {iter}.")
-            logger.info(f" {args.user}'s bank balance is {v.balance}.")
+            logger.info(f" {v.Character.name}'s bank balance is {v.Character.balance}.")
             logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
             logger.info(f" {HOME_PLANET}'s treasury value is {v.treasury}.")
             logger.info(f" That's a difference of {diff_treasury} compared to last iteration.")
@@ -421,7 +421,7 @@ def main():
             else:
                 logger.info("Current fuel is above minimum.")
                 pass
-            if v.current_stamina < v.stamina_min:
+            if v.Character.current_stamina < v.Character.stamina_min:
                 for dir in data[HOME_PLANET]["LP_to_Restaurant"]:
                     moveDirection(dir)
                     sleep(1)
@@ -588,10 +588,10 @@ def main():
             # Iteration data updates to keep things fresh
             iter += 1
 
-            prev_balance = v.balance  # how much we had before cycle began
+            prev_balance = v.Character.balance  # how much we had before cycle began
             player()  # gather new player data
             sleep(1)
-            diff_balance = (v.balance-prev_balance)  # how much we made this iteration
+            diff_balance = (v.Character.balance-prev_balance)  # how much we made this iteration
 
             ship()  # gather new ship data
             sleep(1)
@@ -608,7 +608,7 @@ def main():
             tn.write(b"say Sold " + str.encode(sur_item) + b" to " + str.encode(remote_planet_id) + b".\n")
 
             # end of iteration checks to ensure we are still able to move forward
-            if v.current_planet not in HOME_PLANET:
+            if v.Character.current_planet not in HOME_PLANET:
                 logger.info(f"Detected location is not {HOME_PLANET}.")
                 logger.info("Something went wrong, closing script to ensure player safety.")
                 exit(0)
