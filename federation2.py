@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Federation 2 Community Edition hauling scripts for planet owners
-# version 2.3 "LanzariK Lozenges"
+# version 2.4 "Kurious Katydidics"
 
 # Imports
 from telnetlib import Telnet  # used to do all things telnet
@@ -9,7 +9,7 @@ from time import sleep  # used to provide sleep function
 from datetime import datetime  # used to provide logging filename
 from re import compile  # used to escape ansi characters
 from json import load  # used to read planets.json file
-import logging  # used to write logs to file
+from logging import basicConfig, getLogger  # used to write logs to file
 from os import remove  # used to delete files
 from argparse import ArgumentParser  # used to pass user/password credentials
 from sys import exit  # used to exit script if criteria is met
@@ -40,8 +40,8 @@ day = now.strftime("%a")
 hour = now.strftime("%H")
 minute = now.strftime("%M")
 LOG_FILENAME = (day + "-" + hour + minute + "-fed2.txt")
-logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
-logger = logging.getLogger()
+basicConfig(filename=LOG_FILENAME, level=INFO)
+logger = getLogger()
 
 # Character constants
 HOME_PLANET = args.planet  # passed from player arguments
