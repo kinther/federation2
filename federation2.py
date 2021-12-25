@@ -4,15 +4,6 @@
 # version 2.4 "Kurious Katydidics"
 
 # Imports
-from telnetlib import Telnet  # used to do all things telnet
-from time import sleep  # used to provide sleep function
-from datetime import datetime  # used to provide logging filename
-from re import compile  # used to escape ansi characters
-from json import load  # used to read planets.json file
-from logging import basicConfig, getLogger  # used to write logs to file
-from os import remove  # used to delete files
-from argparse import ArgumentParser  # used to pass user/password credentials
-from sys import exit  # used to exit script if criteria is met
 from fed_utils import *  # used to pull in all custom functions from fed_utils.py
 
 # argparse constants
