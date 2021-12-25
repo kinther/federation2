@@ -12,6 +12,7 @@ from logging import basicConfig, getLogger  # used to write logs to file
 from os import remove  # used to delete files
 from argparse import ArgumentParser  # used to pass user/password credentials
 from sys import exit  # used to exit script if criteria is met
+from federation2 import *  # test
 
 # argparse constants
 parser = ArgumentParser()
@@ -104,7 +105,7 @@ def clearBuffer():
     i = ""  # get rid of whatever was in the buffer, we don't need it
 
 def escape_ansi(line):
-    
+
     # https://stackoverflow.com/questions/14693701/how-can-i-remove-the-ansi
     # -escape-sequences-from-a-string-in-python
     ansi_escape = compile(r'(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]')
