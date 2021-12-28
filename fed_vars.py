@@ -25,3 +25,6 @@ treasury = 0  # planet's current balance, from output of di planet
 exchange_dict = {}  # used to hold the exchange information
 deficits = []  # used to hold the current deficits list
 surpluses = []  # used to hold the current surpluses list
+
+# System variables
+system_owned = []  # used to hold the owned planets, from output of di system

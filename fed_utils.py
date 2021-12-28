@@ -622,6 +622,45 @@ def deficitToBays(commodity):
 
     return bays
 
+# System functions
+
+def updateSystem(system):
+
+    # Clear buffer before issuing commands
+    clearBuffer()
+
+    # Checks local system for planets owned by player
+    logger.info(f"Checking for planets owned by {v.args.user} in local system...")
+    tn.write(b"di system" + str.encode(system) + b"\n")
+    sleep(1)
+    system = tn.read_very_eager().decode("ascii")
+    system = escape_ansi(system)
+
+    # Write system information to file
+    file = open("system.txt", "w")
+    f = file.write(system)
+    file.close()
+
+def checkSystem():
+
+    # Check system information
+    try:
+        with open("system.txt", "r") as f:
+            for line in f:
+                if "Owner" in line:
+                    if "Space" in line:
+                        pass
+                    else:
+                        i = line.split(" ")
+                        i = i[0]
+                        i = i[:-1]
+                        system_owned.append(i)
+                else:
+                    pass
+
+    except Exception as e:
+        logger.exception(e)
+
 # Multi functions
 
 def player():
