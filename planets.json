@@ -35,7 +35,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["BioComponents", "Clinics", "Games", "Holos", "Hypnotapes", "MicroScalpels", "Probes", "Proteins", "Simulations", "Tracers"]
+        "Sell": ["Alloys", "BioComponents", "Clinics", "Games", "Holos", "Hypnotapes", "MicroScalpels", "Probes", "Proteins", "Simulations", "Tracers"]
     },
 
     "Winery": {
@@ -48,7 +48,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": ["Cereals", "Furs", "Fruit", "Gold", "LubOils", "Meats", "Textiles", "Woods", "Xmetals"]
+        "Sell": ["Alloys", "Cereals", "Furs", "Fruit", "Gold", "LubOils", "Meats", "Textiles", "Woods", "Xmetals"]
     },
 
     "Berez": {
