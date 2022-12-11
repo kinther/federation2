@@ -447,18 +447,12 @@ def checkCommodityThreshold(commodity, planet):
     price = tn.read_very_eager().decode("ascii")
     price = escape_ansi(price)
 
-    # Write score output to file
-    file = open("price.txt", "w")
-    f = file.write(price)
-    file.close()
-
     # Check commodity level
     try:
-        with open("price.txt", "r") as f:
-            for line in f:
-                if "+++ Exchange has" in line:
-                    i = line.split(" ")
-                    i = int(i[3])
+        for line in price:
+            if "+++ Exchange has" in line:
+                i = line.split(" ")
+                i = int(i[3])
 
     except Exception as e:
         logger.exception(e)
