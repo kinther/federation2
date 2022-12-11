@@ -88,34 +88,6 @@ def escape_ansi(line):
     ansi_escape = compile(r'(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]')
     return ansi_escape.sub('', line)
 
-def deleteFiles():
-
-    while True:
-        # deletes all generated files
-        logger.info("Trying to delete previous files...")
-        try:
-            remove("score.txt")
-        except FileNotFoundError as e:
-            pass
-        try:
-            remove("ship.txt")
-        except FileNotFoundError as e:
-            pass
-        try:
-            remove("planet.txt")
-        except FileNotFoundError as e:
-            pass
-        try:
-            remove("exchange.txt")
-        except FileNotFoundError as e:
-            pass
-        try:
-            remove("price.txt")
-        except FileNotFoundError as e:
-            pass
-
-        break
-
 def nonblank_lines(f):
     # https://stackoverflow.com/questions/4842057/easiest-way-to-ignore-blank-
     # lines-when-reading-a-file-in-python
@@ -128,6 +100,9 @@ def nonblank_lines(f):
 
 def updateScore():
 
+    # Pull in global score var
+    global score
+
     # Clear buffer before issuing commands
     clearBuffer()
 
@@ -138,81 +113,84 @@ def updateScore():
     score = tn.read_very_eager().decode("ascii")
     score = escape_ansi(score)
 
-    # Write score output to file
-    file = open("score.txt", "w")
-    f = file.write(score)
-    file.close()
-
 def checkBalance():
+
+    # Pull in global score var
+    global score
 
     # Check character balance information
     logger.info(f"Checking bank balance of {args.user}...")
     try:
-        with open("score.txt", "r") as f:
-            for line in f:
-                if "Bank Balance:" in line:
-                    i = line.split(" ")  # remove whitespace
-                    i = i[4]  # select fourth entry in list
-                    i = i[:-3]  # remove last 3 characters from string
-                    i = i.split(",")  # parse output to remove comma separation
-                    i = "".join(i)  # rejoin list entries into single string
-                    i = int(i)  # turn string into integer
-                    v.balance = i
-                else:
-                    pass
+        for line in score:
+            if "Bank Balance:" in line:
+                i = line.split(" ")  # remove whitespace
+                i = i[4]  # select fourth entry in list
+                i = i[:-3]  # remove last 3 characters from string
+                i = i.split(",")  # parse output to remove comma separation
+                i = "".join(i)  # rejoin list entries into single string
+                i = int(i)  # turn string into integer
+                v.balance = i
+            else:
+                pass
 
     except Exception as e:
         logger.exception(e)
 
 def checkStamina():
 
+    # Pull in global score var
+    global score
+
     # Check character stamina information
     logger.info(f"Checking stamina of {args.user}...")
     try:
-        with open("score.txt", "r") as f:
-            for line in f:
-                if "Stamina" in line:
-                    i = line.split(" ")
-                    i = i[9]
-                    i = i.split("/")
-                    v.current_stamina = int(i[0])
-                    imax = i[1]
-                    v.stamina_max = int(imax[:-1])
-                else:
-                    pass
+        for line in score:
+            if "Stamina" in line:
+                i = line.split(" ")
+                i = i[9]
+                i = i.split("/")
+                v.current_stamina = int(i[0])
+                imax = i[1]
+                v.stamina_max = int(imax[:-1])
+            else:
+                pass
 
     except Exception as e:
         logger.exception(e)
 
 def checkLocation():
 
+    # Pull in global score var
+    global score
+
     # Check character location information
     logger.info(f"Checking location of {args.user}...")
     try:
-        with open("score.txt", "r") as f:
-            for line in f:
-                if "You are currently on" in line:
-                    i = line.split(" ")
-                    v.current_planet = i[6]
-                    v.current_system = i[9]
-                else:
-                    pass
+        for line in score:
+            if "You are currently on" in line:
+                i = line.split(" ")
+                v.current_planet = i[6]
+                v.current_system = i[9]
+            else:
+                pass
 
     except Exception as e:
         logger.exception(e)
 
 def checkRank():
 
+    # Pull in global score var
+    global score
+
     # Check character rank information
     logger.info(f"Checking rank of {args.user}...")
     try:
-        with open("score.txt", "r") as f:
-            for line in f:
-                if args.user in line:
-                    i = line.split(" ")
-                    v.character_rank = i[0]
-                else:
-                    pass
+        for line in score:
+            if args.user in line:
+                i = line.split(" ")
+                v.character_rank = i[0]
+            else:
+                pass
 
     except Exception as e:
         logger.exception(e)
@@ -231,6 +209,9 @@ def buyFood():
 
 def updateShip():
 
+    # Pull in global ship var
+    global ship
+
     # Clear buffer before issuing commands
     clearBuffer()
 
@@ -241,46 +222,45 @@ def updateShip():
     ship = tn.read_very_eager().decode("ascii")
     ship = escape_ansi(ship)
 
-    # Write st output to file
-    file = open("ship.txt", "w")
-    f = file.write(ship)
-    file.close()
-
 def checkFuel():
+
+    # Pull in global ship var
+    global ship
 
     # Check character location information
     logger.info(f"Checking fuel of {args.user}'s ship...")
     try:
-        with open("ship.txt", "r") as f:
-            for line in f:
-                if "Fuel:" in line:
-                    i = line.split(" ")
-                    ii = i[13]
-                    ii = ii.split("/")
-                    v.current_fuel = int(ii[0])
-                    v.fuel_max = int(ii[1])
-                else:
-                    pass
+        for line in ship:
+            if "Fuel:" in line:
+                i = line.split(" ")
+                ii = i[13]
+                ii = ii.split("/")
+                v.current_fuel = int(ii[0])
+                v.fuel_max = int(ii[1])
+            else:
+                pass
 
     except Exception as e:
         logger.exception(e)
 
 def checkCargo():
 
+    # Pull in global ship var
+    global ship
+
     # Check character location information
     logger.info(f"Checking cargo space of {args.user}'s ship...")
     try:
-        with open("ship.txt", "r") as f:
-            for line in f:
-                if "Cargo space:" in line:
-                    i = line.split(" ")
-                    i = i[7]
-                    i = i.split("/")
-                    v.current_cargo = int(i[0])
-                    v.cargo_max = int(i[1])
-                    v.current_cargo = (v.cargo_max - v.current_cargo)
-                else:
-                    pass
+        for line in ship:
+            if "Cargo space:" in line:
+                i = line.split(" ")
+                i = i[7]
+                i = i.split("/")
+                v.current_cargo = int(i[0])
+                v.cargo_max = int(i[1])
+                v.current_cargo = (v.cargo_max - v.current_cargo)
+            else:
+                pass
 
     except Exception as e:
         logger.exception(e)
@@ -299,6 +279,9 @@ def buyFuel():
 
 def updatePlanet():
 
+    # Pull in global planet var
+    global planet
+
     # Clear buffer before issuing commands
     clearBuffer()
 
@@ -309,33 +292,33 @@ def updatePlanet():
     planet = tn.read_very_eager().decode("ascii")
     planet = escape_ansi(planet)
 
-    # Write score output to file
-    file = open("planet.txt", "w")
-    f = file.write(planet)
-    file.close()
-
 def checkTreasury():
+
+    # Pull in global planet var
+    global planet
 
     # Check character location information
     logger.info(f"Checking treasury of {HOME_PLANET}...")
     try:
-        with open("planet.txt", "r") as f:
-            for line in f:
-                if "Treasury:" in line:
-                    i = line.split(" ")
-                    i = i[3]
-                    i = i[:-3]
-                    i = i.split(",")
-                    i = "".join(i)
-                    i = int(i)
-                    v.treasury = i
-                else:
-                    pass
+        for line in planet:
+            if "Treasury:" in line:
+                i = line.split(" ")
+                i = i[3]
+                i = i[:-3]
+                i = i.split(",")
+                i = "".join(i)
+                i = int(i)
+                v.treasury = i
+            else:
+                pass
 
     except Exception as e:
         logger.exception(e)
 
 def updateExchange():
+
+    # Pull in global exchange var
+    global exchange
 
     # Bring in global variables
     global HOME_PLANET
@@ -350,36 +333,36 @@ def updateExchange():
     exchange = tn.read_very_eager().decode("ascii")
     exchange = escape_ansi(exchange)
 
-    # Write score output to file
-    file = open("exchange.txt", "w")
-    f = file.write(exchange)
-    file.close()
-
 def parseExchange():
+
+    # Pull in global exchange var
+    global exchange
 
     # parse plaintext exchange data and extract current data
     logger.info("Pulling exchange data into dictionary...")
     try:
-        with open("exchange.txt", "r") as f:
-            lines = nonblank_lines(f)
-            for line in lines:
-                if "Stock: current" in line:
-                    i = line.split(" ")
-                    i = list(filter(None, i))
-                    commodity = i[0]
-                    commodity = commodity[:-1]
-                    current = i[7]
-                    current = current.split("/")
-                    current = current[0]
-                    max = i[9]
-                    v.exchange_dict[commodity] = {"Current": current, "Max": max}
-                else:
-                    pass
+        lines = nonblank_lines(exchange)
+        for line in lines:
+            if "Stock: current" in line:
+                i = line.split(" ")
+                i = list(filter(None, i))
+                commodity = i[0]
+                commodity = commodity[:-1]
+                current = i[7]
+                current = current.split("/")
+                current = current[0]
+                max = i[9]
+                v.exchange_dict[commodity] = {"Current": current, "Max": max}
+            else:
+                pass
 
     except Exception as e:
         logger.exception(e)
 
 def checkCurrentCommodity(commodity):
+
+    # Pull in global exchange var
+    global exchange
 
     # temporary variables
     current = 0
@@ -387,18 +370,17 @@ def checkCurrentCommodity(commodity):
     # parse plaintext exchange data and extract current data
     logger.info("Checking current commodity level required...")
     try:
-        with open("exchange.txt", "r") as f:
-            lines = nonblank_lines(f)
-            for line in lines:
-                if commodity in line:
-                    i = line.split(" ")
-                    i = list(filter(None, i))
-                    current = i[7]
-                    current = current.split("/")
-                    current = int(current[0])
-                    v.exchange_dict[commodity] = {"Current": current}
-                else:
-                    pass
+        lines = nonblank_lines(exchange)
+        for line in lines:
+            if commodity in line:
+                i = line.split(" ")
+                i = list(filter(None, i))
+                current = i[7]
+                current = current.split("/")
+                current = int(current[0])
+                v.exchange_dict[commodity] = {"Current": current}
+            else:
+                pass
 
     except Exception as e:
         logger.exception(e)
@@ -507,27 +489,21 @@ def checkIfBuying(commodity, planet):
     price = tn.read_very_eager().decode("ascii")
     price = escape_ansi(price)
 
-    # Write score output to file
-    file = open("price.txt", "w")
-    f = file.write(price)
-    file.close()
-
     # Check price
     try:
-        with open("price.txt", "r") as f:
-            for line in f:  # check if buying - first variable check
-                if "+++ Exchange will buy" in line:
-                    logger.info(f"Remote exchange is buying {commodity}.")
-                    i = True
-                else:
-                    pass
+        for line in price:  # check if buying - first variable check
+            if "+++ Exchange will buy" in line:
+                logger.info(f"Remote exchange is buying {commodity}.")
+                i = True
+            else:
+                pass
 
-            for line in f:  # check if selling - second variable check
-                if "+++ Offer price is" in line:
-                    logger.info(f"Remote exchange is selling {commodity}.")
-                    ii = True
-                else:
-                    pass
+        for line in price:  # check if selling - second variable check
+            if "+++ Offer price is" in line:
+                logger.info(f"Remote exchange is selling {commodity}.")
+                ii = True
+            else:
+                pass
 
     except Exception as e:
         logger.exception(e)
@@ -566,24 +542,18 @@ def checkIfSelling(commodity, planet):
     price = tn.read_very_eager().decode("ascii")
     price = escape_ansi(price)
 
-    # Write score output to file
-    file = open("price.txt", "w")
-    f = file.write(price)
-    file.close()
-
     # Check price
     try:
-        with open("price.txt", "r") as f:
-            for line in f:
-                if "not currently trading" in line:
-                    logger.info(f"Remote exchange is not selling {commodity}")
-                elif "tons for sale" in line:
-                    logger.info(f"Remote exchange is selling {commodity}.")
-                    ii = True
-                    iii = line.split(" ")
-                    i = int(iii[3])
-                else:
-                    pass
+        for line in price:
+            if "not currently trading" in line:
+                logger.info(f"Remote exchange is not selling {commodity}")
+            elif "tons for sale" in line:
+                logger.info(f"Remote exchange is selling {commodity}.")
+                ii = True
+                iii = line.split(" ")
+                i = int(iii[3])
+            else:
+                pass
 
     except Exception as e:
         logger.exception(e)
