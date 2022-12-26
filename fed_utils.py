@@ -113,9 +113,6 @@ def updateScore():
     score = tn.read_very_eager().decode("ascii")
     score = escape_ansi(score)
 
-    # debugging
-    print(score)
-
 def checkBalance():
 
     # Pull in global score var
