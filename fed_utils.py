@@ -100,9 +100,6 @@ def nonblank_lines(f):
 
 def updateScore():
 
-    # Pull in global score var
-    global score
-
     # Clear buffer before issuing commands
     clearBuffer()
 
@@ -110,18 +107,15 @@ def updateScore():
     logger.info(f"Updating score info of {args.user}...")
     tn.write(b"score\n")
     sleep(1)
-    score = tn.read_very_eager().decode("ascii")
-    score = escape_ansi(score)
+    v.score = tn.read_very_eager().decode("ascii")
+    v.score = escape_ansi(v.score)
 
 def checkBalance():
-
-    # Pull in global score var
-    global score
 
     # Check character balance information
     logger.info(f"Checking bank balance of {args.user}...")
     try:
-        for line in score:
+        for line in v.score:
             if "Bank Balance:" in line:
                 i = line.split(" ")  # remove whitespace
                 i = i[4]  # select fourth entry in list
@@ -138,13 +132,10 @@ def checkBalance():
 
 def checkStamina():
 
-    # Pull in global score var
-    global score
-
     # Check character stamina information
     logger.info(f"Checking stamina of {args.user}...")
     try:
-        for line in score:
+        for line in v.score:
             if "Stamina" in line:
                 i = line.split(" ")
                 i = i[9]
@@ -160,13 +151,10 @@ def checkStamina():
 
 def checkLocation():
 
-    # Pull in global score var
-    global score
-
     # Check character location information
     logger.info(f"Checking location of {args.user}...")
     try:
-        for line in score:
+        for line in v.score:
             if "You are currently on" in line:
                 i = line.split(" ")
                 v.current_planet = i[6]
@@ -179,13 +167,10 @@ def checkLocation():
 
 def checkRank():
 
-    # Pull in global score var
-    global score
-
     # Check character rank information
     logger.info(f"Checking rank of {args.user}...")
     try:
-        for line in score:
+        for line in v.score:
             if args.user in line:
                 i = line.split(" ")
                 v.character_rank = i[0]
@@ -209,9 +194,6 @@ def buyFood():
 
 def updateShip():
 
-    # Pull in global ship var
-    global ship
-
     # Clear buffer before issuing commands
     clearBuffer()
 
@@ -219,18 +201,15 @@ def updateShip():
     logger.info(f"Updating ship info of {args.user}...")
     tn.write(b"st\n")
     sleep(1)
-    ship = tn.read_very_eager().decode("ascii")
-    ship = escape_ansi(ship)
+    v.ship = tn.read_very_eager().decode("ascii")
+    v.ship = escape_ansi(v.ship)
 
 def checkFuel():
-
-    # Pull in global ship var
-    global ship
 
     # Check character location information
     logger.info(f"Checking fuel of {args.user}'s ship...")
     try:
-        for line in ship:
+        for line in v.ship:
             if "Fuel:" in line:
                 i = line.split(" ")
                 ii = i[13]
@@ -245,13 +224,10 @@ def checkFuel():
 
 def checkCargo():
 
-    # Pull in global ship var
-    global ship
-
     # Check character location information
     logger.info(f"Checking cargo space of {args.user}'s ship...")
     try:
-        for line in ship:
+        for line in v.ship:
             if "Cargo space:" in line:
                 i = line.split(" ")
                 i = i[7]
@@ -279,9 +255,6 @@ def buyFuel():
 
 def updatePlanet():
 
-    # Pull in global planet var
-    global planet
-
     # Clear buffer before issuing commands
     clearBuffer()
 
@@ -289,18 +262,15 @@ def updatePlanet():
     logger.info(f"Updating {HOME_PLANET} planet information...")
     tn.write(b"di planet " + str.encode(HOME_PLANET) + b"\n")
     sleep(1)
-    planet = tn.read_very_eager().decode("ascii")
-    planet = escape_ansi(planet)
+    v.planet = tn.read_very_eager().decode("ascii")
+    v.planet = escape_ansi(v.planet)
 
 def checkTreasury():
-
-    # Pull in global planet var
-    global planet
 
     # Check character location information
     logger.info(f"Checking treasury of {HOME_PLANET}...")
     try:
-        for line in planet:
+        for line in v.planet:
             if "Treasury:" in line:
                 i = line.split(" ")
                 i = i[3]
@@ -317,9 +287,6 @@ def checkTreasury():
 
 def updateExchange():
 
-    # Pull in global exchange var
-    global exchange
-
     # Bring in global variables
     global HOME_PLANET
 
@@ -330,18 +297,15 @@ def updateExchange():
     logger.info(f"Updating {HOME_PLANET} exchange information...")
     tn.write(b"di exchange " + str.encode(HOME_PLANET) + b"\n")
     sleep(1)
-    exchange = tn.read_very_eager().decode("ascii")
-    exchange = escape_ansi(exchange)
+    v.exchange = tn.read_very_eager().decode("ascii")
+    v.exchange = escape_ansi(v.exchange)
 
 def parseExchange():
-
-    # Pull in global exchange var
-    global exchange
 
     # parse plaintext exchange data and extract current data
     logger.info("Pulling exchange data into dictionary...")
     try:
-        lines = nonblank_lines(exchange)
+        lines = nonblank_lines(v.exchange)
         for line in lines:
             if "Stock: current" in line:
                 i = line.split(" ")
@@ -361,16 +325,13 @@ def parseExchange():
 
 def checkCurrentCommodity(commodity):
 
-    # Pull in global exchange var
-    global exchange
-
     # temporary variables
     current = 0
 
     # parse plaintext exchange data and extract current data
     logger.info("Checking current commodity level required...")
     try:
-        lines = nonblank_lines(exchange)
+        lines = nonblank_lines(v.exchange)
         for line in lines:
             if commodity in line:
                 i = line.split(" ")
