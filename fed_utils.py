@@ -115,7 +115,7 @@ def checkBalance():
     # Check character balance information
     logger.info(f"Checking bank balance of {args.user}...")
     try:
-        for line in v.score:
+        for line in v.score.splitlines():
             if "Bank Balance:" in line:
                 i = line.split(" ")  # remove whitespace
                 i = i[4]  # select fourth entry in list
@@ -135,7 +135,7 @@ def checkStamina():
     # Check character stamina information
     logger.info(f"Checking stamina of {args.user}...")
     try:
-        for line in v.score:
+        for line in v.score.splitlines():
             if "Stamina" in line:
                 i = line.split(" ")
                 i = i[9]
@@ -154,7 +154,7 @@ def checkLocation():
     # Check character location information
     logger.info(f"Checking location of {args.user}...")
     try:
-        for line in v.score:
+        for line in v.score.splitlines():
             if "You are currently on" in line:
                 i = line.split(" ")
                 v.current_planet = i[6]
@@ -170,7 +170,7 @@ def checkRank():
     # Check character rank information
     logger.info(f"Checking rank of {args.user}...")
     try:
-        for line in v.score:
+        for line in v.score.splitlines():
             if args.user in line:
                 i = line.split(" ")
                 v.character_rank = i[0]
@@ -209,7 +209,7 @@ def checkFuel():
     # Check character location information
     logger.info(f"Checking fuel of {args.user}'s ship...")
     try:
-        for line in v.ship:
+        for line in v.ship.splitlines():
             if "Fuel:" in line:
                 i = line.split(" ")
                 ii = i[13]
@@ -227,7 +227,7 @@ def checkCargo():
     # Check character location information
     logger.info(f"Checking cargo space of {args.user}'s ship...")
     try:
-        for line in v.ship:
+        for line in v.ship.splitlines():
             if "Cargo space:" in line:
                 i = line.split(" ")
                 i = i[7]
@@ -270,7 +270,7 @@ def checkTreasury():
     # Check character location information
     logger.info(f"Checking treasury of {HOME_PLANET}...")
     try:
-        for line in v.planet:
+        for line in v.planet.splitlines():
             if "Treasury:" in line:
                 i = line.split(" ")
                 i = i[3]
@@ -306,7 +306,7 @@ def parseExchange():
     logger.info("Pulling exchange data into dictionary...")
     try:
         lines = nonblank_lines(v.exchange)
-        for line in lines:
+        for line in lines.splitlines():
             if "Stock: current" in line:
                 i = line.split(" ")
                 i = list(filter(None, i))
@@ -332,7 +332,7 @@ def checkCurrentCommodity(commodity):
     logger.info("Checking current commodity level required...")
     try:
         lines = nonblank_lines(v.exchange)
-        for line in lines:
+        for line in lines.splitlines():
             if commodity in line:
                 i = line.split(" ")
                 i = list(filter(None, i))
@@ -392,7 +392,7 @@ def checkCommodityThreshold(commodity, planet):
 
     # Check commodity level
     try:
-        for line in price:
+        for line in price.splitlines():
             if "+++ Exchange has" in line:
                 i = line.split(" ")
                 i = int(i[3])
@@ -452,14 +452,14 @@ def checkIfBuying(commodity, planet):
 
     # Check price
     try:
-        for line in price:  # check if buying - first variable check
+        for line in price.splitlines():  # check if buying - first variable check
             if "+++ Exchange will buy" in line:
                 logger.info(f"Remote exchange is buying {commodity}.")
                 i = True
             else:
                 pass
 
-        for line in price:  # check if selling - second variable check
+        for line in price.splitlines():  # check if selling - second variable check
             if "+++ Offer price is" in line:
                 logger.info(f"Remote exchange is selling {commodity}.")
                 ii = True
@@ -505,7 +505,7 @@ def checkIfSelling(commodity, planet):
 
     # Check price
     try:
-        for line in price:
+        for line in price.splitlines():
             if "not currently trading" in line:
                 logger.info(f"Remote exchange is not selling {commodity}")
             elif "tons for sale" in line:
