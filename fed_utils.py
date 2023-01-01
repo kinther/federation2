@@ -314,8 +314,6 @@ def updateExchange():
     v.exchange = tn.read_very_eager().decode("ascii")
     v.exchange = escape_ansi(v.exchange)
 
-    print(v.exchange) # debugging
-
 def parseExchange():
 
     # parse plaintext exchange data and extract current data
@@ -338,6 +336,8 @@ def parseExchange():
 
     except Exception as e:
         logger.exception(e)
+
+    print(v.exchange_dict) # debugging next step
 
 def checkCurrentCommodity(commodity):
 
