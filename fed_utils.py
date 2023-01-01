@@ -110,6 +110,23 @@ def updateScore():
     v.score = tn.read_very_eager().decode("ascii")
     v.score = escape_ansi(v.score)
 
+def checkRemoteService():
+
+    # Check whether character has remote service or not
+    logger.info(f"Checking whether {args.user} has remote service...")
+
+    try:
+        tn.write(b"c price alloys earth" + b"\n")
+        i = tn.read_very_eager().decode("ascii")
+        if "remote access subscription" in i:
+            logger.info(f"Found {args.user} does not have remote service.")
+            logger.info("Closing down.  Remote service is required to run this script.")
+            exit(0)
+        else:
+            logger.info(f"Appears that {args.user} has remote service subscription.")
+            logger.info("Moving on.")
+            pass
+
 def checkBalance():
 
     # Check character balance information
