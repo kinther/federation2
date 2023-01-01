@@ -139,7 +139,6 @@ def checkStamina():
     # Check character stamina information
     logger.info(f"Checking stamina of {args.user}...")
     try:
-        print(v.score)
         for line in v.score.splitlines():
             if "Stamina" in line:
                 i = line.split(" ")
@@ -159,7 +158,6 @@ def checkLocation():
     # Check character location information
     logger.info(f"Checking location of {args.user}...")
     try:
-        print(v.score)
         for line in v.score.splitlines():
             if "You are currently on" in line:
                 i = line.split(" ")
@@ -176,7 +174,6 @@ def checkRank():
     # Check character rank information
     logger.info(f"Checking rank of {args.user}...")
     try:
-        print(v.score)
         for line in v.score.splitlines():
             if args.user in line:
                 i = line.split(" ")
