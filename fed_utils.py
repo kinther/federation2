@@ -130,8 +130,7 @@ def checkBalance():
     except Exception as e:
         logger.exception(e)
 
-    print("Attempting to find character balance")
-    print(f"Value found is {v.balance}") # debugging
+    logger.info(f"Balance of {args.user} found to be {v.balance}.")
 
 def checkStamina():
 
@@ -152,8 +151,7 @@ def checkStamina():
     except Exception as e:
         logger.exception(e)
 
-    print("Attempting to find character stamina")
-    print(f"Value found is {v.current_stamina}") # debugging
+    logger.info(f"Stamina of {args.user} found to be {v.current_stamina}.")
 
 def checkLocation():
 
@@ -171,8 +169,7 @@ def checkLocation():
     except Exception as e:
         logger.exception(e)
 
-    print("Attempting to find character location")
-    print(f"Value found is {v.current_planet}") # debugging
+    logger.info(f"Location of {args.user} found to be {v.current_planet} in the {v.current_system} system.")
 
 def checkRank():
 
@@ -189,8 +186,7 @@ def checkRank():
     except Exception as e:
         logger.exception(e)
 
-    print("Attempting to find character rank")
-    print(f"Value found is {v.character_rank}") # debugging
+    logger.info(f"Rank of {args.user} found to be {v.character_rank}.")
 
 def buyFood():
 
