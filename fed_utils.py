@@ -320,7 +320,6 @@ def parseExchange():
     logger.info("Pulling exchange data into dictionary...")
     try:
         lines = nonblank_lines(v.exchange.splitlines())
-        print(lines) # debugging within function to see where it fails
         for line in lines:
             if "Stock: current" in line:
                 i = line.split(" ")
@@ -338,8 +337,6 @@ def parseExchange():
     except Exception as e:
         logger.exception(e)
 
-    print(v.exchange_dict) # debugging next step
-
 def checkCurrentCommodity(commodity):
 
     # temporary variables
@@ -348,8 +345,8 @@ def checkCurrentCommodity(commodity):
     # parse plaintext exchange data and extract current data
     logger.info("Checking current commodity level required...")
     try:
-        lines = nonblank_lines(v.exchange)
-        for line in lines.splitlines():
+        lines = nonblank_lines(v.exchange.splitlines())
+        for line in lines:
             if commodity in line:
                 i = line.split(" ")
                 i = list(filter(None, i))
