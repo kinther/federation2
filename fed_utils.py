@@ -127,6 +127,9 @@ def checkRemoteService():
             logger.info("Moving on.")
             pass
 
+    except Exception as e:
+        logger.exception(e)
+
 def checkBalance():
 
     # Check character balance information
