@@ -349,9 +349,6 @@ def main():
             sleep(1)
             diff_treasury = (v.treasury-prev_treasury)  # how much we made this iteration
 
-            remove("score.txt")  # remove files
-            remove("ship.txt")  # remove files
-            remove("planet.txt")  # remove files
             logger.info("Removing entry from deficits list...")
             tn.write(b"say Filled " + str.encode(def_item) + b".\n")
             v.deficits.pop(0)
@@ -593,10 +590,6 @@ def main():
             sleep(1)
             diff_treasury = (v.treasury-prev_treasury)  # how much we made this iteration
 
-            remove("score.txt")  # remove files
-            remove("ship.txt")  # remove files
-            remove("planet.txt")  # remove files
-            remove("price.txt")  # remove files
             tn.write(b"say Sold " + str.encode(sur_item) + b" to " + str.encode(remote_planet_id) + b".\n")
 
             # end of iteration checks to ensure we are still able to move forward
