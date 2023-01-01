@@ -27,7 +27,7 @@ ranks = ["Founder", "Engineer", "Mogul", "Technocrat", "Gengineer", "Magnate", "
 script_mode = (args.mode).lower()  # determines whether to focus on deficits or surpluses
 
 # Telnetlib variables
-host = "play.federation2.com"  # don't change this
+host = "test.federation2.com"  # don't change this
 port = 30003  # don't change this
 timeout = 90  # maybe change this
 
