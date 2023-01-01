@@ -120,7 +120,6 @@ def checkBalance():
         print(type(v.score))
         print(len(v.score))
         for line in v.score.splitlines():
-            print(line)  # more debugging
             if "Bank Balance:" in line:
                 i = line.split(" ")  # remove whitespace
                 i = i[4]  # select fourth entry in list
@@ -142,7 +141,6 @@ def checkStamina():
     try:
         print(v.score)
         for line in v.score.splitlines():
-            print(line)  # more debugging
             if "Stamina" in line:
                 i = line.split(" ")
                 i = i[9]
@@ -163,7 +161,6 @@ def checkLocation():
     try:
         print(v.score)
         for line in v.score.splitlines():
-            print(line)  # more debugging
             if "You are currently on" in line:
                 i = line.split(" ")
                 v.current_planet = i[6]
@@ -181,7 +178,6 @@ def checkRank():
     try:
         print(v.score)
         for line in v.score.splitlines():
-            print(line)  # more debugging
             if args.user in line:
                 i = line.split(" ")
                 v.character_rank = i[0]
