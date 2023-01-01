@@ -37,6 +37,14 @@ def main():
         logger.error("Ran into error during check of character rank.  Please try again.")
         logger.exception(e)
 
+    try:
+        checkRemoteService()
+        sleep(1)
+
+    except Exception as e:
+        logger.error("Ran into error during check of remote checking service.  Please try again.")
+        logger.exception(e)
+
     # Check if character is sufficient rank to run script
     if v.character_rank not in ranks:
         logger.info("ERROR: This script is meant to be run by planet owners.")
@@ -84,7 +92,7 @@ def main():
         logger.info("WARNING: Ship is hauling some cargo already in its hold.")
         logger.info(f"Detected {i} tons in use.")
     else:
-        pass
+        pass    
 
     # while loop variables
     iter = 0  # how many times have we gone through the loop?
