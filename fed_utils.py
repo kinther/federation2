@@ -320,7 +320,7 @@ def parseExchange():
     logger.info("Pulling exchange data into dictionary...")
     try:
         lines = nonblank_lines(v.exchange)
-        for line in lines.splitlines():
+        for line in lines:
             if "Stock: current" in line:
                 i = line.split(" ")
                 i = list(filter(None, i))
