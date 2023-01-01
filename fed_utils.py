@@ -127,11 +127,11 @@ def checkBalance():
             else:
                 pass
 
-    print("Attempting to find character balance")
-    print(f"Value found is {v.balance}") # debugging
-
     except Exception as e:
         logger.exception(e)
+
+    print("Attempting to find character balance")
+    print(f"Value found is {v.balance}") # debugging
 
 def checkStamina():
 
@@ -149,11 +149,11 @@ def checkStamina():
             else:
                 pass
 
-    print("Attempting to find character stamina")
-    print(f"Value found is {v.current_stamina}") # debugging
-
     except Exception as e:
         logger.exception(e)
+
+    print("Attempting to find character stamina")
+    print(f"Value found is {v.current_stamina}") # debugging
 
 def checkLocation():
 
