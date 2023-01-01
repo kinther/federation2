@@ -109,10 +109,6 @@ def updateScore():
     sleep(1)
     v.score = tn.read_very_eager().decode("ascii")
     v.score = escape_ansi(v.score)
-    
-    # debugging
-
-    print(v.score)
 
 def checkBalance():
 
