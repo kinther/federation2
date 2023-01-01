@@ -120,6 +120,7 @@ def checkBalance():
     logger.info(f"Checking bank balance of {args.user}...")
     try:
         for line in v.score.splitlines():
+            print(line)  # more debugging
             if "Bank Balance:" in line:
                 i = line.split(" ")  # remove whitespace
                 i = i[4]  # select fourth entry in list
@@ -140,6 +141,7 @@ def checkStamina():
     logger.info(f"Checking stamina of {args.user}...")
     try:
         for line in v.score.splitlines():
+            print(line)  # more debugging
             if "Stamina" in line:
                 i = line.split(" ")
                 i = i[9]
@@ -159,6 +161,7 @@ def checkLocation():
     logger.info(f"Checking location of {args.user}...")
     try:
         for line in v.score.splitlines():
+            print(line)  # more debugging
             if "You are currently on" in line:
                 i = line.split(" ")
                 v.current_planet = i[6]
@@ -175,6 +178,7 @@ def checkRank():
     logger.info(f"Checking rank of {args.user}...")
     try:
         for line in v.score.splitlines():
+            print(line)  # more debugging
             if args.user in line:
                 i = line.split(" ")
                 v.character_rank = i[0]
