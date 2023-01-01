@@ -119,6 +119,7 @@ def checkBalance():
     # Check character balance information
     logger.info(f"Checking bank balance of {args.user}...")
     try:
+        print(v.score)
         for line in v.score.splitlines():
             print(line)  # more debugging
             if "Bank Balance:" in line:
@@ -140,6 +141,7 @@ def checkStamina():
     # Check character stamina information
     logger.info(f"Checking stamina of {args.user}...")
     try:
+        print(v.score)
         for line in v.score.splitlines():
             print(line)  # more debugging
             if "Stamina" in line:
@@ -160,6 +162,7 @@ def checkLocation():
     # Check character location information
     logger.info(f"Checking location of {args.user}...")
     try:
+        print(v.score)
         for line in v.score.splitlines():
             print(line)  # more debugging
             if "You are currently on" in line:
@@ -177,6 +180,7 @@ def checkRank():
     # Check character rank information
     logger.info(f"Checking rank of {args.user}...")
     try:
+        print(v.score)
         for line in v.score.splitlines():
             print(line)  # more debugging
             if args.user in line:
