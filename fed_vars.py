@@ -33,7 +33,6 @@ current_fuel = 0  # ship's current fuel level, from output of st
 fuel_min = 250  # lowest fuel level we want our ship to fall to
 fuel_max = 0  # ship's maximum stamina level, from output of st
 current_cargo = 0  # total cargo currently being hauled
-cargo_min = 0  # not sure if needed
 cargo_max = 0  # maximum tonnage ship can haul
 
 # Ship class structure
@@ -46,7 +45,6 @@ class Ship:
         self.fuel_min = fuel_min
         self.fuel_max = fuel_max
         self.current_cargo = current_cargo
-        self.cargo_min = cargo_min
         self.cargo_max = cargo_max
 
 # Planet variables
