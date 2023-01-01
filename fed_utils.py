@@ -115,10 +115,6 @@ def checkBalance():
     # Check character balance information
     logger.info(f"Checking bank balance of {args.user}...")
     try:
-        print("In checkBalance function attempting to check v.score variable info")
-        print(v.score)
-        print(type(v.score))
-        print(len(v.score))
         for line in v.score.splitlines():
             if "Bank Balance:" in line:
                 i = line.split(" ")  # remove whitespace
