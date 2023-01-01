@@ -314,6 +314,8 @@ def updateExchange():
     v.exchange = tn.read_very_eager().decode("ascii")
     v.exchange = escape_ansi(v.exchange)
 
+    print(v.exchange) # debugging
+
 def parseExchange():
 
     # parse plaintext exchange data and extract current data
