@@ -230,6 +230,8 @@ def checkFuel():
     except Exception as e:
         logger.exception(e)
 
+    logger.info(f"Fuel of {args.user}'s ship found to be {v.current_fuel}.")
+
 def checkCargo():
 
     # Check character location information
@@ -248,6 +250,8 @@ def checkCargo():
 
     except Exception as e:
         logger.exception(e)
+
+    logger.info(f"Cargo load of {args.user}'s ship found to be {v.current_cargo}.")
 
 def buyFuel():
 
@@ -292,6 +296,8 @@ def checkTreasury():
 
     except Exception as e:
         logger.exception(e)
+
+    logger.info(f"Treasury of {args.planet} found to be {v.treasury}.")
 
 def updateExchange():
 
