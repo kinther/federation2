@@ -127,6 +127,9 @@ def checkBalance():
             else:
                 pass
 
+    print("Attempting to find character balance")
+    print(f"Value found is {v.balance}") # debugging
+
     except Exception as e:
         logger.exception(e)
 
@@ -145,6 +148,9 @@ def checkStamina():
                 v.stamina_max = int(imax[:-1])
             else:
                 pass
+
+    print("Attempting to find character stamina")
+    print(f"Value found is {v.current_stamina}") # debugging
 
     except Exception as e:
         logger.exception(e)
@@ -165,6 +171,9 @@ def checkLocation():
     except Exception as e:
         logger.exception(e)
 
+    print("Attempting to find character location")
+    print(f"Value found is {v.current_planet}") # debugging
+
 def checkRank():
 
     # Check character rank information
@@ -179,6 +188,9 @@ def checkRank():
 
     except Exception as e:
         logger.exception(e)
+
+    print("Attempting to find character rank")
+    print(f"Value found is {v.character_rank}") # debugging
 
 def buyFood():
 
