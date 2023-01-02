@@ -13,7 +13,6 @@ from os import remove  # used to delete files
 from argparse import ArgumentParser  # used to pass user/password credentials
 from sys import exit  # used to exit script if criteria is met
 import fed_vars as v  # used to makes variables global across files
-from fed_vars import Player as c_player, Ship as c_ship, Planet as c_planet
 
 # argparse constants
 parser = ArgumentParser()
@@ -108,8 +107,8 @@ def updateScore():
     logger.info(f"Updating score info of {args.user}...")
     tn.write(b"score\n")
     sleep(1)
-    c_player.score = tn.read_very_eager().decode("ascii")
-    c_player.score = escape_ansi(c_player.score)
+    v.score = tn.read_very_eager().decode("ascii")
+    v.score = escape_ansi(v.score)
 
 def checkRemoteService():
 
@@ -136,7 +135,7 @@ def checkBalance():
     # Check character balance information
     logger.info(f"Checking bank balance of {args.user}...")
     try:
-        for line in c_player.score.splitlines():
+        for line in v.score.splitlines():
             if "Bank Balance:" in line:
                 i = line.split(" ")  # remove whitespace
                 i = i[4]  # select fourth entry in list
@@ -144,70 +143,70 @@ def checkBalance():
                 i = i.split(",")  # parse output to remove comma separation
                 i = "".join(i)  # rejoin list entries into single string
                 i = int(i)  # turn string into integer
-                c_player.balance = i
+                v.balance = i
             else:
                 pass
 
     except Exception as e:
         logger.exception(e)
 
-    logger.info(f"Balance of {args.user} found to be {c_player.balance}.")
+    logger.info(f"Balance of {args.user} found to be {v.balance}.")
 
 def checkStamina():
 
     # Check character stamina information
     logger.info(f"Checking stamina of {args.user}...")
     try:
-        for line in c_player.score.splitlines():
+        for line in v.score.splitlines():
             if "Stamina" in line:
                 i = line.split(" ")
                 i = i[9]
                 i = i.split("/")
-                c_player.current_stamina = int(i[0])
+                v.current_stamina = int(i[0])
                 imax = i[1]
-                c_player.stamina_max = int(imax[:-1])
+                v.stamina_max = int(imax[:-1])
             else:
                 pass
 
     except Exception as e:
         logger.exception(e)
 
-    logger.info(f"Stamina of {args.user} found to be {c_player.current_stamina}.")
+    logger.info(f"Stamina of {args.user} found to be {v.current_stamina}.")
 
 def checkLocation():
 
     # Check character location information
     logger.info(f"Checking location of {args.user}...")
     try:
-        for line in c_player.score.splitlines():
+        for line in v.score.splitlines():
             if "You are currently on" in line:
                 i = line.split(" ")
-                c_player.current_planet = i[6]
-                c_player.current_system = i[9]
+                v.current_planet = i[6]
+                v.current_system = i[9]
             else:
                 pass
 
     except Exception as e:
         logger.exception(e)
 
-    logger.info(f"Location of {args.user} found to be {c_player.current_planet} in the {c_player.current_system} system.")
+    logger.info(f"Location of {args.user} found to be {v.current_planet} in the {v.current_system} system.")
 
 def checkRank():
 
     # Check character rank information
     logger.info(f"Checking rank of {args.user}...")
     try:
-        for line in c_player.score.splitlines():
+        for line in v.score.splitlines():
             if args.user in line:
                 i = line.split(" ")
-                c_player.character_rank = i[0]
+                v.character_rank = i[0]
             else:
                 pass
 
     except Exception as e:
         logger.exception(e)
 
-    logger.info(f"Rank of {args.user} found to be {c_player.character_rank}.")
+    logger.info(f"Rank of {args.user} found to be {v.character_rank}.")
 
 def buyFood():
 
@@ -230,49 +229,49 @@ def updateShip():
     logger.info(f"Updating ship info of {args.user}...")
     tn.write(b"st\n")
     sleep(1)
-    c_ship.ship = tn.read_very_eager().decode("ascii")
-    c_ship.ship = escape_ansi(c_ship.ship)
+    v.ship = tn.read_very_eager().decode("ascii")
+    v.ship = escape_ansi(v.ship)
 
 def checkFuel():
 
     # Check character location information
     logger.info(f"Checking fuel of {args.user}'s ship...")
     try:
-        for line in c_ship.ship.splitlines():
+        for line in v.ship.splitlines():
             if "Fuel:" in line:
                 i = line.split(" ")
                 ii = i[13]
                 ii = ii.split("/")
-                c_ship.current_fuel = int(ii[0])
-                c_ship.fuel_max = int(ii[1])
+                v.current_fuel = int(ii[0])
+                v.fuel_max = int(ii[1])
             else:
                 pass
 
     except Exception as e:
         logger.exception(e)
 
-    logger.info(f"Fuel of {args.user}'s ship found to be {c_ship.current_fuel}.")
+    logger.info(f"Fuel of {args.user}'s ship found to be {v.current_fuel}.")
 
 def checkCargo():
 
     # Check character location information
     logger.info(f"Checking cargo space of {args.user}'s ship...")
     try:
-        for line in c_ship.ship.splitlines():
+        for line in v.ship.splitlines():
             if "Cargo space:" in line:
                 i = line.split(" ")
                 i = i[7]
                 i = i.split("/")
-                c_ship.current_cargo = int(i[0])
-                c_ship.cargo_max = int(i[1])
-                c_ship.current_cargo = (c_ship.cargo_max - c_ship.current_cargo)
+                v.current_cargo = int(i[0])
+                v.cargo_max = int(i[1])
+                v.current_cargo = (v.cargo_max - v.current_cargo)
             else:
                 pass
 
     except Exception as e:
         logger.exception(e)
 
-    logger.info(f"Cargo load of {args.user}'s ship found to be {c_ship.current_cargo}.")
+    logger.info(f"Cargo load of {args.user}'s ship found to be {v.current_cargo}.")
 
 def buyFuel():
 
@@ -295,15 +294,15 @@ def updatePlanet():
     logger.info(f"Updating {HOME_PLANET} planet information...")
     tn.write(b"di planet " + str.encode(HOME_PLANET) + b"\n")
     sleep(1)
-    c_planet.planet = tn.read_very_eager().decode("ascii")
-    c_planet.planet = escape_ansi(c_planet.planet)
+    v.planet = tn.read_very_eager().decode("ascii")
+    v.planet = escape_ansi(v.planet)
 
 def checkTreasury():
 
     # Check character location information
     logger.info(f"Checking treasury of {HOME_PLANET}...")
     try:
-        for line in c_planet.planet.splitlines():
+        for line in v.planet.splitlines():
             if "Treasury:" in line:
                 i = line.split(" ")
                 i = i[3]
@@ -311,14 +310,14 @@ def checkTreasury():
                 i = i.split(",")
                 i = "".join(i)
                 i = int(i)
-                c_planet.treasury = i
+                v.treasury = i
             else:
                 pass
 
     except Exception as e:
         logger.exception(e)
 
-    logger.info(f"Treasury of {args.planet} found to be {c_planet.treasury}.")
+    logger.info(f"Treasury of {args.planet} found to be {v.treasury}.")
 
 def updateExchange():
 
@@ -332,15 +331,15 @@ def updateExchange():
     logger.info(f"Updating {HOME_PLANET} exchange information...")
     tn.write(b"di exchange " + str.encode(HOME_PLANET) + b"\n")
     sleep(1)
-    c_planet.exchange = tn.read_very_eager().decode("ascii")
-    c_planet.exchange = escape_ansi(c_planet.exchange)
+    v.exchange = tn.read_very_eager().decode("ascii")
+    v.exchange = escape_ansi(v.exchange)
 
 def parseExchange():
 
     # parse plaintext exchange data and extract current data
     logger.info("Pulling exchange data into dictionary...")
     try:
-        lines = nonblank_lines(c_planet.exchange.splitlines())
+        lines = nonblank_lines(v.exchange.splitlines())
         for line in lines:
             if "Stock: current" in line:
                 i = line.split(" ")
@@ -351,7 +350,7 @@ def parseExchange():
                 current = current.split("/")
                 current = current[0]
                 max = i[9]
-                c_planet.exchange_dict[commodity] = {"Current": current, "Max": max}
+                v.exchange_dict[commodity] = {"Current": current, "Max": max}
             else:
                 pass
 
@@ -366,7 +365,7 @@ def checkCurrentCommodity(commodity):
     # parse plaintext exchange data and extract current data
     logger.info("Checking current commodity level required...")
     try:
-        lines = nonblank_lines(c_planet.exchange.splitlines())
+        lines = nonblank_lines(v.exchange.splitlines())
         for line in lines:
             if commodity in line:
                 i = line.split(" ")
@@ -374,7 +373,7 @@ def checkCurrentCommodity(commodity):
                 current = i[7]
                 current = current.split("/")
                 current = int(current[0])
-                c_planet.exchange_dict[commodity] = {"Current": current}
+                v.exchange_dict[commodity] = {"Current": current}
             else:
                 pass
 
@@ -390,9 +389,9 @@ def checkDeficits():
 
     # Checks what home planet has current deficits of and writes to list
     logger.info("Checking home planet deficits...")
-    for commodity in c_planet.exchange_dict:
-        if int(c_planet.exchange_dict[commodity]["Current"]) < DEFICIT:
-            c_planet.deficits.append(commodity)
+    for commodity in v.exchange_dict:
+        if int(v.exchange_dict[commodity]["Current"]) < DEFICIT:
+            v.deficits.append(commodity)
 
 def checkSurpluses():
 
@@ -401,9 +400,9 @@ def checkSurpluses():
 
     # Checks what home planet has current surpluses of and writes to list
     logger.info("Checking home planet surpluses...")
-    for commodity in c_planet.exchange_dict:
-        if int(c_planet.exchange_dict[commodity]["Current"]) > SURPLUS:
-            c_planet.surpluses.append(commodity)
+    for commodity in v.exchange_dict:
+        if int(v.exchange_dict[commodity]["Current"]) > SURPLUS:
+            v.surpluses.append(commodity)
 
 def checkCommodityThreshold(commodity, planet):
 
@@ -575,16 +574,16 @@ def deficitToBays(commodity):
     # Used to determine how many bays of a deficit to buy
     logger.info(f"Identifying how many bays to buy of {commodity}...")
     # Check current deficit value by parsing dictionary based on commodity key
-    for item in c_planet.exchange_dict:
+    for item in v.exchange_dict:
         if commodity in item:
-            bays = int(c_planet.exchange_dict[commodity]["Current"])
+            bays = int(v.exchange_dict[commodity]["Current"])
             bays = int((bays / 75) * -1)
 
     return bays
 
 # Multi functions
 
-def player_data():
+def player():
 
     # Runs all player functions with slight delay
     updateScore()  # Required before any other check can run
@@ -596,7 +595,7 @@ def player_data():
     checkLocation()  # What planet and system are we on right now?
     sleep(1)
 
-def ship_data():
+def ship():
 
     # Runs all ship functions with slight delay
     updateShip()  # Required before any other check can run
@@ -606,7 +605,7 @@ def ship_data():
     checkCargo()  # How much cargo do we have right now?
     sleep(1)
 
-def planet_data():
+def planet():
 
     # Runs all planet functions with slight delay
     updatePlanet()  # Required before any other update can run
@@ -614,7 +613,7 @@ def planet_data():
     checkTreasury()  # How much money does the treasury have right now?
     sleep(1)
 
-def exchange_data():
+def exchange():
 
     # Runs all planet exchange functions with slight delay
     updateExchange()  # Required before any other update can run
@@ -631,9 +630,8 @@ def gatherData():
     # Runs all multi functions
 
     while True:
-
         try:
-            player_data()
+            player()
             sleep(1)
 
         except Exception as e:
@@ -641,7 +639,7 @@ def gatherData():
             logger.exception(e)
 
         try:
-            ship_data()
+            ship()
             sleep(1)
 
         except Exception as e:
@@ -649,7 +647,7 @@ def gatherData():
             logger.exception(e)
 
         try:
-            planet_data()
+            planet()
             sleep(1)
 
         except Exception as e:
@@ -657,7 +655,7 @@ def gatherData():
             logger.exception(e)
 
         try:
-            exchange_data()
+            exchange()
             sleep(1)
 
         except Exception as e:
