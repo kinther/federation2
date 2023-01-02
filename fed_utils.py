@@ -13,6 +13,7 @@ from os import remove  # used to delete files
 from argparse import ArgumentParser  # used to pass user/password credentials
 from sys import exit  # used to exit script if criteria is met
 import fed_vars as v  # used to makes variables global across files
+from fed_vars import Player as c_player, Ship as c_ship, Planet as c_planet
 
 # argparse constants
 parser = ArgumentParser()
@@ -47,11 +48,6 @@ logger = getLogger()
 HOME_PLANET = args.planet  # passed from player arguments
 DEFICIT = -75  # How much we consider a deficit
 SURPLUS = 18000  # How much we consider a surplus
-
-# Instantiate classes
-c_player = v.Player()
-c_ship = v.Ship()
-c_planet = v.Planet()
 
 # Global functions
 
@@ -635,7 +631,7 @@ def gatherData():
     # Runs all multi functions
 
     while True:
-        
+
         try:
             player_data()
             sleep(1)
