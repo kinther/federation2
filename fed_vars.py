@@ -63,6 +63,6 @@ class Planet:
         self.planet = planet
         self.exchange = exchange
         self.treasury = treasury
-        self.exchange_dict = {}
-        self.deficits = []
-        self.surpluses = []
+        self.exchange_dict = exchange_dict
+        self.deficits = deficits
+        self.surpluses = surpluses
