@@ -6,6 +6,8 @@
 # Imports
 from fed_utils import *  # used to pull in all custom functions from fed_utils.py
 import fed_vars as v  # used to makes variables global across files
+from fed_vars import Player as c_player, Ship as c_ship, Planet as c_planet
+
 
 # Main function
 
