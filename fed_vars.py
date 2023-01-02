@@ -16,16 +16,14 @@ stamina_min = 35  # lowest stamina level we want our character to fall to
 # Character class structure
 
 class Player:
-    def __init__(self, score, balance, current_stamina, stamina_max,
-    current_system, current_planet, character_rank, stamina_min):
-        self.score = score
-        self.balance = balance
-        self.current_stamina = current_stamina
-        self.stamina_max = stamina_max
-        self.current_system = current_system
-        self.current_planet = current_planet
-        self.character_rank = character_rank
-        self.stamina_min = stamina_min
+    score = ""
+    balance = 0
+    current_stamina = 0
+    stamina_max = 0
+    current_system = ""
+    current_planet = ""
+    character_rank = ""
+    stamina_min = 0
 
 # Ship variables
 ship = ""  # output of the status report command held in memory
@@ -38,14 +36,12 @@ cargo_max = 0  # maximum tonnage ship can haul
 # Ship class structure
 
 class Ship:
-    def __init__(self, ship, current_fuel, fuel_min, fuel_max,
-    current_cargo, cargo_min, cargo_max):
-        self.ship = ship
-        self.current_fuel = current_fuel
-        self.fuel_min = fuel_min
-        self.fuel_max = fuel_max
-        self.current_cargo = current_cargo
-        self.cargo_max = cargo_max
+    ship = ""
+    current_fuel = 0
+    fuel_min = 0
+    fuel_max = 0
+    current_cargo = 0
+    cargo_max = 0
 
 # Planet variables
 planet = ""  # output of the di planet command held in memory
@@ -58,11 +54,9 @@ surpluses = []  # used to hold the current surpluses list
 # Planet class structure
 
 class Planet:
-    def __init__(self, planet, exchange, treasury, exchange_dict,
-    deficits, surpluses):
-        self.planet = planet
-        self.exchange = exchange
-        self.treasury = treasury
-        self.exchange_dict = exchange_dict
-        self.deficits = deficits
-        self.surpluses = surpluses
+    planet = ""
+    exchange = ""
+    treasury = 0
+    exchange_dict = {}
+    deficits = []
+    surpluses = []
