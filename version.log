@@ -50,3 +50,8 @@ not an actual bug in the code.
 2.4 "Kurious Katydidics" - Reduced memory usage by only importing functions
 needed to run from python modules.  Moved all functions to fed_utils.py and
 dynamic variables to fed_vars.py.
+
+2.5 "Problematic Proteins" - changed update functions so that they no longer
+write to disk and instead hold data in memory.  added new system and cartel
+functions for future use cases.  renamed a few variables for less confusion
+later on.  further increased speed of script by 50%, finding it stable.
