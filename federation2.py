@@ -132,7 +132,7 @@ def main():
                         sleep(60)
                     clearBuffer()  # clear buffer, who knows what happened in 30 mins
                     sleep(1)
-                    exchange()  # run exchange functions
+                    exchange_data()  # run exchange functions
                     sleep(1)
                     continue
 
@@ -345,15 +345,15 @@ def main():
             iter += 1
 
             prev_balance = v.balance  # how much we had before cycle began
-            player()  # gather new player data
+            player_data()  # gather new player data
             sleep(1)
             diff_balance = (v.balance-prev_balance)  # how much we made this iteration
 
-            ship()  # gather new ship data
+            ship_data()  # gather new ship data
             sleep(1)
             prev_treasury = v.treasury  # how much we had before cycle began
 
-            planet()  # gather new planet data
+            planet_data()  # gather new planet data
             sleep(1)
             diff_treasury = (v.treasury-prev_treasury)  # how much we made this iteration
 
@@ -403,7 +403,7 @@ def main():
                         sleep(60)
                     clearBuffer()  # clear buffer, who knows what happened in 30 mins
                     sleep(1)
-                    exchange()  # run exchange functions
+                    exchange_data()  # run exchange functions
                     sleep(1)
                     continue
 
@@ -586,15 +586,15 @@ def main():
             iter += 1
 
             prev_balance = v.balance  # how much we had before cycle began
-            player()  # gather new player data
+            player_data()  # gather new player data
             sleep(1)
             diff_balance = (v.balance-prev_balance)  # how much we made this iteration
 
-            ship()  # gather new ship data
+            ship_data()  # gather new ship data
             sleep(1)
             prev_treasury = v.treasury  # how much we had before cycle began
 
-            planet()  # gather new planet data
+            planet_data()  # gather new planet data
             sleep(1)
             diff_treasury = (v.treasury-prev_treasury)  # how much we made this iteration
 
