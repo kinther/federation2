@@ -607,7 +607,7 @@ def checkPlanetOwner():
         for line in v.system.splitlines():
             if "system - Owner" in line:
                 i = line.split(" ")
-                if {args.user} in i[-1]:
+                if args.user in i[-1]:
                     if "," in i[0]:  # for planets with one word names
                         ii = i[0]
                         ii = list(ii)  # make list of string
