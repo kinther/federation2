@@ -606,24 +606,27 @@ def checkPlanetOwner():
     try:
         for line in v.system.splitlines():
             if "system - Owner" in line:
-                i = line.split(" ")
-                if args.user in i[-1]:
-                    if "," in i[0]:  # for planets with one word names
-                        ii = i[0]
-                        ii = list(ii)  # make list of string
-                        ii = ii.pop()  # remove comma from list
-                        ii = "".join(ii)  # rejoin list into string
-                        v.owned_planets.append(ii)
-                    elif "," in i[1]: ## for planets with two word names:
-                        ii = i[0]  # first name of planet
-                        jj = i[1]  # second name of planet
-                        jj = list(jj)
-                        jj = jj.pop()
-                        jj = "".join(jj)
-                        kk = ii + " " + jj
-                        v.owned_planets.append(kk)
-                    else:
-                        pass  # someone could add a check for a third name here
+                if "Space," in line:
+                    pass
+                else:
+                    i = line.split(" ")
+                    if args.user in i[-1]:
+                        if "," in i[0]:  # for planets with one word names
+                            ii = i[0]
+                            ii = list(ii)  # make list of string
+                            ii.pop()  # remove comma from list
+                            ii = "".join(ii)  # rejoin list into string
+                            v.owned_planets.append(ii)
+                        elif "," in i[1]: ## for planets with two word names:
+                            ii = i[0]  # first name of planet
+                            jj = i[1]  # second name of planet
+                            jj = list(jj)
+                            jj.pop()
+                            jj = "".join(jj)
+                            kk = ii + " " + jj
+                            v.owned_planets.append(kk)
+                        else:
+                            pass  # someone could add a check for a third name here
             else:
                 pass
 
