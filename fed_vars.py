@@ -66,3 +66,12 @@ class Planet:
         self.exchange_dict = exchange_dict
         self.deficits = deficits
         self.surpluses = surpluses
+
+# System variables
+
+system = ""  # output of the di system command held in memory
+owned_planets = []  # list of planets owned by the player
+
+# Cartel variables
+
+cartel = ""  # output of the di cartel command held in memory

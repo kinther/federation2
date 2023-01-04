@@ -208,16 +208,6 @@ def checkRank():
 
     logger.info(f"Rank of {args.user} found to be {v.character_rank}.")
 
-def buyFood():
-
-    # Clear buffer before issuing commands
-    clearBuffer()
-
-    # Tries to buy food for the player
-    logger.info(f"Buying food for {args.user}...")
-    tn.write(b"buy food\n")
-    sleep(1)
-
 # Ship functions
 
 def updateShip():
@@ -283,7 +273,7 @@ def buyFuel():
     tn.write(b"buy fuel\n")
     sleep(1)
 
-# Planet/Exchange functions
+# Planet functions
 
 def updatePlanet():
 
@@ -318,6 +308,8 @@ def checkTreasury():
         logger.exception(e)
 
     logger.info(f"Treasury of {args.planet} found to be {v.treasury}.")
+
+# Exchange functions
 
 def updateExchange():
 
@@ -438,6 +430,18 @@ def checkCommodityThreshold(commodity, planet):
         return True
     else:
         return False
+
+# Consumable functions
+
+def buyFood():
+
+    # Clear buffer before issuing commands
+    clearBuffer()
+
+    # Tries to buy food for the player
+    logger.info(f"Buying food for {args.user}...")
+    tn.write(b"buy food\n")
+    sleep(1)
 
 # Move functions
 
@@ -581,9 +585,78 @@ def deficitToBays(commodity):
 
     return bays
 
+# System functions
+
+def updateSystem():
+
+    # Clear buffer before issuing commands
+    clearBuffer()
+
+    # Check system data
+    logger.info(f"Checking current system information...")
+    tn.write(b"di system" + b"\n")
+    sleep(1)
+    v.system = tn.read_very_eager().decode("ascii")
+    v.system = escape_ansi(v.system)
+
+def checkPlanetOwner():
+
+    # Check di system output for ownership of other planets
+    logger.info(f"Checking planet ownership in this system...")
+    try:
+        for line in v.system.splitlines():
+            if "system - Owner" in line:
+                i = line.split(" ")
+                if {args.user} in i[-1]:
+                    if "," in i[0]:  # for planets with one word names
+                        ii = i[0]
+                        ii = list(ii)  # make list of string
+                        ii = ii.pop()  # remove comma from list
+                        ii = "".join(ii)  # rejoin list into string
+                        v.owned_planets.append(ii)
+                    elif "," in i[1]: ## for planets with two word names:
+                        ii = i[0]  # first name of planet
+                        jj = i[1]  # second name of planet
+                        jj = list(jj)
+                        jj = jj.pop()
+                        jj = "".join(jj)
+                        kk = ii + " " + jj
+                        v.owned_planets.append(kk)
+                    else:
+                        pass  # someone could add a check for a third name here
+            else:
+                pass
+
+    except Exception as e:
+        logger.exception(e)
+
+    if len(v.owned_planets) <= 1:  # only owns one planet
+        logger.info(f"{args.user} owns the following planet:")
+        for entry in v.owned_planets:
+            logger.info(entry)
+    else:  # must be more then one
+        logger.info(f"{args.user} owns the following planets:")
+        for entry in v.owned_planets:
+            logger.info(entry)   
+
+
+# Cartel functions
+
+def updateCartel():
+
+    # Clear buffer before issuing commands
+    clearBuffer()
+
+    # Check system data
+    logger.info(f"Checking current system information...")
+    tn.write(b"di cartel" + b"\n")
+    sleep(1)
+    v.cartel = tn.read_very_eager().decode("ascii")
+    v.cartel = escape_ansi(v.cartel)
+
 # Multi functions
 
-def player():
+def player_data():
 
     # Runs all player functions with slight delay
     updateScore()  # Required before any other check can run
@@ -594,8 +667,10 @@ def player():
     sleep(1)
     checkLocation()  # What planet and system are we on right now?
     sleep(1)
+    checkRank()  # What rank is the player?
+    sleep(1)
 
-def ship():
+def ship_data():
 
     # Runs all ship functions with slight delay
     updateShip()  # Required before any other check can run
@@ -605,7 +680,7 @@ def ship():
     checkCargo()  # How much cargo do we have right now?
     sleep(1)
 
-def planet():
+def planet_data():
 
     # Runs all planet functions with slight delay
     updatePlanet()  # Required before any other update can run
@@ -613,16 +688,24 @@ def planet():
     checkTreasury()  # How much money does the treasury have right now?
     sleep(1)
 
-def exchange():
+def exchange_data():
 
     # Runs all planet exchange functions with slight delay
     updateExchange()  # Required before any other update can run
     sleep(1)
     parseExchange()  # Convert plain text to dictionary
     sleep(1)
-    checkDeficits()
+    checkDeficits()  # Checks deficits and makes list
     sleep(1)
-    checkSurpluses()
+    checkSurpluses()  # Checks surpluses and makes list
+    sleep(1)
+
+def system_data():
+
+    # Runs all system functions with slight delay
+    updateSystem()  # Required before any update or check can be run
+    sleep(1)
+    checkPlanetOwner()  # Which planets does the player own in this system?
     sleep(1)
 
 def gatherData():
@@ -631,7 +714,7 @@ def gatherData():
 
     while True:
         try:
-            player()
+            player_data()
             sleep(1)
 
         except Exception as e:
@@ -639,7 +722,7 @@ def gatherData():
             logger.exception(e)
 
         try:
-            ship()
+            ship_data()
             sleep(1)
 
         except Exception as e:
@@ -647,7 +730,7 @@ def gatherData():
             logger.exception(e)
 
         try:
-            planet()
+            planet_data()
             sleep(1)
 
         except Exception as e:
@@ -655,11 +738,21 @@ def gatherData():
             logger.exception(e)
 
         try:
-            exchange()
+            exchange_data()
             sleep(1)
 
         except Exception as e:
             logger.error("Ran into error running exchange function.  Please try again.")
+            logger.exception(e)
+
+        break
+
+        try:
+            system_data()
+            sleep(1)
+
+        except Exception as e:
+            logger.error("Ran into error running system function.  Please try again.")
             logger.exception(e)
 
         break
