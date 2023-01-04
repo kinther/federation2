@@ -745,8 +745,6 @@ def gatherData():
             logger.error("Ran into error running exchange function.  Please try again.")
             logger.exception(e)
 
-        break
-
         try:
             system_data()
             sleep(1)
