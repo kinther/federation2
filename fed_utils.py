@@ -670,8 +670,6 @@ def player_data():
     sleep(1)
     checkLocation()  # What planet and system are we on right now?
     sleep(1)
-    checkRank()  # What rank is the player?
-    sleep(1)
 
 def ship_data():
 
