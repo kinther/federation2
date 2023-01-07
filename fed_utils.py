@@ -307,7 +307,7 @@ def checkTreasury():
     except Exception as e:
         logger.exception(e)
 
-    logger.info(f"Treasury of {args.planet} found to be {v.treasury}.")
+    logger.info(f"Treasury of {v.current_planet} found to be {v.treasury}.")
 
 # Exchange functions
 
