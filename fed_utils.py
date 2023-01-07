@@ -44,7 +44,7 @@ basicConfig(filename=LOG_FILENAME, level=20)
 logger = getLogger()
 
 # Character/ship constants
-HOME_PLANET = args.planet  # passed from player arguments
+v.current_planet = args.planet  # passed from player arguments, we start the cycle on this planet
 DEFICIT = -75  # How much we consider a deficit
 SURPLUS = 18000  # How much we consider a surplus
 
@@ -281,8 +281,8 @@ def updatePlanet():
     clearBuffer()
 
     # Check planetary exchange information
-    logger.info(f"Updating {HOME_PLANET} planet information...")
-    tn.write(b"di planet " + str.encode(HOME_PLANET) + b"\n")
+    logger.info(f"Updating {v.current_planet} planet information...")
+    tn.write(b"di planet " + str.encode(v.current_planet) + b"\n")
     sleep(0.5)
     v.planet = tn.read_very_eager().decode("ascii")
     v.planet = escape_ansi(v.planet)
@@ -290,7 +290,7 @@ def updatePlanet():
 def checkTreasury():
 
     # Check character location information
-    logger.info(f"Checking treasury of {HOME_PLANET}...")
+    logger.info(f"Checking treasury of {v.current_planet}...")
     try:
         for line in v.planet.splitlines():
             if "Treasury:" in line:
@@ -313,15 +313,12 @@ def checkTreasury():
 
 def updateExchange():
 
-    # Bring in global variables
-    global HOME_PLANET
-
     # Clear buffer before issuing commands
     clearBuffer()
 
     # Check planetary exchange information
-    logger.info(f"Updating {HOME_PLANET} exchange information...")
-    tn.write(b"di exchange " + str.encode(HOME_PLANET) + b"\n")
+    logger.info(f"Updating {v.current_planet} exchange information...")
+    tn.write(b"di exchange " + str.encode(v.current_planet) + b"\n")
     sleep(0.5)
     v.exchange = tn.read_very_eager().decode("ascii")
     v.exchange = escape_ansi(v.exchange)

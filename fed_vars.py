@@ -23,8 +23,8 @@ cargo_max = 0  # maximum tonnage ship can haul
 
 # Planet variables
 planet = ""  # output of the di planet command held in memory
-
 exchange = ""  # output of the di exchange command held in memory
+current_planet = ""  # planet that we are filling deficits or selling surpluses on
 treasury = 0  # planet's current balance, from output of di planet
 exchange_dict = {}  # used to hold the exchange information
 deficits = []  # used to hold the current deficits list
