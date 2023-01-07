@@ -379,6 +379,9 @@ def checkDeficits():
     # Bring in global variables
     global DEFICIT
 
+    # Ensure accurate deficit list by starting fresh
+    v.deficits = []
+
     # Checks what home planet has current deficits of and writes to list
     logger.info("Checking home planet deficits...")
     for commodity in v.exchange_dict:
@@ -402,6 +405,9 @@ def checkCommodityThreshold(commodity, planet):
 
     # global variables
     global SURPLUS
+
+    # Ensure accurate deficit list by starting fresh
+    v.surpluses = []
 
     # temp variables
     i = 0
