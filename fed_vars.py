@@ -8,8 +8,8 @@ score = ""  # output of the score command held in memory
 balance = 0  # character's current balance, from output of score
 current_stamina = 0  # character's current stamina, from output of score
 stamina_max = 0  # character's maximum stamina level, from output of score
-current_system = ""  # character is on this planet, from output of score
-current_planet = ""  # character is in this system, from output of score
+system_location = ""  # character is in this system, from output of score
+current_planet = ""  # character is on this planet, from output of score
 character_rank = ""  # character's rank, from output of score
 stamina_min = 35  # lowest stamina level we want our character to fall to
 
@@ -23,6 +23,7 @@ cargo_max = 0  # maximum tonnage ship can haul
 
 # Planet variables
 planet = ""  # output of the di planet command held in memory
+
 exchange = ""  # output of the di exchange command held in memory
 treasury = 0  # planet's current balance, from output of di planet
 exchange_dict = {}  # used to hold the exchange information
