@@ -128,6 +128,8 @@ def main():
                 elif len(v.owned_planets) > 0:  # have we already filled deficits of all owned planets?
 
                     # Previous planet deficits are now filled and there are still planets remaining to be filled
+                    logger.info("Deficits all filled.  Moving on to next planet.")
+                    tn.write(b"say All deficits filled on current planet.  Moving on to next.\n")
 
                     # Board planet
                     boardPlanet()
@@ -167,7 +169,6 @@ def main():
                     logger.info("+++++++++++++++++++++++++++++++++++++++.")
                     tn.write(b"say All deficits filled.  Restarting cycle.\n")
                     checkPlanetOwner()
-                    sleep(0.5)
                     continue
 
             # Deficits loop specific vars
