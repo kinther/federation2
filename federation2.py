@@ -54,10 +54,10 @@ def main():
     else:
         pass
 
-    # Check if current_planet = HOME_PLANET.  If not, exit script.
-    if HOME_PLANET not in v.current_planet:
+    # Check if planet_location = HOME_PLANET.  If not, exit script.
+    if HOME_PLANET not in v.planet_location:
         logger.info("ERROR: Character must be on their home planet on the landing pad.")
-        logger.info(f"Detected character on {v.current_planet} rather than {HOME_PLANET}.")
+        logger.info(f"Detected character on {v.planet_location} rather than {HOME_PLANET}.")
         logger.info("Exiting.")
         exit(0)
     else:
@@ -400,7 +400,7 @@ def main():
             sleep(0.5)
 
             # end of iteration checks to ensure we are still able to move forward
-            if v.current_planet not in HOME_PLANET:
+            if v.planet_location not in HOME_PLANET:
                 logger.info(f"Detected location is not {HOME_PLANET}.")
                 logger.info("Something went wrong, closing script to ensure player safety.")
                 exit(0)
@@ -638,7 +638,7 @@ def main():
             tn.write(b"say Sold " + str.encode(sur_item) + b" to " + str.encode(remote_planet_id) + b".\n")
 
             # end of iteration checks to ensure we are still able to move forward
-            if v.current_planet not in HOME_PLANET:
+            if v.planet_location not in HOME_PLANET:
                 logger.info(f"Detected location is not {HOME_PLANET}.")
                 logger.info("Something went wrong, closing script to ensure player safety.")
                 exit(0)

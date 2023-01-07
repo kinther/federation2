@@ -181,7 +181,7 @@ def checkLocation():
         for line in v.score.splitlines():
             if "You are currently on" in line:
                 i = line.split(" ")
-                v.current_planet = i[6]
+                v.planet_location = i[6]
                 v.system_location = i[9]
             else:
                 pass
@@ -189,7 +189,7 @@ def checkLocation():
     except Exception as e:
         logger.exception(e)
 
-    logger.info(f"Location of {args.user} found to be {v.current_planet} in the {v.system_location} system.")
+    logger.info(f"Location of {args.user} found to be {v.planet_location} in the {v.system_location} system.")
 
 def checkRank():
 
