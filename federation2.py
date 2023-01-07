@@ -122,9 +122,46 @@ def main():
 
             # Pause for 30 minutes if deficits list is empty
             while True:
-                if len(v.deficits) > 0:  # is deficits list empty yet?
-                    break
-                else:
+                if len(v.deficits) > 0:  # is deficits list of current planet empty yet?
+                    break  # if more is to be done here, break and go back to filling deficits on current planet
+
+                elif len(v.deficits) <= 0 and len(v.owned_planets) > 0:  # have we already filled deficits of all owned planets?
+
+                    # Previous planet deficits are now filled and there are still planets remaining to be filled
+
+                    # Board planet
+                    boardPlanet()
+                    sleep(0.5)
+
+                    # Move to ISL from previous planet
+                    logger.info(f"Moving to ISL from {HOME_PLANET}...")
+                    for dir in data[HOME_PLANET]["Planet_to_ISL"]:
+                        moveDirection(dir)
+                        sleep(0.5)
+
+                    # Change planet routine
+                    HOME_PLANET = v.owned_planets[0]  # switch over to first planet in owned_planets list
+                    v.owned_planets.pop(0)  # remove planet from list since we have switched over to it
+
+                    # Move from ISL to new planet
+                    logger.info(f"Moving from ISL to {HOME_PLANET}...")
+                    for dir in data[HOME_PLANET]["Planet_to_ISL"]:
+                        moveDirection(dir)
+                        sleep(0.5)
+
+                    # Board planet
+                    boardPlanet()
+                    sleep(0.5)
+
+                    # Check new planet's current treasury, deficits, surpluses
+                    planet_data()  # update stored planetary information to reflect new planet
+                    sleep(0.5)
+                    exchange_data()  # update stored exchange data to reflect new planet
+                    sleep(0.5)
+
+                    break  # planet switch routine finalized, moving to main routine to fill deficits
+
+                else:  # catch all if deficits have been filled entirely
                     logger.info("Deficits all filled.  Sleeping for 30 minutes...")
                     tn.write(b"say All deficits filled.  Sleeping for 30 minutes.\n")
                     for i in range(30):  # Keepalive function so BrokenPipe does not occur
