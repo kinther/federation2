@@ -43,7 +43,7 @@ LOG_FILENAME = (day + "-" + hour + minute + "-fed2.txt")
 basicConfig(filename=LOG_FILENAME, level=20)
 logger = getLogger()
 
-# Character/ship constants
+# to-do: figure out a better place for these vars
 v.current_planet = args.planet  # passed from player arguments, we start the cycle on this planet
 DEFICIT = -75  # How much we consider a deficit
 SURPLUS = 18000  # How much we consider a surplus
