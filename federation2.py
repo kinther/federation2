@@ -164,10 +164,13 @@ def main():
                     break  # planet switch routine finalized, moving to main routine to fill deficits
 
                 else:  # catch all if deficits have been filled entirely
-                    logger.info("+++++++++++++++++++++++++++++++++++++++.")
-                    logger.info("Deficits all filled.  Restarting cycle.")
-                    logger.info("+++++++++++++++++++++++++++++++++++++++.")
-                    tn.write(b"say All deficits filled.  Restarting cycle.\n")
+                    logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.")
+                    logger.info("Deficits all filled.  Restarting cycle after sleeping for 30 minutes.")
+                    logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.")
+                    tn.write(b"say All deficits filled.  Sleeping for 30 minutes and then restarting cycle.\n")
+                    for i in range(30):  # Keepalive routine so BrokenPipe does not occur
+                        tn.write(b"\n")
+                        sleep(60)
                     checkPlanetOwner()
                     continue
 
