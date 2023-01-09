@@ -103,6 +103,19 @@
         "Sell": ["BioChips", "BioComponents", "Clinics", "GAsChips", "Laboratories", "MicroScalpels", "Musiks", "NanoFabrics", "Proteins", "Sensamps", "Sensors", "Synths", "ToxicMunchers", "Tracers"]
     },
 
+    "Yester Hill": {
+        "Cartel": "Barovia",
+        "System": "Barovia",
+        "ISL_to_Planet": ["sw", "w"],
+        "Planet_to_ISL": ["e", "ne"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["w"],
+        "Restaurant_to_LP": ["e"],
+        "Buy": [],
+        "Sell": []
+    },
+
     "Goto": {
         "Cartel": "Barovia",
         "System": "Easy",
