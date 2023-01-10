@@ -138,12 +138,12 @@ def checkBalance():
         for line in v.score.splitlines():
             if "Bank Balance:" in line:
                 i = line.split(" ")  # remove whitespace
-                i = i[4]  # select fourth entry in list
-                i = i[:-3]  # remove last 3 characters from string
-                i = i.split(",")  # parse output to remove comma separation
-                i = "".join(i)  # rejoin list entries into single string
-                i = int(i)  # turn string into integer
-                v.balance = i
+                for entry in i:
+                    if "ig" in entry:
+                        ii = i[:-2]  # remove last 2 characters from string, aka "ig" notation
+                        ii = ii.split(",")  # parse output to remove comma separation
+                        ii = "".join(ii)  # rejoin list entries into single string
+                        v.balance = int(ii)  # return integer as balance
             else:
                 pass
 
