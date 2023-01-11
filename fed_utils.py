@@ -140,7 +140,7 @@ def checkBalance():
                 i = line.split(" ")  # remove whitespace
                 for entry in i:
                     if "ig" in entry:
-                        ii = i[:-2]  # remove last 2 characters from string, aka "ig" notation
+                        ii = entry[:-2]  # remove last 2 characters from string, aka "ig" notation
                         ii = ii.split(",")  # parse output to remove comma separation
                         ii = "".join(ii)  # rejoin list entries into single string
                         v.balance = int(ii)  # return integer as balance
