@@ -12,6 +12,7 @@ from logging import basicConfig, getLogger  # used to write logs to file
 from os import remove  # used to delete files
 from argparse import ArgumentParser  # used to pass user/password credentials
 from sys import exit  # used to exit script if criteria is met
+from re import search  # used to parse some output such as planets with multiple word names
 import fed_vars as v  # used to makes variables global across files
 
 # argparse constants
@@ -181,8 +182,9 @@ def checkLocation():
         for line in v.score.splitlines():
             if "You are currently on" in line:
                 i = line.split(" ")
-                v.planet_location = i[6]
-                v.system_location = i[9]
+                ii = search(r'on (.+) in the (.+) system', i)
+                v.planet_location = ii.group(1)
+                v.system_location = ii.group(2)
             else:
                 pass
 
