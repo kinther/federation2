@@ -145,6 +145,7 @@ def main():
                     # Change planet routine
                     v.current_planet = v.owned_planets[0]  # switch over to first planet in owned_planets list
                     v.owned_planets.pop(0)  # remove planet from list since we have switched over to it
+                    logger.info(f"New planet to fill deficits on is {v.current_planet}...")
 
                     # Move from ISL to new planet
                     logger.info(f"Moving from ISL to {v.current_planet}...")
