@@ -295,12 +295,12 @@ def checkTreasury():
         for line in v.planet.splitlines():
             if "Treasury:" in line:
                 i = line.split(" ")
-                i = i[3]
-                i = i[:-3]
-                i = i.split(",")
-                i = "".join(i)
-                i = int(i)
-                v.treasury = i
+                for entry in i:
+                    if "ig" in entry:
+                        ii = entry[:-2]
+                        ii = ii.split(",")
+                        ii = "".join(ii)
+                        v.treasury = int(ii)
             else:
                 pass
 
