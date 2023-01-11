@@ -367,7 +367,7 @@ def main():
                 sleep(0.5)
 
             # Sell item to home exchange
-            logger.info(f"Selling {def_item} to home exchange...")
+            logger.info(f"Selling {def_item} to exchange...")
             for _ in range(bays):
                 sellCommodity(def_item)
                 sleep(0.5)
@@ -403,6 +403,7 @@ def main():
             # end of iteration checks to ensure we are still able to move forward
             if v.planet_location not in v.current_planet:
                 logger.info(f"Detected location is not {v.current_planet}.")
+                logger.info(f"Somehow we ended up on {v.planet_location}.")
                 logger.info("Something went wrong, closing script to ensure player safety.")
                 exit(0)
             else:
