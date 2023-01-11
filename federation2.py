@@ -114,6 +114,7 @@ def main():
             # Iteration checks
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
             logger.info(f" This is iteration number {iter}.")
+            logger.info(f" We are currently filling deficits on {v.current_planet}.")
             logger.info(f" {args.user}'s bank balance is {v.balance}.")
             logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
             logger.info(f" {v.current_planet}'s treasury value is {v.treasury}.")
@@ -424,6 +425,7 @@ def main():
             # Iteration checks
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
             logger.info(f" This is iteration number {iter}.")
+            logger.info(f" We are currently selling surpluses from {v.current_planet}.")
             logger.info(f" {args.user}'s bank balance is {v.balance}.")
             logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
             logger.info(f" {v.current_planet}'s treasury value is {v.treasury}.")
