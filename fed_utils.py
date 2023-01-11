@@ -181,10 +181,9 @@ def checkLocation():
     try:
         for line in v.score.splitlines():
             if "You are currently on" in line:
-                i = line.split(" ")
-                ii = search(r'on (.+) in the (.+) system', i)
-                v.planet_location = ii.group(1)
-                v.system_location = ii.group(2)
+                i = search(r'on (.+) in the (.+) system', str(line))
+                v.planet_location = i.group(1)
+                v.system_location = i.group(2)
             else:
                 pass
 
