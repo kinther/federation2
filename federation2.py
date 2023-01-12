@@ -54,9 +54,10 @@ def main():
     else:
         pass
 
-    # Check if we are in a system where we own planets.  If not, exit script.
-    if len(v.owned_planets) <= 0:
-        logger.info("ERROR: Character should be in a system where they own planets.")
+    # Check if planet_location = v.current_planet.  If not, exit script.
+    if v.current_planet not in v.planet_location:
+        logger.info("ERROR: Character must be on their home planet on the landing pad.")
+        logger.info(f"Detected character on {v.planet_location} rather than {v.current_planet}.")
         logger.info("Exiting.")
         exit(0)
     else:
