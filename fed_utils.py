@@ -757,12 +757,8 @@ def gatherData():
             logger.exception(e)
 
         try:  # Set initial planet we work with
-            print(v.current_planet)
-            print(v.planet_location)
             v.current_planet = v.owned_planets[0]  
             sleep(0.5)
-            print(v.current_planet)
-            print(v.planet_location)
 
         except Exception as e:
             logger.error("Ran into error setting starting planet.  Please try again.")
