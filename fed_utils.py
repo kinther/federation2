@@ -718,15 +718,16 @@ def gatherData():
     # Runs all multi functions
 
     while True:
-        try:  # Get initial player data from score
+        try:
             player_data()
             sleep(0.5)
+            v.current_planet = v.owned_planets[0]  # Set initial planet we work with
 
         except Exception as e:
             logger.error("Ran into error running player function.  Please try again.")
             logger.exception(e)
 
-        try:  # Get initial ship data from st
+        try:
             ship_data()
             sleep(0.5)
 
@@ -734,7 +735,7 @@ def gatherData():
             logger.error("Ran into error running ship function.  Please try again.")
             logger.exception(e)
 
-        try:  # Get initial planet data from di planet
+        try:
             planet_data()
             sleep(0.5)
 
@@ -742,7 +743,7 @@ def gatherData():
             logger.error("Ran into error running planet function.  Please try again.")
             logger.exception(e)
 
-        try:  # Get initial exchange data from di exchange <planet>
+        try:
             exchange_data()
             sleep(0.5)
 
@@ -750,24 +751,12 @@ def gatherData():
             logger.error("Ran into error running exchange function.  Please try again.")
             logger.exception(e)
 
-        try:  # Get initial system data from di system
+        try:
             system_data()
             sleep(0.5)
 
         except Exception as e:
             logger.error("Ran into error running system function.  Please try again.")
-            logger.exception(e)
-
-        try:  # Set initial planet we work with
-            print(v.current_planet)
-            print(v.planet_location)
-            v.current_planet = v.owned_planets[0]  
-            sleep(0.5)
-            print(v.current_planet)
-            print(v.planet_location)
-
-        except Exception as e:
-            logger.error("Ran into error setting starting planet.  Please try again.")
             logger.exception(e)
 
         break
