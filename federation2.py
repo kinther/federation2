@@ -54,14 +54,47 @@ def main():
     else:
         pass
 
-    # Check if planet_location = v.current_planet.  If not, exit script.
-    if v.current_planet not in v.planet_location:
-        logger.info("ERROR: Character must be on their home planet on the landing pad.")
-        logger.info(f"Detected character on {v.planet_location} rather than {v.current_planet}.")
+    # Check if we are in a system where we own planets.  If not, exit script.
+    if len(v.owned_planets) <= 0:
+        logger.info("ERROR: Character should be in a system where they own planets.")
         logger.info("Exiting.")
         exit(0)
-    else:
-        pass
+    else:  # Found player is in system where we own planets.
+        if v.current_planet in v.planet_location:  # Are we on the planet we are starting loop on?
+            pass
+        else:  # Found player is not on starting planet.
+
+            # Leave current planet and head to starting planet
+            boardPlanet()
+            sleep(0.5)
+
+            # Move to ISL from previous planet
+            logger.info(f"Moving to ISL from {v.planet_location}...")
+            for dir in data[v.planet_location]["Planet_to_ISL"]:
+                moveDirection(dir)
+                sleep(0.5)
+
+            # Move from ISL to starting planet
+            logger.info(f"Moving from ISL from {v.current_planet}...")
+            for dir in data[v.current_planet]["Planet_to_ISL"]:
+                moveDirection(dir)
+                sleep(0.5)          
+
+            # Land on starting planet
+            boardPlanet()
+            sleep(0.5)  
+
+            # Check if we made it to the starting planet successfully
+            checkLocation()
+            sleep(0.5)
+
+            if v.current_planet in v.planet_location:  # Did we make it there successfully?
+                pass
+            else:  # If not, exit script
+                logger.info("ERROR: Tried to move character to starting planet and ran into issue.")
+                logger.info("Please start your character on a landing pad of an owned planet.")
+                logger.info("Exiting.")
+                exit(0)
 
     # Check if cargo_max is less than 525 (can't haul a full 7 bays)
     if v.cargo_max < 525:
