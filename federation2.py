@@ -138,8 +138,8 @@ def main():
                         sleep(0.5)
 
                     # Move from ISL to starting planet
-                    logger.info(f"Moving from ISL from {v.current_planet}...")
-                    for dir in data[v.current_planet]["Planet_to_ISL"]:
+                    logger.info(f"Moving from ISL to {v.current_planet}...")
+                    for dir in data[v.current_planet]["ISL_to_Planet"]:
                         moveDirection(dir)
                         sleep(0.5)          
 
