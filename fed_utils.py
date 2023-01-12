@@ -19,7 +19,6 @@ import fed_vars as v  # used to makes variables global across files
 parser = ArgumentParser()
 parser.add_argument("--user", type=str, action="store", required=True)
 parser.add_argument("--password", type=str, action="store", required=True)
-parser.add_argument("--planet", type=str, action="store", required=True)
 parser.add_argument("--mode", type=str, action="store", required=True)
 args = parser.parse_args()
 
@@ -45,7 +44,6 @@ basicConfig(filename=LOG_FILENAME, level=20)
 logger = getLogger()
 
 # to-do: figure out a better place for these vars
-v.current_planet = args.planet  # passed from player arguments, we start the cycle on this planet
 DEFICIT = -75  # How much we consider a deficit
 SURPLUS = 18000  # How much we consider a surplus
 
@@ -721,6 +719,7 @@ def gatherData():
         try:
             player_data()
             sleep(0.5)
+            v.current_planet = v.owned_planets[0]  # Set initial planet we work with
 
         except Exception as e:
             logger.error("Ran into error running player function.  Please try again.")
