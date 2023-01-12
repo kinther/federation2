@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Federation 2 Community Edition hauling scripts for planet owners
-# version 2.5 "Problematic Proteins"
+# version 3.0 "Strictly Spices"
 
 # Imports
 from fed_utils import *  # used to pull in all custom functions from fed_utils.py
