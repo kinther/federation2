@@ -721,7 +721,6 @@ def gatherData():
         try:
             player_data()
             sleep(0.5)
-            v.current_planet = v.owned_planets[0]  # Set initial planet we work with
 
         except Exception as e:
             logger.error("Ran into error running player function.  Please try again.")
