@@ -158,12 +158,21 @@ def main():
             # Pause for 30 minutes if deficits list is empty
             while True:
                 if len(v.deficits) > 0:  # is deficits list of current planet empty yet?
+
+                    # Print out remaining deficits to log for visibility
+                    for entry in v.deficits:
+                        logger.info(f"Still need to fill {entry} on {v.current_planet}.")
+
                     break  # if more is to be done here, break and go back to filling deficits on current planet
 
                 elif len(v.owned_planets) > 0:  # have we already filled deficits of all owned planets?
 
+                    # Print out remaining planets that need to be worked
+                    for entry in v.owned_planets:
+                        logger.info(f"Still need to visit {entry} and fill deficits.")
+
                     # Previous planet deficits are now filled and there are still planets remaining to be filled
-                    logger.info("Deficits all filled.  Moving on to next planet.")
+                    logger.info(f"Deficits all filled on {v.current_planet}.  Moving on to next planet.")
                     tn.write(b"say All deficits filled on current planet.  Moving on to next.\n")
 
                     # Board planet
@@ -180,6 +189,10 @@ def main():
                     v.current_planet = v.owned_planets[0]  # switch over to first planet in owned_planets list
                     v.owned_planets.pop(0)  # remove planet from list since we have switched over to it
                     logger.info(f"New planet to fill deficits on is {v.current_planet}...")
+
+                    # Print out remaining planets that need to be worked
+                    for entry in v.owned_planets:
+                        logger.info(f"Still need to visit {entry} and fill deficits once {v.current_planet} has been filled.")
 
                     # Move from ISL to new planet
                     logger.info(f"Moving from ISL to {v.current_planet}...")
