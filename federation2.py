@@ -285,6 +285,7 @@ def main():
                         ii = checkCurrentCommodity(def_item)
                         if ii < DEFICIT:  # item is still needed
                             tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
+                            tn.write(b"say Buying from " + str.encode(remote_planet_id) + b".\n")
                             logger.info(f"Will buy {def_item} from {remote_planet_id}...")
                             break
                         elif ii > DEFICIT:  # item is not needed anymore
