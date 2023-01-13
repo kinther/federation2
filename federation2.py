@@ -285,7 +285,6 @@ def main():
                         ii = checkCurrentCommodity(def_item)
                         if ii < DEFICIT:  # item is still needed
                             tn.write(b"say Deficit needed is " + str.encode(def_item) + b".\n")
-                            tn.write(b"say Buying from " + str.encode(remote_planet_id) + b".\n")
                             logger.info(f"Will buy {def_item} from {remote_planet_id}...")
                             break
                         elif ii > DEFICIT:  # item is not needed anymore
@@ -301,7 +300,7 @@ def main():
             # Determine how many bays to buy of deficit[cycle]
             bays = deficitToBays(def_item)
             logger.info(f"Will buy {bays} bays of deficit from remote planet...")
-            tn.write(b"say Will buy " + str.encode(str(bays)) + b" " + str.encode(def_item) + b".\n")
+            tn.write(b"say Will buy " + str.encode(str(bays)) + b" " + str.encode(def_item) + b" from " + str.encode(remote_planet_id) + b".\n")
 
             # Board planet
             boardPlanet()
