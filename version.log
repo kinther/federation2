@@ -81,3 +81,4 @@ multiple strings, e.g. "Amber Temple".
 - Fixed issue where player would occasionally show up on planets they should
 not be on.
 - New logic for filling deficits on multiple planets owned by player.
+- More logging for visibility into what is happening behind the scenes.
