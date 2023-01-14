@@ -77,8 +77,6 @@ hold data in memory.
 - Fixed issue with player balance not showing correctly.
 - Fixed issue with planet treasury not showing correctly.
 - Fixed issue with checkLocation function not capturing planet names with
-multiple strings, e.g. "Amber Temple".
-- Fixed issue where player would occasionally show up on planets they should
-not be on.
+multiple words, e.g. "Amber Temple".
 - New logic for filling deficits on multiple planets owned by player.
 - More logging for visibility into what is happening behind the scenes.
