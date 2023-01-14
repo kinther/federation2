@@ -168,6 +168,32 @@
         "Sell": ["Alloys", "Clays", "Crystals", "Fruit", "Furs", "Gold", "Hides", "Livestock", "Meats", "Mechparts", "Monopoles", "Munitions", "Nickel", "Petrochemicals", "Polymers", "Propellants", "Radioactives", "Semiconductors", "Soya", "Spices", "Textiles", "Woods", "Xmetals"]
     },
 
+    "Goldenshoe": {
+        "Cartel": "Meadows",
+        "System": "Meadows",
+        "ISL_to_Planet": ["w", "n"],
+        "Planet_to_ISL": ["s", "e"],
+        "LP_to_Exchange": ["w"],
+        "Exchange_to_LP": ["e"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Artifacts", "Libraries", "TQuarks"]
+    },
+
+    "Fisticuffs": {
+        "Cartel": "Meadows",
+        "System": "Meadows",
+        "ISL_to_Planet": ["w", "s"],
+        "Planet_to_ISL": ["n", "e"],
+        "LP_to_Exchange": ["w"],
+        "Exchange_to_LP": ["e"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Droids", "NanoFabrics", "Powerpacks", "Weapons"]
+    },
+
     "Cessna": {
         "Cartel": "Flight",
         "System": "Flight",
@@ -282,7 +308,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["AntiMatter", "Hypnotapes", "Lasers", "Livestock", "Munitions", "Tools"]
+        "Sell": ["AntiMatter", "Lasers", "Livestock", "Munitions", "Tools"]
     },
 
     "Memory": {
@@ -295,7 +321,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Furs", "Propellants", "Weapons"]
+        "Sell": ["Weapons"]
     },
 
     "Umatilla": {
