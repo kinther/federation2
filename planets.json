@@ -71,8 +71,8 @@
         "Planet_to_ISL": ["w"],
         "LP_to_Exchange": ["e"],
         "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": ["w"],
-        "Restaurant_to_LP": ["e"],
+        "LP_to_Restaurant": ["n"],
+        "Restaurant_to_LP": ["s"],
         "Buy": [],
         "Sell": ["Cereals", "Livestock", "Meats", "Monopoles", "Semiconductors", "Soya", "Spices", "Textiles"]
     },
