@@ -71,8 +71,8 @@
         "Planet_to_ISL": ["w"],
         "LP_to_Exchange": ["e"],
         "Exchange_to_LP": ["w"],
-        "LP_to_Restaurant": ["w"],
-        "Restaurant_to_LP": ["e"],
+        "LP_to_Restaurant": ["n"],
+        "Restaurant_to_LP": ["s"],
         "Buy": [],
         "Sell": ["Cereals", "Livestock", "Meats", "Monopoles", "Semiconductors", "Soya", "Spices", "Textiles"]
     },
@@ -101,6 +101,19 @@
         "Restaurant_to_LP": [],
         "Buy": [],
         "Sell": ["BioChips", "BioComponents", "Clinics", "GAsChips", "Laboratories", "MicroScalpels", "Musiks", "NanoFabrics", "Proteins", "Sensamps", "Sensors", "Synths", "ToxicMunchers", "Tracers"]
+    },
+
+    "Yester Hill": {
+        "Cartel": "Barovia",
+        "System": "Barovia",
+        "ISL_to_Planet": ["sw", "w"],
+        "Planet_to_ISL": ["e", "ne"],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": ["w"],
+        "Restaurant_to_LP": ["e"],
+        "Buy": [],
+        "Sell": []
     },
 
     "Goto": {
@@ -155,6 +168,32 @@
         "Sell": ["Alloys", "Clays", "Crystals", "Fruit", "Furs", "Gold", "Hides", "Livestock", "Meats", "Mechparts", "Monopoles", "Munitions", "Nickel", "Petrochemicals", "Polymers", "Propellants", "Radioactives", "Semiconductors", "Soya", "Spices", "Textiles", "Woods", "Xmetals"]
     },
 
+    "Goldenshoe": {
+        "Cartel": "Meadows",
+        "System": "Meadows",
+        "ISL_to_Planet": ["w", "n"],
+        "Planet_to_ISL": ["s", "e"],
+        "LP_to_Exchange": ["w"],
+        "Exchange_to_LP": ["e"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Artifacts", "Libraries", "TQuarks"]
+    },
+
+    "Fisticuffs": {
+        "Cartel": "Meadows",
+        "System": "Meadows",
+        "ISL_to_Planet": ["w", "s"],
+        "Planet_to_ISL": ["n", "e"],
+        "LP_to_Exchange": ["w"],
+        "Exchange_to_LP": ["e"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["Droids", "NanoFabrics", "Powerpacks", "Weapons"]
+    },
+
     "Cessna": {
         "Cartel": "Flight",
         "System": "Flight",
@@ -165,7 +204,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": [],
-        "Sell": ["AntiMatter", "Explosives", "Games", "GAsChips", "Holos", "Katydidics", "Musiks", "Univators"]
+        "Sell": ["AntiMatter", "Explosives", "Games", "GAsChips", "Holos", "Katydidics", "Libraries", "Musiks", "Studios", "Univators"]
     },
 
     "Diamond": {
@@ -178,7 +217,7 @@
         "LP_to_Restaurant": ["sw"],
         "Restaurant_to_LP": ["ne"],
         "Buy": ["Gold", "Mechparts", "Nickel", "Spices", "Univators"],
-        "Sell": []
+        "Sell": ["BioChips", "BioComponents", "Controllers", "Firewalls", "Katydidics", "Laboratories", "Propellants", "Sensamps", "TQuarks", "Tracers"]
     },
 
     "Piper": {
@@ -217,7 +256,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": ["Fruit", "Mechparts", "Monopoles", "RNA", "Spices"],
-        "Sell": []
+        "Sell": ["Crystals", "Gold", "Meats", "Semiconductors", "Textiles"]
     },
 
     "Zen": {
@@ -269,7 +308,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["AntiMatter", "Hypnotapes", "Lasers", "Livestock", "Munitions", "Tools"]
+        "Sell": ["AntiMatter", "Lasers", "Livestock", "Munitions", "Tools"]
     },
 
     "Memory": {
@@ -282,7 +321,7 @@
         "LP_to_Restaurant": [],
         "Restaurant_to_LP": [],
         "Buy": [],
-        "Sell": ["Furs", "Propellants", "Weapons"]
+        "Sell": ["Weapons"]
     },
 
     "Umatilla": {
@@ -348,6 +387,45 @@
         "Restaurant_to_LP": [],
         "Buy": ["Fruit", "Gold", "Mechparts", "Monopoles", "Nickel", "Spices", "Synths"],
         "Sell": ["Clinics"]
+    },
+
+    "Foreigner": {
+        "Cartel": "Jukebox",
+        "System": "Jukebox",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["AntiMatter", "Droids", "Firewalls", "GAsChips", "Katydidics", "Libraries", "Nanos", "Nitros", "Polymers", "Propellants", "Radioactives", "Sensamps", "Simulations", "Studios", "Synths", "Univators", "Vidicasters", "Weapons"]
+    },
+
+    "Laboratory": {
+        "Cartel": "Jukebox",
+        "System": "Jukebox",
+        "ISL_to_Planet": ["s", "s"],
+        "Planet_to_ISL": ["n", "n"],
+        "LP_to_Exchange": ["sw"],
+        "Exchange_to_LP": ["ne"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["BioChips", "BioComponents", "Clinics", "Firewalls", "Katydidics", "Laboratories", "LubOils", "MicroScalpels", "Nanos", "Pharmaceuticals", "Powerpacks", "RNA", "Sensamps", "ToxicMunchers", "Tracers"]
+    },
+
+    "Pathfinder": {
+        "Cartel": "Discovery",
+        "System": "Discovery",
+        "ISL_to_Planet": [],
+        "Planet_to_ISL": [],
+        "LP_to_Exchange": ["e"],
+        "Exchange_to_LP": ["w"],
+        "LP_to_Restaurant": [],
+        "Restaurant_to_LP": [],
+        "Buy": [],
+        "Sell": ["LanzariK", "Lasers", "NanoFabrics", "Simulations", "Studios", "Synths"]
     }
 
 }

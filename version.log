@@ -1,57 +1,82 @@
 ### Version log
 
-1.0 "Deficit Dance" - Initial release.  Runs through deficit loop cycle.
+1.0 "Deficit Dance" - Initial release
+- Runs through deficit loop cycle.
 
-1.1 "Anomalous Alloys" - bug fixes in deficit loop logic, minor enhancements
-to print further data to logfile, conversion of user/password passing to
-command line arguments rather than static entries in script, and some PEP8
-updates.
+1.1 "Anomalous Alloys" 
+- Bug fixes in deficit loop logic.
+- Minor enhancements to print further data to logfile.
+- Conversion of user/password passing to command line arguments rather than
+static entries in script.
+- Some PEP8 updates.
 
-1.2 "BBQ BioChips" - cargo bay checks/notifications, script will now exit
-if run by character below Founder rank, script will exit when character is not
-on their home planet when started, home planet is now passed from command line,
-deficits not accounted for in planets.json will be skipped, and fixed a
-timestamp error on Windows preventing script from running.
+1.2 "BBQ BioChips"
+- Cargo bay checks/notifications.
+- Script will now exit if run by character below Founder rank.
+- Script will exit when character is not on their home planet when started.
+- Home planet is now passed from command line.
+- Deficits not accounted for in planets.json will be skipped.
+- Fixed a timestamp error on Windows preventing script from running.
 
-1.3 "Bargain BioComponents" - fix exchange parsing issue caused by recent
-update and improve script speed by decreasing time.sleep in most cases.
+1.3 "Bargain BioComponents"
+- Fix exchange parsing issue caused by recent update and improve script speed
+by decreasing time.sleep in most cases.
 
-1.4 "Celestial Cereals" - support for multiple planets in your system
+1.4 "Celestial Cereals"
+- Support for multiple planets in your system.
 
-2.0 "Surplus Shuffle" - adds support for selling surpluses to remote planets
-with the --mode parameter (allows either "deficit" or "surplus").  Defaults
-to deficit if not specified.
+2.0 "Surplus Shuffle" - Major release
+- Adds support for selling surpluses to remote planets with the --mode
+parameter (allows either "deficit" or "surplus").  Defaults to deficit if not
+specified.
 
-2.1 "Clandestine Clays" - adds checks on whether a remote exchange is selling
-a commodity and if that is above a certain threshold, improvements to the jump
-system routine to reduce extra jumps, rank is checked only once instead of
-every iteration, and improvements to logging.
+2.1 "Clandestine Clays"
+- Adds checks on whether a remote exchange is selling a commodity and if that
+is above a certain threshold.
+- Improvements to the jump system routine to reduce extra jumps.
+- Rank is checked only once instead of every iteration
+- Improvements to logging.
 
-2.1.1 "Clandestine Clays" - hotfix to resolve company name conflicting with
-planet name issue.
+2.1.1 "Clandestine Clays"
+- Hotfix to resolve company name conflicting with planet name issue.
 
-2.2 "Smuggled Semiconductors" - deficits are now checked before leaving planet
-to purchase them (this should ensure if someone sold to your planet you don't
-also try to sell, thereby buying commodities for no reason), food/fuel will
-be bought more often, added numerous try/except blocks to improve script
-runtime, and fixed the parsing of exchange data so that it sees less
-ValueError or IndexError exceptions.
+2.2 "Smuggled Semiconductors"
+- Deficits are now checked before leaving planet to purchase them (this should
+ensure if someone sold to your planet you don't also try to sell, thereby
+buying commodities for no reason).
+- Food/fuel will be bought more often.
+- Added numerous try/except blocks to improve script runtime.
+- Fixed the parsing of exchange data so that it sees less ValueError or 
+IndexError exceptions.
 
-2.3 "LanzariK Lozenges" - altered exception handling to print exceptions to the
-logfile, improved verbosity when the checkIfSelling function is used and the
-remote exchange is below a certain threshold, updated README with more info on
-how to run the script, and added more logic to end of each iteration so that
-if a user is not on the expected planet the script will exit (thus ensuring
-something bad doesn't happen like dying) or if there are extra tons in the
-cargo hold the script will not continuously buy more and waste money.  closed
-out old WinError issue which appears to be due to my old crappy wifi router,
-not an actual bug in the code.
+2.3 "LanzariK Lozenges"
+- Altered exception handling to print exceptions to the logfile.
+- Improved verbosity when the checkIfSelling function is used and the remote
+exchange is below a certain threshold.
+- Updated README with more info on how to run the script.
+- Added more logic to end of each iteration so that if a user is not on the
+expected planet the script will exit (thus ensuring something bad doesn't 
+happen like dying) or if there are extra tons in the cargo hold the script will
+not continuously buy more and waste money.
+- Closed out old WinError issue which appears to be due to my old crappy wifi
+router, not an actual bug in the code.
 
-2.4 "Kurious Katydidics" - Reduced memory usage by only importing functions
-needed to run from python modules.  Moved all functions to fed_utils.py and
-dynamic variables to fed_vars.py.
+2.4 "Kurious Katydidics"
+- Reduced memory usage by only importing functions needed to run from python
+modules.
+- Moved all functions to fed_utils.py and dynamic variables to fed_vars.py.
 
-2.5 "Problematic Proteins" - changed update functions so that they no longer
-write to disk and instead hold data in memory.  added new system and cartel
-functions for future use cases.  renamed a few variables for less confusion
-later on.  further increased speed of script by 50%, finding it stable.
+2.5 "Problematic Proteins" 
+- Changed update functions so that they no longer write to disk and instead
+hold data in memory.
+- Added new system and cartel functions for future use cases.
+- Renamed a few variables for less confusion later on.
+- Further increased speed of script by 50%, finding it stable.
+
+3.0 "Strictly Spices" - Major release
+- Fixed issue with player balance not showing correctly.
+- Fixed issue with planet treasury not showing correctly.
+- Fixed issue with checkLocation function not capturing planet names with
+multiple words, e.g. "Amber Temple".
+- New logic for filling deficits on multiple planets owned by player.
+- More logging for visibility into what is happening behind the scenes.

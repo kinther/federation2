@@ -12,6 +12,7 @@ from logging import basicConfig, getLogger  # used to write logs to file
 from os import remove  # used to delete files
 from argparse import ArgumentParser  # used to pass user/password credentials
 from sys import exit  # used to exit script if criteria is met
+from re import search  # used to parse some output such as planets with multiple word names
 import fed_vars as v  # used to makes variables global across files
 
 # argparse constants
@@ -43,8 +44,8 @@ LOG_FILENAME = (day + "-" + hour + minute + "-fed2.txt")
 basicConfig(filename=LOG_FILENAME, level=20)
 logger = getLogger()
 
-# Character/ship constants
-HOME_PLANET = args.planet  # passed from player arguments
+# to-do: figure out a better place for these vars
+v.current_planet = args.planet  # passed from player arguments, we start the cycle on this planet
 DEFICIT = -75  # How much we consider a deficit
 SURPLUS = 18000  # How much we consider a surplus
 
@@ -138,12 +139,12 @@ def checkBalance():
         for line in v.score.splitlines():
             if "Bank Balance:" in line:
                 i = line.split(" ")  # remove whitespace
-                i = i[4]  # select fourth entry in list
-                i = i[:-3]  # remove last 3 characters from string
-                i = i.split(",")  # parse output to remove comma separation
-                i = "".join(i)  # rejoin list entries into single string
-                i = int(i)  # turn string into integer
-                v.balance = i
+                for entry in i:
+                    if "ig" in entry:
+                        ii = entry[:-2]  # remove last 2 characters from string, aka "ig" notation
+                        ii = ii.split(",")  # parse output to remove comma separation
+                        ii = "".join(ii)  # rejoin list entries into single string
+                        v.balance = int(ii)  # return integer as balance
             else:
                 pass
 
@@ -180,16 +181,16 @@ def checkLocation():
     try:
         for line in v.score.splitlines():
             if "You are currently on" in line:
-                i = line.split(" ")
-                v.current_planet = i[6]
-                v.current_system = i[9]
+                i = search(r'on (.+) in the (.+) system', str(line))
+                v.planet_location = i.group(1)
+                v.system_location = i.group(2)
             else:
                 pass
 
     except Exception as e:
         logger.exception(e)
 
-    logger.info(f"Location of {args.user} found to be {v.current_planet} in the {v.current_system} system.")
+    logger.info(f"Location of {args.user} found to be {v.planet_location} in the {v.system_location} system.")
 
 def checkRank():
 
@@ -281,8 +282,8 @@ def updatePlanet():
     clearBuffer()
 
     # Check planetary exchange information
-    logger.info(f"Updating {HOME_PLANET} planet information...")
-    tn.write(b"di planet " + str.encode(HOME_PLANET) + b"\n")
+    logger.info(f"Updating {v.current_planet} planet information...")
+    tn.write(b"di planet " + str.encode(v.current_planet) + b"\n")
     sleep(0.5)
     v.planet = tn.read_very_eager().decode("ascii")
     v.planet = escape_ansi(v.planet)
@@ -290,38 +291,35 @@ def updatePlanet():
 def checkTreasury():
 
     # Check character location information
-    logger.info(f"Checking treasury of {HOME_PLANET}...")
+    logger.info(f"Checking treasury of {v.current_planet}...")
     try:
         for line in v.planet.splitlines():
             if "Treasury:" in line:
                 i = line.split(" ")
-                i = i[3]
-                i = i[:-3]
-                i = i.split(",")
-                i = "".join(i)
-                i = int(i)
-                v.treasury = i
+                for entry in i:
+                    if "ig" in entry:
+                        ii = entry[:-2]
+                        ii = ii.split(",")
+                        ii = "".join(ii)
+                        v.treasury = int(ii)
             else:
                 pass
 
     except Exception as e:
         logger.exception(e)
 
-    logger.info(f"Treasury of {args.planet} found to be {v.treasury}.")
+    logger.info(f"Treasury of {v.current_planet} found to be {v.treasury}.")
 
 # Exchange functions
 
 def updateExchange():
 
-    # Bring in global variables
-    global HOME_PLANET
-
     # Clear buffer before issuing commands
     clearBuffer()
 
     # Check planetary exchange information
-    logger.info(f"Updating {HOME_PLANET} exchange information...")
-    tn.write(b"di exchange " + str.encode(HOME_PLANET) + b"\n")
+    logger.info(f"Updating {v.current_planet} exchange information...")
+    tn.write(b"di exchange " + str.encode(v.current_planet) + b"\n")
     sleep(0.5)
     v.exchange = tn.read_very_eager().decode("ascii")
     v.exchange = escape_ansi(v.exchange)
@@ -379,6 +377,9 @@ def checkDeficits():
     # Bring in global variables
     global DEFICIT
 
+    # Ensure accurate deficit list by starting fresh
+    v.deficits = []
+
     # Checks what home planet has current deficits of and writes to list
     logger.info("Checking home planet deficits...")
     for commodity in v.exchange_dict:
@@ -402,6 +403,9 @@ def checkCommodityThreshold(commodity, planet):
 
     # global variables
     global SURPLUS
+
+    # Ensure accurate deficit list by starting fresh
+    v.surpluses = []
 
     # temp variables
     i = 0

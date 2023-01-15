@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Federation 2 Community Edition hauling scripts for planet owners
-# version 2.5 "Problematic Proteins"
+# version 3.0 "Strictly Spices"
 
 # Imports
 from fed_utils import *  # used to pull in all custom functions from fed_utils.py
@@ -54,14 +54,48 @@ def main():
     else:
         pass
 
-    # Check if current_planet = HOME_PLANET.  If not, exit script.
-    if HOME_PLANET not in v.current_planet:
+    # Check if planet_location = v.current_planet.  If not, exit script.
+    if v.current_planet not in v.planet_location:
         logger.info("ERROR: Character must be on their home planet on the landing pad.")
-        logger.info(f"Detected character on {v.current_planet} rather than {HOME_PLANET}.")
+        logger.info(f"Detected character on {v.planet_location} rather than {v.current_planet}.")
         logger.info("Exiting.")
         exit(0)
-    else:
-        pass
+    else:  # Found player is in system where we own planets.
+        if v.current_planet in v.planet_location:  # Are we on the planet we are starting loop on?
+            pass
+        else:  # Found player is not on starting planet.
+
+            # Leave current planet and head to starting planet
+            boardPlanet()
+            sleep(0.5)
+
+            # Move to ISL from previous planet
+            logger.info(f"Moving to ISL from {v.planet_location}...")
+            for dir in data[v.planet_location]["Planet_to_ISL"]:
+                moveDirection(dir)
+                sleep(0.5)
+
+            # Move from ISL to starting planet
+            logger.info(f"Moving from ISL from {v.current_planet}...")
+            for dir in data[v.current_planet]["Planet_to_ISL"]:
+                moveDirection(dir)
+                sleep(0.5)          
+
+            # Land on starting planet
+            boardPlanet()
+            sleep(0.5)  
+
+            # Check if we made it to the starting planet successfully
+            checkLocation()
+            sleep(0.5)
+
+            if v.current_planet in v.planet_location:  # Did we make it there successfully?
+                pass
+            else:  # If not, exit script
+                logger.info("ERROR: Tried to move character to starting planet and ran into issue.")
+                logger.info("Please start your character on a landing pad of an owned planet.")
+                logger.info("Exiting.")
+                exit(0)
 
     # Check if cargo_max is less than 525 (can't haul a full 7 bays)
     if v.cargo_max < 525:
@@ -114,26 +148,79 @@ def main():
             # Iteration checks
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
             logger.info(f" This is iteration number {iter}.")
+            logger.info(f" We are currently filling deficits on {v.current_planet}.")
             logger.info(f" {args.user}'s bank balance is {v.balance}.")
             logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
-            logger.info(f" {HOME_PLANET}'s treasury value is {v.treasury}.")
+            logger.info(f" {v.current_planet}'s treasury value is {v.treasury}.")
             logger.info(f" That's a difference of {diff_treasury} compared to last iteration.")
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
             # Pause for 30 minutes if deficits list is empty
             while True:
-                if len(v.deficits) > 0:  # is deficits list empty yet?
-                    break
-                else:
-                    logger.info("Deficits all filled.  Sleeping for 30 minutes...")
-                    tn.write(b"say All deficits filled.  Sleeping for 30 minutes.\n")
-                    for i in range(30):  # Keepalive function so BrokenPipe does not occur
+                if len(v.deficits) > 0:  # is deficits list of current planet empty yet?
+
+                    # Print out remaining deficits to log for visibility
+                    for entry in v.deficits:
+                        logger.info(f"Still need to fill {entry} on {v.current_planet}.")
+
+                    break  # if more is to be done here, break and go back to filling deficits on current planet
+
+                elif len(v.owned_planets) > 0:  # have we already filled deficits of all owned planets?
+
+                    # Print out remaining planets that need to be worked
+                    for entry in v.owned_planets:
+                        logger.info(f"Still need to visit {entry} and fill deficits.")
+
+                    # Previous planet deficits are now filled and there are still planets remaining to be filled
+                    logger.info(f"Deficits all filled on {v.current_planet}.  Moving on to next planet.")
+                    tn.write(b"say All deficits filled on current planet.  Moving on to next.\n")
+
+                    # Board planet
+                    boardPlanet()
+                    sleep(0.5)
+
+                    # Move to ISL from previous planet
+                    logger.info(f"Moving to ISL from {v.current_planet}...")
+                    for dir in data[v.current_planet]["Planet_to_ISL"]:
+                        moveDirection(dir)
+                        sleep(0.5)
+
+                    # Change planet routine
+                    v.current_planet = v.owned_planets[0]  # switch over to first planet in owned_planets list
+                    v.owned_planets.pop(0)  # remove planet from list since we have switched over to it
+                    logger.info(f"New planet to fill deficits on is {v.current_planet}...")
+
+                    # Print out remaining planets that need to be worked
+                    for entry in v.owned_planets:
+                        logger.info(f"Still need to visit {entry} and fill deficits once {v.current_planet} has been filled.")
+
+                    # Move from ISL to new planet
+                    logger.info(f"Moving from ISL to {v.current_planet}...")
+                    for dir in data[v.current_planet]["ISL_to_Planet"]:
+                        moveDirection(dir)
+                        sleep(0.5)
+
+                    # Board planet
+                    boardPlanet()
+                    sleep(0.5)
+
+                    # Check new planet's current treasury, deficits, surpluses
+                    planet_data()  # update stored planetary information to reflect new planet
+                    sleep(0.5)
+                    exchange_data()  # update stored exchange data to reflect new planet
+                    sleep(0.5)
+
+                    break  # planet switch routine finalized, moving to main routine to fill deficits
+
+                else:  # catch all if deficits have been filled entirely
+                    logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.")
+                    logger.info("Deficits all filled.  Restarting cycle after sleeping for 30 minutes.")
+                    logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.")
+                    tn.write(b"say All deficits filled.  Sleeping for 30 minutes and then restarting cycle.\n")
+                    for i in range(30):  # Keepalive routine so BrokenPipe does not occur
                         tn.write(b"\n")
                         sleep(60)
-                    clearBuffer()  # clear buffer, who knows what happened in 30 mins
-                    sleep(0.5)
-                    exchange_data()  # run exchange functions
-                    sleep(0.5)
+                    checkPlanetOwner()
                     continue
 
             # Deficits loop specific vars
@@ -148,12 +235,12 @@ def main():
                 logger.info("Current fuel is above minimum.")
                 pass
             if v.current_stamina < v.stamina_min:
-                for dir in data[HOME_PLANET]["LP_to_Restaurant"]:
+                for dir in data[v.current_planet]["LP_to_Restaurant"]:
                     moveDirection(dir)
                     sleep(0.5)
                 buyFood()
                 logger.info("Current stamina is below minimum, buying food.")
-                for dir in data[HOME_PLANET]["Restaurant_to_LP"]:
+                for dir in data[v.current_planet]["Restaurant_to_LP"]:
                     moveDirection(dir)
                     sleep(0.5)
             else:
@@ -167,7 +254,7 @@ def main():
                 ii = False  # do we still need this deficit item?
 
                 for entry in data:
-                    if HOME_PLANET not in entry:
+                    if v.current_planet not in entry:
                         if def_item in data[entry]["Sell"]:
                             if checkIfSelling(def_item, entry) == True:
                                 remote_planet_id = entry
@@ -213,31 +300,31 @@ def main():
             # Determine how many bays to buy of deficit[cycle]
             bays = deficitToBays(def_item)
             logger.info(f"Will buy {bays} bays of deficit from remote planet...")
-            tn.write(b"say Will buy " + str.encode(str(bays)) + b" " + str.encode(def_item) + b".\n")
+            tn.write(b"say Will buy " + str.encode(str(bays)) + b" " + str.encode(def_item) + b" from " + str.encode(remote_planet_id) + b".\n")
 
             # Board planet
             boardPlanet()
             sleep(0.5)
 
             # Move to ISL from home planet
-            logger.info(f"Moving to ISL from {HOME_PLANET}...")
-            for dir in data[HOME_PLANET]["Planet_to_ISL"]:
+            logger.info(f"Moving to ISL from {v.current_planet}...")
+            for dir in data[v.current_planet]["Planet_to_ISL"]:
                 moveDirection(dir)
                 sleep(0.5)
 
             # Cartel/System jump logic
             # Local system logic
-            if (data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
+            if (data[v.current_planet]["System"] in data[remote_planet_id]["System"]) and (data[v.current_planet]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 pass
             # Local cartel logic
-            elif (data[HOME_PLANET]["System"] not in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
+            elif (data[v.current_planet]["System"] not in data[remote_planet_id]["System"]) and (data[v.current_planet]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 logger.info("Jumping to remote system in same cartel...")
                 jumpSystem(data[remote_planet_id]["System"])
                 sleep(0.5)
             # Different cartel logic
             else:
                 logger.info("Jumping to remote cartel...")
-                jumpSystem(data[HOME_PLANET]["Cartel"])
+                jumpSystem(data[v.current_planet]["Cartel"])
                 sleep(0.5)
                 jumpSystem(data[remote_planet_id]["Cartel"])
                 sleep(0.5)
@@ -290,31 +377,31 @@ def main():
 
             # Cartel/System jump logic
             # Local cartel logic
-            if (data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
+            if (data[v.current_planet]["System"] in data[remote_planet_id]["System"]) and (data[v.current_planet]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 pass
             # Local cartel logic
-            elif (data[HOME_PLANET]["System"] not in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
+            elif (data[v.current_planet]["System"] not in data[remote_planet_id]["System"]) and (data[v.current_planet]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 logger.info("Jumping to remote system in same cartel...")
-                jumpSystem(data[HOME_PLANET]["System"])
+                jumpSystem(data[v.current_planet]["System"])
                 sleep(0.5)
             # Different cartel logic
             else:
                 logger.info("Jumping to home cartel...")
                 jumpSystem(data[remote_planet_id]["Cartel"])
                 sleep(0.5)
-                jumpSystem(data[HOME_PLANET]["Cartel"])
+                jumpSystem(data[v.current_planet]["Cartel"])
                 sleep(0.5)
                 # Different cartel different system logic
-                if data[HOME_PLANET]["Cartel"] not in data[HOME_PLANET]["System"]:
+                if data[v.current_planet]["Cartel"] not in data[v.current_planet]["System"]:
                     logger.info("Jumping to home system...")
-                    jumpSystem(data[HOME_PLANET]["System"])
+                    jumpSystem(data[v.current_planet]["System"])
                     sleep(0.5)
                 else:
                     pass
 
             # Move to home planet from ISL
-            logger.info(f"Moving to {HOME_PLANET} from ISL...")
-            for dir in data[HOME_PLANET]["ISL_to_Planet"]:
+            logger.info(f"Moving to {v.current_planet} from ISL...")
+            for dir in data[v.current_planet]["ISL_to_Planet"]:
                 moveDirection(dir)
                 sleep(0.5)
 
@@ -324,12 +411,12 @@ def main():
 
             # Move to exchange
             logger.info("Moving to exchange from landing pad...")
-            for dir in data[HOME_PLANET]["LP_to_Exchange"]:
+            for dir in data[v.current_planet]["LP_to_Exchange"]:
                 moveDirection(dir)
                 sleep(0.5)
 
             # Sell item to home exchange
-            logger.info(f"Selling {def_item} to home exchange...")
+            logger.info(f"Selling {def_item} to exchange...")
             for _ in range(bays):
                 sellCommodity(def_item)
                 sleep(0.5)
@@ -337,7 +424,7 @@ def main():
 
             # Move to landing pad
             logger.info("Moving to landing pad from exchange...")
-            for dir in data[HOME_PLANET]["Exchange_to_LP"]:
+            for dir in data[v.current_planet]["Exchange_to_LP"]:
                 moveDirection(dir)
                 sleep(0.5)
 
@@ -363,8 +450,9 @@ def main():
             sleep(0.5)
 
             # end of iteration checks to ensure we are still able to move forward
-            if v.current_planet not in HOME_PLANET:
-                logger.info(f"Detected location is not {HOME_PLANET}.")
+            if v.planet_location not in v.current_planet:
+                logger.info(f"Detected location is not {v.current_planet}.")
+                logger.info(f"Somehow we ended up on {v.planet_location}.")
                 logger.info("Something went wrong, closing script to ensure player safety.")
                 exit(0)
             else:
@@ -385,9 +473,10 @@ def main():
             # Iteration checks
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
             logger.info(f" This is iteration number {iter}.")
+            logger.info(f" We are currently selling surpluses from {v.current_planet}.")
             logger.info(f" {args.user}'s bank balance is {v.balance}.")
             logger.info(f" That's a difference of {diff_balance} compared to last iteration.")
-            logger.info(f" {HOME_PLANET}'s treasury value is {v.treasury}.")
+            logger.info(f" {v.current_planet}'s treasury value is {v.treasury}.")
             logger.info(f" That's a difference of {diff_treasury} compared to last iteration.")
             logger.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
@@ -419,12 +508,12 @@ def main():
                 logger.info("Current fuel is above minimum.")
                 pass
             if v.current_stamina < v.stamina_min:
-                for dir in data[HOME_PLANET]["LP_to_Restaurant"]:
+                for dir in data[v.current_planet]["LP_to_Restaurant"]:
                     moveDirection(dir)
                     sleep(0.5)
                 buyFood()
                 logger.info("Current stamina is below minimum, buying food.")
-                for dir in data[HOME_PLANET]["Restaurant_to_LP"]:
+                for dir in data[v.current_planet]["Restaurant_to_LP"]:
                     moveDirection(dir)
                     sleep(0.5)
             else:
@@ -437,7 +526,7 @@ def main():
                 i = False  # find out if surpluse is in planets.json or if not buying
 
                 for entry in data:
-                    if HOME_PLANET not in entry:
+                    if v.current_planet not in entry:
                         if sur_item in data[entry]["Buy"]:
                             if checkIfBuying(sur_item, entry) == True:
                                  remote_planet_id = entry
@@ -463,7 +552,7 @@ def main():
 
             # Move to exchange
             logger.info("Moving to exchange from landing pad...")
-            for dir in data[HOME_PLANET]["LP_to_Exchange"]:
+            for dir in data[v.current_planet]["LP_to_Exchange"]:
                 moveDirection(dir)
                 sleep(0.5)
 
@@ -474,7 +563,7 @@ def main():
 
             # Move to landing pad
             logger.info("Moving to landing pad from exchange...")
-            for dir in data[HOME_PLANET]["Exchange_to_LP"]:
+            for dir in data[v.current_planet]["Exchange_to_LP"]:
                 moveDirection(dir)
                 sleep(0.5)
 
@@ -483,23 +572,23 @@ def main():
             sleep(0.5)
 
             # Move to ISL from home planet
-            for dir in data[HOME_PLANET]["Planet_to_ISL"]:
+            for dir in data[v.current_planet]["Planet_to_ISL"]:
                 moveDirection(dir)
                 sleep(0.5)
 
             # Cartel/System jump logic
             # Local system logic
-            if (data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
+            if (data[v.current_planet]["System"] in data[remote_planet_id]["System"]) and (data[v.current_planet]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 pass
             # Local cartel logic
-            elif (data[HOME_PLANET]["System"] not in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
+            elif (data[v.current_planet]["System"] not in data[remote_planet_id]["System"]) and (data[v.current_planet]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 logger.info("Jumping to remote system in same cartel...")
                 jumpSystem(data[remote_planet_id]["System"])
                 sleep(0.5)
             # Different cartel logic
             else:
                 logger.info("Jumping to remote cartel...")
-                jumpSystem(data[HOME_PLANET]["Cartel"])
+                jumpSystem(data[v.current_planet]["Cartel"])
                 sleep(0.5)
                 jumpSystem(data[remote_planet_id]["Cartel"])
                 sleep(0.5)
@@ -550,31 +639,31 @@ def main():
 
             # Cartel/System jump logic
             # Local cartel logic
-            if (data[HOME_PLANET]["System"] in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
+            if (data[v.current_planet]["System"] in data[remote_planet_id]["System"]) and (data[v.current_planet]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 pass
             # Local cartel logic
-            elif (data[HOME_PLANET]["System"] not in data[remote_planet_id]["System"]) and (data[HOME_PLANET]["Cartel"] in data[remote_planet_id]["Cartel"]):
+            elif (data[v.current_planet]["System"] not in data[remote_planet_id]["System"]) and (data[v.current_planet]["Cartel"] in data[remote_planet_id]["Cartel"]):
                 logger.info("Jumping to remote system in same cartel...")
-                jumpSystem(data[HOME_PLANET]["System"])
+                jumpSystem(data[v.current_planet]["System"])
                 sleep(0.5)
             # Different cartel logic
             else:
                 logger.info("Jumping to home cartel...")
                 jumpSystem(data[remote_planet_id]["Cartel"])
                 sleep(0.5)
-                jumpSystem(data[HOME_PLANET]["Cartel"])
+                jumpSystem(data[v.current_planet]["Cartel"])
                 sleep(0.5)
                 # Different cartel different system logic
-                if data[HOME_PLANET]["Cartel"] not in data[HOME_PLANET]["System"]:
+                if data[v.current_planet]["Cartel"] not in data[v.current_planet]["System"]:
                     logger.info("Jumping to home system...")
-                    jumpSystem(data[HOME_PLANET]["System"])
+                    jumpSystem(data[v.current_planet]["System"])
                     sleep(0.5)
                 else:
                     pass
 
             # Move to home planet from ISL
-            logger.info(f"Moving to {HOME_PLANET} from ISL...")
-            for dir in data[HOME_PLANET]["ISL_to_Planet"]:
+            logger.info(f"Moving to {v.current_planet} from ISL...")
+            for dir in data[v.current_planet]["ISL_to_Planet"]:
                 moveDirection(dir)
                 sleep(0.5)
 
@@ -601,8 +690,8 @@ def main():
             tn.write(b"say Sold " + str.encode(sur_item) + b" to " + str.encode(remote_planet_id) + b".\n")
 
             # end of iteration checks to ensure we are still able to move forward
-            if v.current_planet not in HOME_PLANET:
-                logger.info(f"Detected location is not {HOME_PLANET}.")
+            if v.planet_location not in v.current_planet:
+                logger.info(f"Detected location is not {v.current_planet}.")
                 logger.info("Something went wrong, closing script to ensure player safety.")
                 exit(0)
             else:
@@ -617,7 +706,7 @@ def main():
                 pass
 
             # check if we are below SURPLUS defined threshold
-            if checkCommodityThreshold(sur_item, HOME_PLANET) == True:
+            if checkCommodityThreshold(sur_item, v.current_planet) == True:
                 logger.info(f"{sur_item} is under SURPLUS defined threshold.  Removing from list.")
                 v.surpluses.pop(0)
             else:
