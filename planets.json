@@ -113,7 +113,7 @@
         "LP_to_Restaurant": ["w"],
         "Restaurant_to_LP": ["e"],
         "Buy": [],
-        "Sell": []
+        "Sell": ["Explosives", "GAsChips", "Generators", "LanzariK", "Lasers", "Mechparts", "Monopoles", "Nanos", "Polymers", "RNA", "Tools", "Univators", "Weapons"]
     },
 
     "Goto": {
